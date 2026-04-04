@@ -1,195 +1,287 @@
 {
   "org": {
     "name": "Lances-Team",
-    "rationale": "Knox is the secure knowledge repository for Lances-Team. It stores procedures, references, development logs and team knowledge across Live and Development projects. Live projects contain stable, production-ready documentation. Development projects hold work in progress, build histories and active logs."
+    "rationale": "Knox is the secure knowledge repository for Lances-Team."
   },
   "projects": [
     {
       "id": "knox-dev-001",
-      "name": "Knox — System Development",
+      "name": "Knox \u2014 System Development",
       "type": "development",
-      "description": "Complete build history of the Knox knowledge repository system. Documents all architectural decisions, setup procedures, problems encountered and solutions found during initial development.",
-      "updatedAt": "2026-04-04T08:00:00Z",
+      "description": "Build history of the Knox knowledge repository system. See GitHub for full manual content.",
+      "updatedAt": "2026-04-05T00:00:00Z",
       "createdAt": "2026-04-04T00:00:00Z",
       "versions": [],
       "manuals": [
         {
-          "id": "man-001",
-          "title": "System Architecture",
-          "category": "Architecture",
-          "description": "Overview of how Knox is structured — what each component does and how they connect.",
-          "author": "Lance",
-          "tags": ["architecture", "overview", "github", "netlify"],
-          "createdAt": "2026-04-04T00:00:00Z",
-          "updatedAt": "2026-04-04T08:00:00Z",
-          "sections": [
-            {
-              "id": "s-001-1",
-              "title": "What Knox Is",
-              "type": "reference",
-              "content": "Knox is a secure knowledge repository system built for Lances-Team. It stores procedures, references, development logs and team knowledge in organised projects.\n\nKnox has two project tracks:\n- LIVE PROJECTS: stable, production-ready documentation\n- DEVELOPMENT PROJECTS: work in progress, drafts, logs\n\nAll data is stored as plain JSON and markdown on GitHub, making it AI-agnostic and portable."
-            },
-            {
-              "id": "s-001-2",
-              "title": "Component Map",
-              "type": "reference",
-              "content": "SIGN-IN PAGE\n  URL: https://lance-knox.netlify.app\n  Host: Netlify (free tier, private GitHub repo compatible)\n  File: index.html in repo root\n  Purpose: Authentication gateway — access codes and biometric registration\n  Storage: localStorage per browser (user accounts, invitation tokens)\n\nREPOSITORY DATA\n  File: repository.json (repo root)\n  Contains: all projects, manuals, users, invitations\n  Format: structured JSON, schema version knox-v3\n\nCLAUDE SESSION\n  File: CLAUDE_SESSION.md (repo root)\n  Purpose: Loaded into Claude at session start — tells Claude what to fetch\n  Fetches: repository.json, dev-log.md, notes.md, backups/manifest.json\n\nCHATGPT SESSION\n  File: CHATGPT_SESSION.md (repo root)\n  Purpose: Equivalent session file for ChatGPT Plus/Pro with browsing\n  Includes: explicit raw URLs, data structure explanation, working rules\n\nBACKUP SYSTEM\n  Workflow: .github/workflows/per-file-backups.yml\n  Script: .github/scripts/backup.py\n  Trigger: push to main affecting repository.json, active/**, logs/**\n  Method: GitHub REST API (no git push — eliminates race conditions)\n  Retention: 30 versions per file in backups/repository/, backups/notes/, backups/dev-log/, backups/active/\n  Manifest: backups/manifest.json (auto-updated per run)\n\nGITHUB REPO\n  URL: https://github.com/lance505504-tech/Knox\n  Visibility: Private\n  Branch: main"
-            },
-            {
-              "id": "s-001-3",
-              "title": "Folder Structure",
-              "type": "reference",
-              "content": "Knox/\n├── index.html                          Sign-in page (Netlify)\n├── repository.json                     Live app state\n├── CLAUDE_SESSION.md                   Claude session file\n├── CHATGPT_SESSION.md                  ChatGPT session file\n├── BACKUP_PROTOCOL.md                  Backup access and restore guide\n├── RATIONALE.md                        System rationale and purpose\n├── README.md                           Repo overview\n├── active/\n│   └── notes.md                        Live project notes\n├── logs/\n│   └── dev-log.md                      Development history\n├── backups/\n│   ├── manifest.json                   Auto-updated version index\n│   ├── repository/                     30 versions of repository.json\n│   ├── notes/                          30 versions of notes.md\n│   ├── dev-log/                        30 versions of dev-log.md\n│   └── active/                         30 versions of other active files\n└── .github/\n    ├── workflows/\n    │   └── per-file-backups.yml        Backup automation\n    └── scripts/\n        └── backup.py                   Backup logic (GitHub API)"
-            }
-          ]
-        },
-        {
-          "id": "man-002",
-          "title": "GitHub Repository Setup",
-          "category": "Setup",
-          "description": "How the Knox GitHub repository was created and configured, including the setup script and initial file structure.",
-          "author": "Lance",
-          "tags": ["github", "setup", "python", "script"],
-          "createdAt": "2026-04-04T00:00:00Z",
-          "updatedAt": "2026-04-04T08:00:00Z",
-          "sections": [
-            {
-              "id": "s-002-1",
-              "title": "Setup Script",
-              "type": "reference",
-              "content": "A Python script (knox-setup.py) was written to automate the entire repository creation.\n\nThe script:\n- Prompts for GitHub token, username, repo name, org name\n- Creates the private GitHub repository via API\n- Creates all files and folders via GitHub Contents API\n- Enables GitHub Pages (attempted — blocked on private repos on free plan)\n- Prints the live URLs on completion\n\nKey fix required: getpass.getpass() does not accept paste input in Windows PowerShell. Replaced with input() to allow token pasting.\n\nKey fix required: Second run failed with 'sha not supplied' because files already existed. Fixed by fetching existing file SHA before PUT request.\n\nAll complex file content (workflow YAML, markdown files) was embedded in the script using json.dumps() to avoid Python string escaping issues."
-            },
-            {
-              "id": "s-002-2",
-              "title": "Running the Setup",
-              "type": "procedure",
-              "content": "Prerequisites:\n1. GitHub account at github.com\n2. Python installed (python.org — accept long path support prompt during install, requires reboot)\n3. Personal Access Token (classic) with repo + workflow scopes\n   Path: GitHub → Settings → Developer settings → Personal access tokens → Tokens (classic)\n\nSteps:\n1. Download knox-setup.py to C:\\cape31\\Development\\\n2. Open PowerShell, navigate: cd C:\\cape31\\Development\n3. Run: python knox-setup.py\n4. Enter token (visible — input() not getpass)\n5. Enter GitHub username: lance505504-tech\n6. Enter repo name: Knox\n7. Enter org name: Lances-Team\n8. Script creates all files, confirms each one\n\nNote: GitHub Pages requires paid plan for private repos. Switched to Netlify for hosting."
-            },
-            {
-              "id": "s-002-3",
-              "title": "Token Security Note",
-              "type": "note",
-              "content": "During setup, a GitHub Personal Access Token was inadvertently pasted into the Claude conversation and became visible in the chat history.\n\nAction taken: Token was immediately revoked on GitHub and a new one generated.\n\nLesson: Always use getpass or similar for sensitive input, even in development. When tokens are exposed in any chat or log, revoke immediately.\n\nCurrent token: New token generated after the exposure — the exposed token (ghp_Bltl2...) is no longer valid."
-            }
-          ]
-        },
-        {
-          "id": "man-003",
-          "title": "Backup System Development",
-          "category": "Development",
-          "description": "The full history of building the automated backup system — problems encountered and how they were solved.",
-          "author": "Lance",
-          "tags": ["backup", "github-actions", "python", "workflow"],
-          "createdAt": "2026-04-04T00:00:00Z",
-          "updatedAt": "2026-04-04T08:00:00Z",
-          "sections": [
-            {
-              "id": "s-003-1",
-              "title": "Design",
-              "type": "reference",
-              "content": "Each tracked file gets its own independent 30-version backup history:\n  backups/repository/  — 30 versions of repository.json\n  backups/notes/       — 30 versions of active/notes.md\n  backups/dev-log/     — 30 versions of logs/dev-log.md\n  backups/active/      — 30 versions of other active files\n\nFiles are named: YYYY-MM-DD-HHMMSS.ext\nbackups/manifest.json is auto-updated after each run listing all versions.\n\nTrigger: push to main on paths: repository.json, active/**, logs/**\nBackup commits use [skip ci] to prevent re-triggering."
-            },
-            {
-              "id": "s-003-2",
-              "title": "Problems and Fixes",
-              "type": "log",
-              "content": "PROBLEM 1: git push rejected — fast-forward error\nCAUSE: Setup script committed 14 files rapidly, triggering 14 queued workflow runs competing to push simultaneously\nFIX ATTEMPTS: git pull --rebase, git fetch + rebase, concurrency group — all failed due to race conditions\nFINAL FIX: Rewrote workflow to use GitHub REST API instead of git push. Each backup file is created via API call — atomic, no push conflicts possible.\n\nPROBLEM 2: Doom loop — workflow triggering itself\nCAUSE: Backup commits were triggering new workflow runs\nFIX: Added [skip ci] to all backup commit messages. Changed concurrency to cancel-in-progress: true.\n\nPROBLEM 3: Python heredoc in YAML — silent failure\nCAUSE: Python code inside YAML run: | block had less indentation than the block, causing YAML to terminate the block early. The Python script never actually ran.\nFIX: Moved Python to a separate file (.github/scripts/backup.py). Workflow simply calls: python3 .github/scripts/backup.py\n\nPROBLEM 4: Queued runs using old workflow version\nCAUSE: GitHub uses the workflow file from the commit that triggered each run, not the current version. The 14 setup runs were all using old workflow versions.\nFIX: Cancelled all pending runs manually via GitHub Actions UI, then committed the new workflow.\n\nFINAL WORKING APPROACH:\n- Workflow YAML: simple trigger + call python script\n- Python script: uses GitHub REST API for all file operations\n- No git commands, no git push, no race conditions\n- concurrency: cancel-in-progress: true to handle bursts"
-            },
-            {
-              "id": "s-003-3",
-              "title": "Current Workflow Files",
-              "type": "reference",
-              "content": "Two files required:\n\n1. .github/workflows/per-file-backups.yml\n   - Trigger: push to main on tracked paths\n   - Concurrency: knox-backup group, cancel-in-progress: true\n   - Single step: python3 .github/scripts/backup.py\n   - Env: GH_TOKEN and REPO passed from GitHub secrets\n\n2. .github/scripts/backup.py\n   - Gets changed files via git diff HEAD~1 HEAD\n   - Creates timestamped backup of each changed file via GitHub API\n   - Prunes each backup folder to 30 files max (deletes oldest)\n   - Updates backups/manifest.json via API\n   - All operations use [skip ci] commit messages\n   - No git push used anywhere"
-            }
-          ]
-        },
-        {
-          "id": "man-004",
-          "title": "Authentication and Sign-in Page",
-          "category": "Setup",
-          "description": "How the Knox sign-in page works, how user accounts and invitations are managed, and the biometric setup.",
-          "author": "Lance",
-          "tags": ["auth", "sign-in", "netlify", "biometrics", "invitations"],
-          "createdAt": "2026-04-04T00:00:00Z",
-          "updatedAt": "2026-04-04T08:00:00Z",
-          "sections": [
-            {
-              "id": "s-004-1",
-              "title": "How Authentication Works",
-              "type": "reference",
-              "content": "The Knox sign-in page (index.html) handles authentication client-side using browser localStorage. No server required.\n\nUser accounts stored in: localStorage key 'ku'\nInvitation tokens stored in: localStorage key 'ki'\nCurrent session stored in: sessionStorage key 'kcu'\n\nAccess codes are SHA-256 hashed before storage — never stored in plain text.\n\nBiometric credentials use WebAuthn (Passkeys) — the private key never leaves the device's secure enclave. Works with Face ID, Touch ID, and Android fingerprint on a real domain (not in iframes).\n\nUser roles: owner, admin, contributor, reader\nRole hierarchy: owner > admin > contributor > reader\nOwner can create any role. Admin can create contributors only."
-            },
-            {
-              "id": "s-004-2",
-              "title": "Creating Invitations",
-              "type": "procedure",
-              "content": "To invite a new team member:\n\n1. Go to https://lance-knox.netlify.app and sign in\n2. Press F12 to open browser console\n3. Run this script (replace name/email/role as needed):\n\n   const userId = 'name-' + Date.now().toString(36);\n   const token = crypto.randomUUID().replace(/-/g,'');\n   const exp = new Date(Date.now() + 7*24*60*60*1000).toISOString();\n   const users = JSON.parse(localStorage.getItem('ku')||'[]');\n   users.push({id:userId, name:'Full Name', role:'admin', cr:[], ch:'', joined:''});\n   localStorage.setItem('ku', JSON.stringify(users));\n   const invs = JSON.parse(localStorage.getItem('ki')||'[]');\n   invs.push({tok:token, uid:userId, exp:exp, used:false});\n   localStorage.setItem('ki', JSON.stringify(invs));\n   console.log('Token:', token);\n\n4. Copy the token from the console output\n5. Send to the new member with the invitation email and user guide\n\nFor multiple invitations at once, use the bulk script (see Team Setup manual).\n\nTokens expire after 7 days."
-            },
-            {
-              "id": "s-004-3",
-              "title": "Hosting — Netlify",
-              "type": "reference",
-              "content": "GitHub Pages was attempted first but requires a paid plan for private repositories.\n\nSwitched to Netlify (free tier):\n- Connects directly to GitHub repo\n- Deploys automatically on every push to main\n- Serves index.html from repo root\n- URL: https://lance-knox.netlify.app\n- Custom name set in Netlify site configuration\n\nSetup steps:\n1. netlify.com → Sign up with GitHub\n2. Add new site → Import existing project → GitHub → select Knox repo\n3. Leave build settings blank (no build command, no publish directory — serves from root)\n4. Deploy\n5. Site configuration → Change site name → lance-knox\n\nBiometric (WebAuthn) works on the Netlify domain because it is a real HTTPS domain. Does not work in Claude artifact iframes."
-            }
-          ]
-        },
-        {
-          "id": "man-005",
-          "title": "Team Setup",
-          "category": "Administration",
-          "description": "Current team members, their roles, and the onboarding process used.",
-          "author": "Lance",
-          "tags": ["team", "roles", "onboarding", "invitations"],
-          "createdAt": "2026-04-04T00:00:00Z",
-          "updatedAt": "2026-04-04T08:00:00Z",
-          "sections": [
-            {
-              "id": "s-005-1",
-              "title": "Current Team",
-              "type": "reference",
-              "content": "NAME                      ROLE    ORGANISATION\nLance                     Owner   Lances-Team\nElliot Adams              Admin   Nouvita (elliot.adams@nouvita.co.uk)\nHarriet Anstey            Admin   Nouvita (harriet.anstey@nouvita.co.uk)\nJessica Lepodevin         Admin   Broadoak Manor (jessica.lepodevin@broadoakmanor.co.uk)\nCharlotte Whay            Admin   Broadoak Manor (charlotte.whay@broadoakmanor.co.uk)\nAmelia Adams              Admin   Broadoak Manor (amelia.adams@broadoakmanor.co.uk)\nNicola White              Admin   Broadoak Manor (nicola.white@broadoakmanor.co.uk)\n\nAll team members invited on 2026-04-04. Tokens valid for 7 days."
-            },
-            {
-              "id": "s-005-2",
-              "title": "Onboarding Materials Sent",
-              "type": "log",
-              "content": "2026-04-04 — Initial team setup\n\nSent to each team member:\n- Individual invitation token (unique per person)\n- Knox invitation email with rationale\n- Knox-User-Guide.md — full user guide covering both Claude and ChatGPT sessions\n\nUser guide covers:\n- Getting access and redeeming invitation\n- Signing in (biometric and code)\n- Which AI to use (Claude vs ChatGPT comparison table)\n- Starting a session with Claude (CLAUDE_SESSION.md)\n- Starting a session with ChatGPT (CHATGPT_SESSION.md)\n- Creating, editing and searching manuals\n- Project types (Live vs Development)\n- Saving work back to GitHub\n- Backup and version history\n- Getting help"
-            },
-            {
-              "id": "s-005-3",
-              "title": "Adding Future Team Members",
-              "type": "procedure",
-              "content": "1. Sign in to https://lance-knox.netlify.app\n2. Open browser console (F12)\n3. Run invitation script (see Authentication manual for full script)\n4. Copy token from console\n5. Send invitation email with:\n   - Their personal token\n   - Knox-User-Guide.md attached\n   - URL: https://lance-knox.netlify.app\n6. Update the Team section of this manual\n7. Update CLAUDE_SESSION.md and CHATGPT_SESSION.md team rosters\n8. Commit updated repository.json to GitHub"
-            }
-          ]
-        },
-        {
-          "id": "man-006",
-          "title": "Session Files Reference",
+          "id": "knox-man-001",
+          "title": "How to Start a Session",
           "category": "Reference",
-          "description": "How the Claude and ChatGPT session files work and how to keep them updated.",
+          "description": "Quick reference guide for all team members on starting a Knox session in Claude or ChatGPT.",
           "author": "Lance",
-          "tags": ["session", "claude", "chatgpt", "workflow"],
-          "createdAt": "2026-04-04T00:00:00Z",
-          "updatedAt": "2026-04-04T08:00:00Z",
+          "tags": [
+            "session",
+            "claude",
+            "chatgpt",
+            "guide",
+            "onboarding"
+          ],
+          "createdAt": "2026-04-05T00:00:00Z",
+          "updatedAt": "2026-04-05T00:00:00Z",
           "sections": [
             {
-              "id": "s-006-1",
-              "title": "CLAUDE_SESSION.md",
-              "type": "reference",
-              "content": "Location: repo root\nPurpose: Loaded into Claude at the start of every session\n\nContains:\n- Repo URL and raw base URL\n- File registry with auto-load flags\n- Team roster with roles\n- Backup access instructions (tells Claude how to list and restore backups)\n- Working rules (fetch from GitHub, never ask for local uploads)\n- Project context (description of what Knox is used for)\n\nHow to use:\n1. Download CLAUDE_SESSION.md from GitHub\n2. Attach to a new Claude conversation\n3. Type: load session\n4. Claude fetches all auto-load files and confirms\n\nKeep updated when:\n- New team members are added\n- New projects are created\n- The repo URL changes"
+              "id": "knox-s-001-1",
+              "title": "Step 1 \u2014 Sign In",
+              "type": "procedure",
+              "content": "Sign in at lance-knox.netlify.app\nUse Face ID, Touch ID, or your access code.\nFirst time: Redeem Invitation \u2192 paste token \u2192 set up access."
             },
             {
-              "id": "s-006-2",
-              "title": "CHATGPT_SESSION.md",
-              "type": "reference",
-              "content": "Location: repo root\nPurpose: Equivalent session file for ChatGPT Plus/Pro users\n\nDifferences from CLAUDE_SESSION.md:\n- Includes exact full raw GitHub URLs (ChatGPT needs explicit URLs)\n- Includes full explanation of repository.json data structure\n- More explicit instructions since ChatGPT needs more guidance\n- Notes that ChatGPT browsing must be enabled (globe icon)\n\nHow to use:\n1. Download CHATGPT_SESSION.md from GitHub\n2. Enable browsing in ChatGPT (globe icon or model settings)\n3. Attach file to new conversation\n4. Type: load session\n5. ChatGPT browses to each URL and loads the data\n\nNote: If ChatGPT says it cannot browse, start a new conversation and try again. Browsing is sometimes disabled by default."
+              "id": "knox-s-001-2",
+              "title": "Step 2 \u2014 Download Session File",
+              "type": "procedure",
+              "content": "Go to github.com/lance505504-tech/Knox\nClick CLAUDE_SESSION.md (for Claude) or CHATGPT_SESSION.md (for ChatGPT)\nClick the download button (down-arrow, top right of file view)\nSave to your computer"
             },
             {
-              "id": "s-006-3",
-              "title": "Using Knox with Other AIs",
+              "id": "knox-s-001-3",
+              "title": "Step 3a \u2014 Claude Session",
+              "type": "procedure",
+              "content": "1. Go to claude.ai \u2014 open a new conversation\n2. Attach CLAUDE_SESSION.md (paperclip icon)\n3. Type: load session\n4. Claude fetches projects, manuals and dev log \u2014 confirms what is loaded"
+            },
+            {
+              "id": "knox-s-001-4",
+              "title": "Step 3b \u2014 ChatGPT Session",
+              "type": "procedure",
+              "content": "ChatGPT Plus or Pro required. Browsing (globe icon) must be enabled.\n1. Go to chatgpt.com \u2014 new conversation\n2. Attach CHATGPT_SESSION.md\n3. Type: load session\n4. ChatGPT browses GitHub URLs and loads data\nIf it says cannot browse: start a new conversation and try again."
+            },
+            {
+              "id": "knox-s-001-5",
+              "title": "Saving Work Back to GitHub",
+              "type": "procedure",
+              "content": "At session end, AI outputs updated files. To save:\n1. Copy the file content from the AI\n2. Go to the file on GitHub\n3. Click pencil icon to edit\n4. Ctrl+A, paste\n5. Click Commit changes \u2014 GitHub saves and triggers automatic backup\n\nOR use knox-update.py (see Development Tools manual) to push via script."
+            }
+          ]
+        },
+        {
+          "id": "knox-man-002",
+          "title": "Knox Data Rules",
+          "category": "Administration",
+          "description": "What can and cannot go in Knox. The simple rule: personal data goes in a private repo, everything else can go in Knox.",
+          "author": "Lance",
+          "tags": [
+            "data",
+            "privacy",
+            "rules",
+            "personal-data",
+            "compliance"
+          ],
+          "createdAt": "2026-04-05T00:00:00Z",
+          "updatedAt": "2026-04-05T00:00:00Z",
+          "sections": [
+            {
+              "id": "knox-s-002-1",
+              "title": "The Simple Rule",
+              "type": "reference",
+              "content": "If it contains personal data \u2014 it goes in a private repository, not Knox.\nEverything else can go in Knox without restriction."
+            },
+            {
+              "id": "knox-s-002-2",
+              "title": "What is Personal Data",
+              "type": "reference",
+              "content": "Personal data = any information that identifies or could identify a real living person:\n- Full name combined with any other detail (address, DOB, phone)\n- NHS number, care ID, employee number\n- Medical, clinical or care information linked to a named individual\n- Financial information linked to a named individual\n- Staff records, HR files, payroll, DBS records\n- Next of kin or family contacts\n\nIf unsure \u2014 treat it as personal data."
+            },
+            {
+              "id": "knox-s-002-3",
+              "title": "What Can Go in Knox",
+              "type": "reference",
+              "content": "Real project data that does not identify a living individual:\n- Procedures, policies, process documents\n- Operational data, statistics, aggregated figures\n- Templates, forms, structural documents\n- Code, scripts, technical development work\n- Training materials and guides\n- Reference information, protocols, standards\n- Project plans, timelines, meeting notes\n- Financial data not linked to an individual\n\nReal data, real projects, real figures \u2014 fine in Knox as long as no individual is identifiable."
+            },
+            {
+              "id": "knox-s-002-4",
+              "title": "Credentials \u2014 Always Private",
+              "type": "reference",
+              "content": "Never in Knox under any circumstances:\n- Passwords or PINs\n- API tokens or access keys\n- Any credential that grants access to a system"
+            },
+            {
+              "id": "knox-s-002-5",
+              "title": "The One-Question Test",
+              "type": "reference",
+              "content": "Before committing anything to Knox:\n\n'Does this file contain information that identifies a real living person?'\n\n  No  \u2192 commit to Knox\n  Yes \u2192 store in private repository, reference from Knox"
+            }
+          ]
+        },
+        {
+          "id": "knox-man-003",
+          "title": "Development Tools",
+          "category": "Setup",
+          "description": "Scripts for pushing Knox files to GitHub. knox-update.py is the primary tool.",
+          "author": "Lance",
+          "tags": [
+            "tools",
+            "scripts",
+            "github",
+            "push",
+            "deploy"
+          ],
+          "createdAt": "2026-04-05T00:00:00Z",
+          "updatedAt": "2026-04-05T00:00:00Z",
+          "sections": [
+            {
+              "id": "knox-s-003-1",
+              "title": "knox-update.py",
+              "type": "procedure",
+              "content": "Primary tool for pushing Knox files to GitHub via API.\nPushes: dev-log.md \u2192 logs/dev-log.md and notes.md \u2192 active/notes.md\n\nUsage:\n  1. Save knox-update.py, dev-log.md and notes.md in the same folder\n  2. Run: python knox-update.py\n  3. Enter GitHub Personal Access Token when prompted\n  4. Files pushed \u2014 Knox backup workflow fires automatically (30 versions kept)\n\nToken: github.com/settings/tokens \u2014 needs repo + workflow scopes\nNever paste tokens in chat."
+            },
+            {
+              "id": "knox-s-003-2",
+              "title": "Pushing repository.json",
+              "type": "procedure",
+              "content": "repository.json must be pushed separately (knox-update.py only handles dev-log and notes).\n\nOptions:\n  A. GitHub web editor: navigate to repository.json in repo \u2192 pencil icon \u2192 paste \u2192 commit\n  B. Extend knox-update.py to include repository.json in the file list\n  C. knox_push.py (extended version) \u2014 handles all three files including repository.json\n\nrepository.json push triggers the backup workflow the same as other files."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cape31-cms-001",
+      "name": "Cape 31 Class Management System",
+      "type": "development",
+      "description": "Single-file HTML/JS class management system for Cape 31 International One Design.",
+      "updatedAt": "2026-04-05T00:00:00Z",
+      "createdAt": "2026-04-01T00:00:00Z",
+      "versions": [],
+      "manuals": [
+        {
+          "id": "c31-man-001",
+          "title": "Infrastructure & URLs",
+          "category": "Setup",
+          "description": "Environments, repos, URLs, deploy commands, Azure workflow, common problems.",
+          "author": "Lance",
+          "tags": [
+            "infrastructure",
+            "azure",
+            "github",
+            "deploy"
+          ],
+          "createdAt": "2026-04-05T00:00:00Z",
+          "updatedAt": "2026-04-05T00:00:00Z",
+          "sections": [
+            {
+              "id": "c31-s-001-1",
+              "title": "Environments",
+              "type": "reference",
+              "content": "PRODUCTION\n  URL:   https://proud-pebble-0896e5503.2.azurestaticapps.net\n  Repo:  cape31one-sudo/Cape31-azure\n  Local: C:\\Cape31\\\n\nDEVELOPMENT\n  URL:   https://polite-bay-0d57fd203.6.azurestaticapps.net\n  Repo:  cape31one-sudo/Cape31-Development\n  Local: C:\\Cape31\\Development\\\n\nAccounts: Azure=Cape31one@gmail.com  GitHub=cape31one-sudo"
+            },
+            {
+              "id": "c31-s-001-2",
+              "title": "Deploy Commands",
+              "type": "procedure",
+              "content": "DEV:\n  cd C:\\Cape31\\Development\n  copy cape31-class-management.html index.html\n  git add .\n  git commit -m \"message\"\n  git push -f https://cape31one-sudo:TOKEN@github.com/cape31one-sudo/Cape31-Development.git master:main\n\nPROD (only after dev confirmed):\n  cd C:\\Cape31\n  copy cape31-class-management.html index.html\n  git add .\n  git commit -m \"message\"\n  git push -f https://cape31one-sudo:TOKEN@github.com/cape31one-sudo/Cape31-azure.git master:main\n\nTOKENS: github.com/settings/tokens \u2014 needs repo + workflow scopes\nNever paste tokens in chat \u2014 revoke immediately if exposed\nAudit before every deploy: python3 cape31_audit.py cape31-class-management.html"
+            },
+            {
+              "id": "c31-s-001-3",
+              "title": "Azure Workflow \u2014 Critical",
+              "type": "reference",
+              "content": "Working workflow uses OIDC authentication. Key settings:\n  output_location: \"\"  (NOT / and NOT .)\n  skip_app_build: true\n  Uses github_id_token from OIDC step\n\nWorkflow files:\n  Prod: C:\\Cape31\\.github\\workflows\\azure-static-web-apps-proud-pebble-0896e5503.yml\n  Dev:  C:\\Cape31\\Development\\.github\\workflows\\azure-static-web-apps-polite-bay-0d57fd203.yml\n\nSecret names:\n  Prod: AZURE_STATIC_WEB_APPS_API_TOKEN_PROUD_PEBBLE_0896E5503\n  Dev:  AZURE_STATIC_WEB_APPS_API_TOKEN_POLITE_BAY_0D57FD203\n\nFull working YAML in CAPE31_DEV_NOTES.md \u2014 use that if workflow ever needs rebuilding."
+            },
+            {
+              "id": "c31-s-001-4",
+              "title": "Technical Facts",
+              "type": "reference",
+              "content": "Single HTML file app \u2014 all HTML, CSS, JS in one file. No build step.\nStorage keys: c31_cms_v1 (main), cape31_users_v1, cape31_buttons_v3, cape31_demo_v1\nHAS_CLOUD = false \u2014 localStorage only\n\nCRITICAL: Always download working file from Claude. NEVER copy from live site.\nCloudflare obfuscates email addresses in served HTML \u2014 breaks login."
+            },
+            {
+              "id": "c31-s-001-5",
+              "title": "Common Problems",
+              "type": "log",
+              "content": "Login not working: Cloudflare email obfuscation \u2014 use file from Claude not live site\ndoLogin undefined: JS syntax error \u2014 run audit, check braces/backticks/escape sequences\nrenderStats crash: stats-bar null on mobile \u2014 add null guard\nAzure token invalid: Portal > Static Web App > Manage deployment token > copy fresh > update GitHub secret"
+            }
+          ]
+        },
+        {
+          "id": "c31-man-002",
+          "title": "Architecture & Build Phases",
+          "category": "Architecture",
+          "description": "Three-tier structure, role model, entry gates, build sequence.",
+          "author": "Lance",
+          "tags": [
+            "architecture",
+            "tiers",
+            "phases",
+            "spec"
+          ],
+          "createdAt": "2026-04-05T00:00:00Z",
+          "updatedAt": "2026-04-05T00:00:00Z",
+          "sections": [
+            {
+              "id": "c31-s-002-1",
+              "title": "Three-Tier Structure",
+              "type": "reference",
+              "content": "INTERNATIONAL (scope=international): Boat register, sail buttons, build certs, IRC certs, measurement, int'l calendar, user access\n\nREGIONAL (scope=uk|eu|sa):\n  UK: ~35 boats, full ExCom, buttons required, class fee active\n  EU/Med: ~15 boats, building\n  South Africa: ~10 boats, emerging\n  Manages: regattas, entries, results, fees, yacht clubs\n\nYACHT CLUBS (scope=[club_id]):\n  Event-scoped per regatta. Entry list, provisional results, document upload.\n  Results provisional until ExCom publishes."
+            },
+            {
+              "id": "c31-s-002-2",
+              "title": "Role & Permission Model",
+              "type": "reference",
+              "content": "ROLES (universal): admin | excom | owner | member | club\nSCOPE: international | uk | eu | sa | [club_id]\nPERMISSIONS (additive): finance, buttons_admin, cert_admin, user_admin, results_publish, entry_confirm\n\nENTRY GATE RATCHET:\n  Regional admin turns ON (fee/insurance/address) with confirmation popup\n  Only Int Admin turns OFF \u2014 audit logged\n  Default: all OFF. UK=all ON."
+            },
+            {
+              "id": "c31-s-002-3",
+              "title": "Build Sequence",
+              "type": "reference",
+              "content": "Phase 1 COMPLETE: Boat register, fees, regattas, entries, results, sail buttons, payments\nPhase 2b COMPLETE: Scope/permissions, entry gate toggles, regatta flags\nPhase 2c IN PROGRESS: Club accounts (club record, club user role, club login view, provisional results, ExCom publishes)\nPhase 2d NEXT: IRC cert, handicap results, Vakaros CSV import\nPhase 3: Noticeboard, WhatsApp/Telegram push, email notifications, public results\nPhase 4: Region management, int'l dashboard, builder registration"
+            }
+          ]
+        },
+        {
+          "id": "c31-man-003",
+          "title": "Role Access Matrix",
+          "category": "Administration",
+          "description": "Official access matrix \u2014 single source of truth. Consolidated from 4 Excel files (all consistent).",
+          "author": "Lance",
+          "tags": [
+            "roles",
+            "permissions",
+            "access",
+            "matrix",
+            "buttons"
+          ],
+          "createdAt": "2026-04-05T00:00:00Z",
+          "updatedAt": "2026-04-05T00:00:00Z",
+          "sections": [
+            {
+              "id": "c31-s-003-1",
+              "title": "Access Matrix",
+              "type": "reference",
+              "content": "ROLES: Admin | ExCom | Owner/Manager | Member\nSource: 4 Excel files uploaded April 2026 \u2014 all consistent.\n\nUSER MANAGEMENT\n  Add/remove users, set roles, link boats:   Admin only\n  Approve access requests:                   Admin only\n\nSAIL BUTTON REGISTER\n  View entire fleet & all buttons:           All roles\n  Issue standard 7 buttons (on fee payment): Admin ONLY \u2014 not ExCom\n  Issue bonus buttons (+2 multi-territory):  Admin ONLY \u2014 not ExCom\n  Amend/correct a button (written reason):   Admin + ExCom \u2014 audit logged\n  Enter IHC cert number (once, then locked): Admin + ExCom + Owner/Manager\n  View audit log (tamper-proof):             Admin + ExCom\n\nREGATTAS & ENTRIES\n  Create & manage regattas:                  Admin + ExCom\n  Enter own boat in regatta:                 Admin + ExCom + Owner/Manager\n  Add/edit crew for own entry:               Admin + ExCom + Owner/Manager\n  View all regatta entries & results:        All roles\n\nCLASS FEES & FLEET\n  Confirm fee payment (triggers buttons):    Admin + ExCom\n  View class fees status:                    All roles\n  View race results & standings:             All roles\n  Add/edit fleet register:                   Admin + ExCom\n\nKEY RULES\n  Owner/Manager: Same role \u2014 boat manager linked to specific hull they don't own\n  OSR HW Jibs: No button required, unlimited per class rules G.2\n  Buttons: 7/year (max 1 main, 3 headsail, 3 spinnaker)\n  Bonus: +2 any type if 6+ events across 2+ RCA territories. Admin applies on request.\n  IHC cert: Manufacturer cert number from build cert. Entered once, locked on save.\n    Admin/ExCom can amend \u2014 mandatory written reason \u2014 permanently audit logged."
+            },
+            {
+              "id": "c31-s-003-2",
+              "title": "Build Implementation",
               "type": "note",
-              "content": "Knox is AI-agnostic. All data is plain JSON and markdown on GitHub — any AI with file upload and web access can work with it.\n\nKnox has been designed and tested with:\n- Claude (Anthropic) — primary AI, full session file\n- ChatGPT (OpenAI) — full session file, browsing required\n\nTo adapt for other AIs (Gemini, Copilot, etc.):\n- Copy CHATGPT_SESSION.md as a starting point\n- Adjust instructions for how that AI handles file uploads and web browsing\n- The GitHub raw URLs and data structure remain the same\n- Commit the new session file to the repo root\n\nThe only Claude-specific component is the dark widget interface built in Claude artifacts. The underlying data and GitHub infrastructure works with any AI."
+              "content": "canManageButtons() = isIntl() && isAdmin() ONLY \u2014 not ExCom\nExCom can AMEND buttons (with reason) but cannot ISSUE them\n\nIHC cert number:\n  Label: 'IHC certificate number (from build cert)'\n  Owner enters once \u2014 certNumberLocked=true on save\n  Locked field shows padlock, read-only\n  Admin/ExCom amend: prompt for written reason \u2192 audit log entry\n\nBoat Manager: positions=['boat_manager'], managedBoatId field, same permissions as Owner\n\nAudit log fields: action, userId, userName, boatId, beforeValue, afterValue, reason, timestamp"
+            }
+          ]
+        },
+        {
+          "id": "c31-man-004",
+          "title": "Stripe & Azure Functions",
+          "category": "Setup",
+          "description": "Stripe payment integration. Azure Functions API from cape31-azure.zip.",
+          "author": "Lance",
+          "tags": [
+            "stripe",
+            "azure",
+            "payments",
+            "api"
+          ],
+          "createdAt": "2026-04-05T00:00:00Z",
+          "updatedAt": "2026-04-05T00:00:00Z",
+          "sections": [
+            {
+              "id": "c31-s-004-1",
+              "title": "Azure Functions",
+              "type": "reference",
+              "content": "cape31-azure.zip contains API folder with Azure Functions:\n  create-checkout/index.js \u2014 creates Stripe Checkout sessions\n  get-payment-status/index.js \u2014 queries Stripe for payment status\n  stripe-webhook/index.js \u2014 receives Stripe payment confirmations\n\nENV VARS in Azure Portal > Static Web App > Configuration:\n  STRIPE_SECRET_KEY = sk_live_...\n  STRIPE_WEBHOOK_SECRET = whsec_...\n  SITE_URL = https://YOUR-SITE.azurestaticapps.net\n\nWebhook endpoint: https://YOUR-SITE.azurestaticapps.net/api/stripe-webhook\nEvents: checkout.session.completed, checkout.session.expired, payment_intent.payment_failed\n\nTest card: 4242 4242 4242 4242, any future expiry, any CVC\nUse sk_test_ while testing, sk_live_ for production"
             }
           ]
         }
@@ -201,6 +293,6 @@
   "_meta": {
     "created": "2026-04-04T00:00:00Z",
     "schema": "knox-v3",
-    "note": "Initial repository.json created from Knox development session 2026-04-04"
+    "note": "Updated 2026-04-05: Knox manuals added (session guide, data rules, dev tools). Cape 31 project added."
   }
 }
