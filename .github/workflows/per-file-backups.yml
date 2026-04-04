@@ -1,12 +1,4 @@
-# .github/workflows/per-file-backups.yml
-#
-# Knox Backup System — Per-File Version Control
-# Runs whenever a tracked file changes.
-# Creates a timestamped backup of each changed file.
-# Prunes each file's backup folder to 30 versions max.
-# NEVER deletes current files — only old backups, oldest first.
-
-name: Knox — Per-File Backups
+name: Knox Backup
 
 on:
   push:
@@ -23,109 +15,59 @@ jobs:
       contents: write
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 2
 
-      - name: Create timestamped backups for changed files
+      - name: Back up changed files
         run: |
-          TIMESTAMP=$(date -u '+%Y-%m-%d-%H%M%S')
-          CHANGED=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || git show --name-only --format='' HEAD)
-
+          TS=$(date -u '+%Y-%m-%d-%H%M%S')
           mkdir -p backups/repository backups/notes backups/dev-log backups/active
 
-          for FILE in $CHANGED; do
-            if [ ! -f "$FILE" ]; then continue; fi
+          if git rev-parse HEAD~1 >/dev/null 2>&1; then
+            FILES=$(git diff --name-only HEAD~1 HEAD)
+          else
+            FILES=$(git show --name-only --format='' HEAD)
+          fi
 
-            case "$FILE" in
-              repository.json)
-                DEST="backups/repository/${TIMESTAMP}.json"
-                cp "$FILE" "$DEST"
-                echo "Backed up: $FILE → $DEST"
-                ;;
-              logs/dev-log.md)
-                DEST="backups/dev-log/${TIMESTAMP}.md"
-                cp "$FILE" "$DEST"
-                echo "Backed up: $FILE → $DEST"
-                ;;
-              active/notes.md)
-                DEST="backups/notes/${TIMESTAMP}.md"
-                cp "$FILE" "$DEST"
-                echo "Backed up: $FILE → $DEST"
-                ;;
+          for F in $FILES; do
+            [ -f "$F" ] || continue
+            case "$F" in
+              repository.json)     cp "$F" "backups/repository/$TS.json" ;;
+              logs/dev-log.md)     cp "$F" "backups/dev-log/$TS.md" ;;
+              active/notes.md)     cp "$F" "backups/notes/$TS.md" ;;
               active/*)
-                SAFENAME=$(echo "$FILE" | sed 's|active/||' | sed 's|/|-|g')
-                mkdir -p backups/active
-                DEST="backups/active/${TIMESTAMP}-${SAFENAME}"
-                cp "$FILE" "$DEST"
-                echo "Backed up: $FILE → $DEST"
-                ;;
+                N=$(echo "$F" | sed 's|active/||;s|/|-|g')
+                cp "$F" "backups/active/$TS-$N" ;;
             esac
           done
 
-      - name: Prune each backup folder to 30 versions
+      - name: Prune to 30 per folder
         run: |
-          MAX=30
           for DIR in backups/repository backups/notes backups/dev-log backups/active; do
-            if [ ! -d "$DIR" ]; then continue; fi
-
-            FILES=($(ls -t "$DIR" 2>/dev/null))
-            TOTAL=${#FILES[@]}
-
-            if [ "$TOTAL" -le "$MAX" ]; then
-              echo "$DIR: $TOTAL versions — no pruning needed."
-              continue
-            fi
-
-            TO_DELETE=("${FILES[@]:$MAX}")
-            echo "$DIR: $TOTAL versions → deleting ${#TO_DELETE[@]} oldest:"
-            for F in "${TO_DELETE[@]}"; do
-              echo "  Removing: $DIR/$F"
-              rm "$DIR/$F"
+            [ -d "$DIR" ] || continue
+            ls -t "$DIR" | grep -v '^\.' | tail -n +31 | while read F; do
+              rm "$DIR/$F" && echo "Pruned: $DIR/$F"
             done
           done
 
-      - name: Update backup manifest
+      - name: Update manifest
         run: |
-          python3 - << 'PYEOF'
+          python3 << 'PY'
           import os, json
           from datetime import datetime
+          m = {"generated": datetime.utcnow().isoformat()+"Z", "folders": {}}
+          for d in sorted(os.listdir("backups")):
+              p = os.path.join("backups", d)
+              if not os.path.isdir(p): continue
+              vs = sorted([f for f in os.listdir(p) if not f.startswith(".")], reverse=True)
+              m["folders"][d] = {"count": len(vs), "newest": vs[0] if vs else None, "versions": vs}
+          json.dump(m, open("backups/manifest.json","w"), indent=2)
+          PY
 
-          manifest = {"generated": datetime.utcnow().isoformat() + "Z", "folders": {}}
-
-          backup_root = "backups"
-          for folder in sorted(os.listdir(backup_root)):
-            folder_path = os.path.join(backup_root, folder)
-            if not os.path.isdir(folder_path):
-              continue
-            files = sorted(
-              [f for f in os.listdir(folder_path) if not f.startswith(".")],
-              reverse=True
-            )
-            manifest["folders"][folder] = {
-              "count": len(files),
-              "newest": files[0] if files else None,
-              "oldest": files[-1] if files else None,
-              "versions": files
-            }
-
-          with open("backups/manifest.json", "w") as f:
-            json.dump(manifest, f, indent=2)
-
-          print("Manifest updated.")
-          PYEOF
-
-      - name: Commit backups
+      - name: Commit
         run: |
-          git config user.name  "knox-backup[bot]"
-          git config user.email "knox-backup[bot]@users.noreply.github.com"
-
-          if git diff --quiet && git diff --staged --quiet; then
-            echo "No changes to commit."
-          else
-            git add backups/
-            git commit -m "knox: backup $(date -u '+%Y-%m-%d %H:%M') UTC"
-            git push
-          fi
-
+          git config user.name "knox-backup[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add backups/
+          git diff --cached --quiet && echo "Nothing to commit" || git commit -m "knox: backup $(date -u '+%Y-%m-%d %H:%M') UTC" && git push
