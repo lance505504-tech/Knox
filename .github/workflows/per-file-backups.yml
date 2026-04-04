@@ -24,7 +24,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 0
 
       - name: Back up changed files
         run: |
@@ -65,8 +65,7 @@ jobs:
           m = {'generated': datetime.utcnow().isoformat()+'Z', 'folders': {}}
           for d in sorted(os.listdir('backups')):
               p = os.path.join('backups', d)
-              if not os.path.isdir(p):
-                  continue
+              if not os.path.isdir(p): continue
               vs = sorted([f for f in os.listdir(p) if not f.startswith('.')], reverse=True)
               m['folders'][d] = {'count': len(vs), 'newest': vs[0] if vs else None, 'versions': vs}
           open('backups/manifest.json', 'w').write(json.dumps(m, indent=2))
@@ -81,8 +80,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "Nothing to commit."
           else
-            git commit -m "knox: backup $(date -u '+%Y-%m-%d %H:%M') UTC"
-            git fetch origin main
-            git rebase origin/main
-            git push origin main
+            git pull --rebase origin main
+            git commit -m "knox: backup $(date -u '+%Y-%m-%d %H:%M') UTC [skip ci]"
+            git push --force-with-lease origin main
           fi
