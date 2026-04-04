@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Knox — Lances_Team</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#11151c;--sidebar:#0c0f14;--card:#1a1f2b;--card2:#212736;--border:#2a3045;--border2:#343d55;--text:#e2dfd8;--text2:#8892a8;--text3:#5a6480;--accent:#d4963a;--accent2:#e8b060;--green:#4caf7d;--red:#e05c5c;--blue:#5b9bd5;--purple:#9b72cf;--live:#4caf7d;--dev:#d4963a;--owner:#9b72cf;--admin:#d4963a;--contrib:#5b9bd5}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;align-items:center;justify-content:center;font-size:14px}
+.wrap{max-width:480px;width:90%;text-align:center;padding:40px 20px}
+.logo{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:700;color:var(--accent);margin-bottom:4px}
+.sub{font-size:10px;text-transform:uppercase;letter-spacing:3px;color:var(--text3);margin-bottom:32px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:16px;text-align:left}
+.card h2{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;margin-bottom:8px}
+.card p{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:16px}
+.biometric-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:14px;background:var(--card2);border:1px solid var(--border2);border-radius:10px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:var(--text);transition:all .2s;margin-bottom:10px}
+.biometric-btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:10px 20px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;border:none;transition:all .15s;width:100%}
+.btn-primary{background:var(--accent);color:#0f0c08;margin-bottom:8px}
+.btn-primary:hover{background:var(--accent2)}
+.btn-ghost{background:transparent;color:var(--text2);border:1px solid var(--border)}
+.btn-ghost:hover{background:var(--card2);color:var(--text)}
+input[type=text],input[type=password]{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:10px 12px;border-radius:8px;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;transition:border-color .2s;margin-bottom:10px}
+input:focus{border-color:var(--accent)}
+input::placeholder{color:var(--text3)}
+.notice{font-size:11px;color:var(--text3);line-height:1.6;margin-top:8px}
+.est{font-size:11px;color:var(--text3);letter-spacing:3px;margin-top:24px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="logo">Knox</div>
+  <div class="sub">Secure Knowledge Repository</div>
+
+  <div id="signin-card" class="card">
+    <h2>Sign In</h2>
+    <p>Use Face ID, Touch ID, or your access code to access Lances_Team's knowledge repository.</p>
+    <button class="biometric-btn" id="bio-btn" onclick="doPasskeySignIn()">
+      <span style="font-size:22px">&#128274;</span>
+      <span>Sign in with Face ID / Touch ID</span>
+    </button>
+    <div style="font-size:11px;color:var(--text3);text-align:center;margin:8px 0">or use your access code</div>
+    <input type="password" id="code" placeholder="Access code" onkeydown="if(event.key==='Enter')doCodeSignIn()">
+    <button class="btn btn-primary" onclick="doCodeSignIn()">Sign In</button>
+    <button class="btn btn-ghost" onclick="showRedeem()">&#127967; Redeem Invitation</button>
+  </div>
+
+  <div id="redeem-card" class="card" style="display:none">
+    <h2>Redeem Invitation</h2>
+    <p>Enter the token you received to activate your account and set up biometric access.</p>
+    <input type="text" id="inv-tok" placeholder="Paste your invitation token">
+    <button class="btn btn-primary" onclick="doRedeem()">Continue</button>
+    <button class="btn btn-ghost" onclick="showSignIn()" style="margin-top:4px">&#8592; Back</button>
+  </div>
+
+  <div id="setup-card" class="card" style="display:none">
+    <h2 id="setup-title">Set Up Biometrics</h2>
+    <p id="setup-desc">Register your biometric on this device.</p>
+    <button class="biometric-btn" id="reg-bio-btn" onclick="doRegisterPasskey()">
+      <span style="font-size:22px">&#128274;</span>
+      <span>Register Face ID / Touch ID</span>
+    </button>
+    <div style="font-size:11px;color:var(--text3);text-align:center;margin:8px 0">or set an access code instead</div>
+    <input type="password" id="new-code" placeholder="Choose a code">
+    <input type="password" id="new-code2" placeholder="Confirm code">
+    <button class="btn btn-ghost" onclick="doSetCode()">Use Code Instead</button>
+  </div>
+
+  <div id="app-card" class="card" style="display:none">
+    <h2 id="welcome-name">Welcome</h2>
+    <p>You are signed in to Knox. Open the full repository app using the link below.</p>
+    <div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent2);word-break:break-all;margin:8px 0" id="app-url"></div>
+    <button class="btn btn-primary" onclick="openApp()" style="margin-top:8px">Open Knox Repository</button>
+    <button class="btn btn-ghost" onclick="signOut()" style="margin-top:6px">Sign out</button>
+  </div>
+
+  <div class="est">EST. 2001</div>
+</div>
+
+<script>
+const APP_URL = window.location.href.replace('index.html','').replace(/\/$/, '') + '/app.html';
+let pendingUser = null;
+
+function sha256(s){return crypto.subtle.digest('SHA-256',new TextEncoder().encode(s)).then(b=>Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join(''));}
+function b64(buf){return btoa(String.fromCharCode(...new Uint8Array(buf)));}
+function b64a(s){return Uint8Array.from(atob(s),c=>c.charCodeAt(0));}
+function rand(n=32){return crypto.getRandomValues(new Uint8Array(n));}
+
+function getUsers(){try{return JSON.parse(localStorage.getItem('knox_users')||'[]')}catch{return[]}}
+function saveUsers(u){localStorage.setItem('knox_users',JSON.stringify(u));}
+function getCU(){try{return JSON.parse(sessionStorage.getItem('knox_cu')||'null')}catch{return null}}
+function setCU(u){sessionStorage.setItem('knox_cu',JSON.stringify(u));}
+
+function showSignIn(){document.getElementById('signin-card').style.display='';document.getElementById('redeem-card').style.display='none';document.getElementById('setup-card').style.display='none';document.getElementById('app-card').style.display='none';}
+function showRedeem(){document.getElementById('signin-card').style.display='none';document.getElementById('redeem-card').style.display='';}
+
+async function doPasskeySignIn(){
+  const users=getUsers();
+  const creds=users.flatMap(u=>(u.credentials||[]).map(c=>({...c,userId:u.id})));
+  if(!creds.length){alert('No biometric credentials registered yet.');return;}
+  try{
+    const a=await navigator.credentials.get({publicKey:{challenge:rand(),allowCredentials:creds.map(c=>({id:b64a(c.credId),type:'public-key'})),userVerification:'required',timeout:60000}});
+    const usedId=b64(a.rawId);
+    const entry=creds.find(c=>c.credId===usedId);
+    const user=users.find(u=>u.id===entry?.userId);
+    if(!user){alert('Credential not recognised.');return;}
+    setCU(user);showApp(user);
+  }catch(e){alert(e.message||'Sign-in failed.');}
+}
+
+async function doCodeSignIn(){
+  const raw=document.getElementById('code').value;
+  if(!raw)return;
+  const hash=await sha256(raw);
+  const users=getUsers();
+  if(!users.length){
+    const name=prompt('First use — enter your name to create an Owner account:');
+    if(!name)return;
+    const u={id:Date.now().toString(36),name:name.trim(),role:'owner',credentials:[],codeHash:hash,joinedAt:new Date().toISOString()};
+    users.push(u);saveUsers(users);setCU(u);showApp(u);return;
+  }
+  const match=users.find(u=>u.codeHash===hash);
+  if(!match){alert('Code not recognised.');return;}
+  setCU(match);showApp(match);
+}
+
+async function doRedeem(){
+  const tok=(document.getElementById('inv-tok').value||'').trim();
+  if(!tok)return;
+  const invites=JSON.parse(localStorage.getItem('knox_invites')||'[]');
+  const inv=invites.find(i=>i.token===tok&&!i.used&&new Date(i.expiresAt)>new Date());
+  if(!inv){alert('Invalid or expired token.');return;}
+  const user=getUsers().find(u=>u.id===inv.userId);
+  if(!user){alert('Account not found.');return;}
+  pendingUser=user;
+  document.getElementById('redeem-card').style.display='none';
+  document.getElementById('setup-title').textContent='Welcome, '+user.name;
+  document.getElementById('setup-desc').textContent='You have been invited as '+user.role+'. Set up your access below.';
+  document.getElementById('setup-card').style.display='';
+}
+
+async function doRegisterPasskey(){
+  if(!pendingUser)return;
+  try{
+    const cred=await navigator.credentials.create({publicKey:{challenge:rand(),rp:{name:'Knox'},user:{id:new TextEncoder().encode(pendingUser.id),name:pendingUser.name,displayName:pendingUser.name},pubKeyCredParams:[{alg:-7,type:'public-key'},{alg:-257,type:'public-key'}],authenticatorSelection:{authenticatorAttachment:'platform',userVerification:'required',residentKey:'preferred'},timeout:60000}});
+    const users=getUsers();
+    const u=users.find(x=>x.id===pendingUser.id);
+    if(!u)return;
+    if(!u.credentials)u.credentials=[];
+    u.credentials.push({credId:b64(cred.rawId),device:navigator.userAgent.includes('iPhone')?'iPhone':navigator.userAgent.includes('Android')?'Android':'Device'});
+    u.joinedAt=u.joinedAt||new Date().toISOString();
+    const invites=JSON.parse(localStorage.getItem('knox_invites')||'[]');
+    const inv=invites.find(i=>i.userId===pendingUser.id&&!i.used);
+    if(inv)inv.used=true;
+    localStorage.setItem('knox_invites',JSON.stringify(invites));
+    saveUsers(users);setCU(u);document.getElementById('setup-card').style.display='none';showApp(u);
+  }catch(e){alert(e.message||'Registration failed.');}
+}
+
+async function doSetCode(){
+  const c1=document.getElementById('new-code').value;
+  const c2=document.getElementById('new-code2').value;
+  if(!c1){alert('Please enter a code.');return;}
+  if(c1!==c2){alert("Codes don't match.");return;}
+  const hash=await sha256(c1);
+  const users=getUsers();
+  const u=users.find(x=>x.id===pendingUser?.id);
+  if(!u)return;
+  u.codeHash=hash;u.joinedAt=u.joinedAt||new Date().toISOString();
+  const invites=JSON.parse(localStorage.getItem('knox_invites')||'[]');
+  const inv=invites.find(i=>i.userId===pendingUser.id&&!i.used);
+  if(inv)inv.used=true;
+  localStorage.setItem('knox_invites',JSON.stringify(invites));
+  saveUsers(users);setCU(u);document.getElementById('setup-card').style.display='none';showApp(u);
+}
+
+function showApp(u){
+  document.getElementById('signin-card').style.display='none';
+  document.getElementById('welcome-name').textContent='Welcome, '+u.name;
+  document.getElementById('app-url').textContent=APP_URL;
+  document.getElementById('app-card').style.display='';
+}
+
+function openApp(){window.location.href=APP_URL;}
+function signOut(){sessionStorage.removeItem('knox_cu');showSignIn();}
+
+if(getCU())showApp(getCU()); else showSignIn();
+</script>
+</body>
+</html>
