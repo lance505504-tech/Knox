@@ -1,4 +1,4 @@
-# Knox — Lances_Team
+# Knox — Lances-Team
 
 Secure Knowledge Repository · Est. 2001
 
