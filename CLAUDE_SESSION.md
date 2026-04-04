@@ -2,7 +2,7 @@
 <!-- Upload this to start any Claude session. Everything else is fetched from GitHub. -->
 
 ## System
-- **Name:** Knox — Lances_Team
+- **Name:** Knox — Lances-Team
 - **Repo:** https://github.com/lance505504-tech/Knox
 - **Raw base URL:** https://raw.githubusercontent.com/lance505504-tech/Knox/main
 - **App URL:** https://lance505504-tech.github.io/Knox
