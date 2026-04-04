@@ -5,7 +5,7 @@
 - **Name:** Knox — Lances-Team
 - **Repo:** https://github.com/lance505504-tech/Knox
 - **Raw base URL:** https://raw.githubusercontent.com/lance505504-tech/Knox/main
-- **App URL:** https://lance505504-tech.github.io/Knox
+- **App URL:** https://lance-knox.netlify.app
 
 ---
 
