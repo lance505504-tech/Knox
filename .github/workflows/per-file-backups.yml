@@ -80,7 +80,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "Nothing to commit."
           else
-            git pull --rebase origin main
             git commit -m "knox: backup $(date -u '+%Y-%m-%d %H:%M') UTC [skip ci]"
-            git push --force-with-lease origin main
+            git pull --rebase origin main
+            git push origin main
           fi
