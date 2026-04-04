@@ -1,13 +1,13 @@
 {
   "org": {
-    "name": "Lances_Team",
-    "rationale": "Knox is the secure knowledge repository for Lances_Team. It holds procedures, references, development logs, and team knowledge across Live and Development projects."
+    "name": "Lances-Team",
+    "rationale": "Knox is the secure knowledge repository for Lances-Team. It holds procedures, references, development logs, and team knowledge across Live and Development projects."
   },
   "projects": [],
   "users": [],
   "invitations": [],
   "_meta": {
-    "created": "2026-04-04T05:12:04Z",
+    "created": "2026-04-04T05:22:03Z",
     "schema": "knox-v3"
   }
 }
