@@ -4,9 +4,12 @@
 -
 
 ## Decisions Made
-- knox-update.py is the standard Knox update method
-- At session end Claude bakes file contents into knox-update.py -- one download, one run
-- Files left on C: drive risk being overwritten by other sessions -- delete after push
+- knox-update.py is the standard Knox update method for Claude sessions
+- dev-log uses fetch-then-append -- safe across multiple simultaneous sessions
+- notes.md and session files are direct push -- last session wins
+- At session end Claude generates one knox-update.py with content baked in -- download, run, delete
+- ChatGPT sessions output file contents for manual GitHub copy-paste
+- CLAUDE_SESSION.md and CHATGPT_SESSION.md now contain full session protocol
 
 ## Links
 -
