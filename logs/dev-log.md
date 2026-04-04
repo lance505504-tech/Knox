@@ -1,24 +1,31 @@
 # Development Log
 
 ---
-## 2026-04-04 — Knox initialised
+## 2026-04-04 -- Knox initialised
 **Worked on:** Repository created and configured via knox-setup.py
-**Files created:** All core files, folder structure, GitHub Actions
+**Files created:** All core files, folder structure, GitHub Actions, GitHub Pages
 **Next:** Sign in to Knox, set up team members, create first project
 
 ---
-## 2026-04-05 — Cape 31 CMS project added to Knox
-**Files ingested:** CAPE31_DEV_NOTES.md, CAPE31_PROJECT_STATE.md, cape31_audit.py, 
-  cape31-azure.zip (Azure Functions + Stripe API), cape31-deploy-v2.zip,
-  Cape31_Access_Control.xlsx + 3 other role matrix files (all consistent),
-  auth.js files (CareCore — not Cape 31, filed separately)
-**Knox updated:** Cape 31 project added with 4 manuals:
-  1. Infrastructure & URLs (correct dev URL: polite-bay-0d57fd203)
-  2. Architecture & Build Phases
-  3. Role Access Matrix (consolidated from 4 files)
-  4. Stripe & Azure Functions
-**Key correction:** Dev URL was wrong in previous sessions. 
-  Correct: https://polite-bay-0d57fd203.6.azurestaticapps.net
-**Current file:** cape31-class-management.html — 384KB clean, Node OK
-**Phase 2c:** Club accounts — to build next session
-**Next:** Start each session by uploading CLAUDE_SESSION.md to load this context
+## 2026-04-04 -- Broadoak Manor website project initiated
+**Worked on:** Full website redesign scoping for broadoakmanor.co.uk
+**Completed:**
+- Homepage prototype (HTML/CSS) -- people-first design, green/gold palette, Cormorant Garamond + Jost typography
+- Comprehensive design paper (Word .docx, 15 sections, 57 questions for the team)
+- knox-update.py updated to push all three Knox files in one command with content baked in
+**Key decisions:**
+- Technology: Next.js + Azure Static Web Apps + Azure Functions for forms
+- Design direction: people not buildings -- residents, staff and families lead every page
+- Stories section: self-contained GitHub markdown files, no CMS login required
+- Founding year corrected to 1986 (current site incorrectly states 1976)
+- CQC Outstanding in Caring to be displayed, subject to current rating verification
+- knox-update.py is the standard method for all Knox file updates
+- Session end workflow: Claude outputs one knox-update.py with content baked in, download and run, done
+**Research findings:**
+- Current site: WordPress 2020, slow, building-led, testimonials buried
+- Facebook: original page (556 followers) lost to password issue; newer page (40 followers) now active
+- CQC: three registrations (Nursing Home, Care Home, Domiciliary Care)
+- Real Google reviews extracted and used as homepage testimonial content
+- Assisted Living undersold -- barn, community, restaurant missing from current site
+**Awaiting:** 57 questions in design paper from Broadoak team
+**Next:** Team reviews design paper -> Phase 2 copywriting -> Phase 3 Next.js build
