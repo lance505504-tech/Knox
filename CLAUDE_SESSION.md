@@ -1,55 +1,35 @@
-# Knox Session File
-<!-- Upload this to start any Claude session. Everything else is fetched from GitHub. -->
-
-## System
-- **Name:** Knox — Lances-Team
-- **Repo:** https://github.com/lance505504-tech/Knox
-- **Raw base URL:** https://raw.githubusercontent.com/lance505504-tech/Knox/main
-- **App URL:** https://lance-knox.netlify.app
-
----
-
-## On Session Start
-
-Fetch all `auto-load: yes` files silently before responding.
-Read the latest dev-log entry. State what was loaded and when, then ask what to work on.
-
----
-
-## File Registry
-
-| File | Path | Auto-load | Notes |
-|---|---|---|---|
-| Repository | `repository.json` | yes | Full Knox app state |
-| Dev log | `logs/dev-log.md` | yes | Last session summary |
-| Project notes | `active/notes.md` | yes | Live context |
-| Backup manifest | `backups/manifest.json` | yes | All available backups |
-| Session file | `CLAUDE_SESSION.md` | — | This file |
-
----
-
-## Backup Access
-
-When asked to show or restore backups:
-1. Read `backups/manifest.json` (auto-loaded) for all available versions
-2. List versions newest first with dates
-3. If restoring: fetch → show summary → wait for explicit confirmation → output for commit
-4. Never restore without confirmation. Restoring creates a new backup of the current version first.
-
-Backup raw URL pattern:
-```
-https://raw.githubusercontent.com/lance505504-tech/Knox/main/backups/[folder]/[filename]
-```
-
----
-
-## Working Rules
-
-Everything lives on GitHub. Never ask the user to upload files from their computer.
-At session end, append a dev log entry to `logs/dev-log.md`.
-
----
-
-## Project Context
-
-[Describe your project here. Update when something significant changes.]
+Knox Session File
+<!-- Attach this file and type "load session" to begin -->
+On Session Start
+Fetch these URLs in order before responding to anything:
+https://raw.githubusercontent.com/lance505504-tech/Knox/main/repository.json
+https://raw.githubusercontent.com/lance505504-tech/Knox/main/logs/dev-log.md
+https://raw.githubusercontent.com/lance505504-tech/Knox/main/active/notes.md
+https://raw.githubusercontent.com/lance505504-tech/Knox/main/backups/manifest.json
+After fetching all four, confirm what was loaded and the date of the last dev log entry, then ask what to work on.
+System
+Name: Knox — Lances-Team
+Repo: https://github.com/lance505504-tech/Knox
+Nouvita repo: https://github.com/lance505504-tech/knox-nouvita
+Broadoak repo: https://github.com/lance505504-tech/knox-broadoak
+Sign-in: https://lance-knox.netlify.app
+Team
+Name	Role
+Lance	Owner
+Elliot Adams	Admin — Nouvita
+Harriet Anstey	Admin — Nouvita
+Jessica Lepodevin	Admin — Broadoak Manor
+Charlotte Whay	Admin — Broadoak Manor
+Amelia Adams	Admin — Broadoak Manor
+Nicola White	Admin — Broadoak Manor
+Backup Access
+To show or restore backups, fetch:
+https://raw.githubusercontent.com/lance505504-tech/Knox/main/backups/manifest.json
+List versions newest first. Always confirm before restoring. Restoring is non-destructive — current version is saved first.
+Working Rules
+Fetch from the URLs above — never ask for local file uploads
+At session end, output updated files clearly labelled for committing to GitHub
+Append a dev log entry to logs/dev-log.md at session end
+Keep responses focused
+Project Context
+Knox is Lances-Team's development workspace. It manages procedures, references, development logs and team knowledge across three organisations — Lances-Team, Nouvita and Broadoak Manor. Each organisation has its own Knox repository. Personal data is never stored in Knox — it goes in private repositories.
