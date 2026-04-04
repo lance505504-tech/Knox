@@ -1,0 +1,131 @@
+# .github/workflows/per-file-backups.yml
+#
+# Knox Backup System — Per-File Version Control
+# Runs whenever a tracked file changes.
+# Creates a timestamped backup of each changed file.
+# Prunes each file's backup folder to 30 versions max.
+# NEVER deletes current files — only old backups, oldest first.
+
+name: Knox — Per-File Backups
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'repository.json'
+      - 'active/**'
+      - 'logs/**'
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create timestamped backups for changed files
+        run: |
+          TIMESTAMP=$(date -u '+%Y-%m-%d-%H%M%S')
+          CHANGED=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || git show --name-only --format='' HEAD)
+
+          mkdir -p backups/repository backups/notes backups/dev-log backups/active
+
+          for FILE in $CHANGED; do
+            if [ ! -f "$FILE" ]; then continue; fi
+
+            case "$FILE" in
+              repository.json)
+                DEST="backups/repository/${TIMESTAMP}.json"
+                cp "$FILE" "$DEST"
+                echo "Backed up: $FILE → $DEST"
+                ;;
+              logs/dev-log.md)
+                DEST="backups/dev-log/${TIMESTAMP}.md"
+                cp "$FILE" "$DEST"
+                echo "Backed up: $FILE → $DEST"
+                ;;
+              active/notes.md)
+                DEST="backups/notes/${TIMESTAMP}.md"
+                cp "$FILE" "$DEST"
+                echo "Backed up: $FILE → $DEST"
+                ;;
+              active/*)
+                SAFENAME=$(echo "$FILE" | sed 's|active/||' | sed 's|/|-|g')
+                mkdir -p backups/active
+                DEST="backups/active/${TIMESTAMP}-${SAFENAME}"
+                cp "$FILE" "$DEST"
+                echo "Backed up: $FILE → $DEST"
+                ;;
+            esac
+          done
+
+      - name: Prune each backup folder to 30 versions
+        run: |
+          MAX=30
+          for DIR in backups/repository backups/notes backups/dev-log backups/active; do
+            if [ ! -d "$DIR" ]; then continue; fi
+
+            FILES=($(ls -t "$DIR" 2>/dev/null))
+            TOTAL=${#FILES[@]}
+
+            if [ "$TOTAL" -le "$MAX" ]; then
+              echo "$DIR: $TOTAL versions — no pruning needed."
+              continue
+            fi
+
+            TO_DELETE=("${FILES[@]:$MAX}")
+            echo "$DIR: $TOTAL versions → deleting ${#TO_DELETE[@]} oldest:"
+            for F in "${TO_DELETE[@]}"; do
+              echo "  Removing: $DIR/$F"
+              rm "$DIR/$F"
+            done
+          done
+
+      - name: Update backup manifest
+        run: |
+          python3 - << 'PYEOF'
+          import os, json
+          from datetime import datetime
+
+          manifest = {"generated": datetime.utcnow().isoformat() + "Z", "folders": {}}
+
+          backup_root = "backups"
+          for folder in sorted(os.listdir(backup_root)):
+            folder_path = os.path.join(backup_root, folder)
+            if not os.path.isdir(folder_path):
+              continue
+            files = sorted(
+              [f for f in os.listdir(folder_path) if not f.startswith(".")],
+              reverse=True
+            )
+            manifest["folders"][folder] = {
+              "count": len(files),
+              "newest": files[0] if files else None,
+              "oldest": files[-1] if files else None,
+              "versions": files
+            }
+
+          with open("backups/manifest.json", "w") as f:
+            json.dump(manifest, f, indent=2)
+
+          print("Manifest updated.")
+          PYEOF
+
+      - name: Commit backups
+        run: |
+          git config user.name  "knox-backup[bot]"
+          git config user.email "knox-backup[bot]@users.noreply.github.com"
+
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git add backups/
+            git commit -m "knox: backup $(date -u '+%Y-%m-%d %H:%M') UTC"
+            git push
+          fi
+
