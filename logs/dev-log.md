@@ -29,3 +29,17 @@
 - Assisted Living undersold -- barn, community, restaurant missing from current site
 **Awaiting:** 57 questions in design paper from Broadoak team
 **Next:** Team reviews design paper -> Phase 2 copywriting -> Phase 3 Next.js build
+
+---
+## 2026-04-05 -- Session protocol standardised
+**Worked on:** Knox session protocol and multi-session conflict prevention
+**Completed:**
+- CLAUDE_SESSION.md rewritten with full protocol -- session start, during, end, knox-update.py template
+- CHATGPT_SESSION.md rewritten with matching protocol -- manual GitHub copy-paste end-of-session workflow
+- knox-update.py updated to fetch-then-append for dev-log, preventing simultaneous session overwrites
+- Both session files now self-contained -- any AI reading them behaves consistently
+**Decisions:**
+- Claude sessions: knox-update.py generated at end with content baked in
+- ChatGPT sessions: file contents output as labelled blocks for manual GitHub commit
+- dev-log always appended, never replaced
+**Next:** Broadoak team to review design paper -> Phase 2 copywriting -> Phase 3 build
