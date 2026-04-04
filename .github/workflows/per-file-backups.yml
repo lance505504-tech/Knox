@@ -8,6 +8,9 @@ on:
       - 'active/**'
       - 'logs/**'
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   backup:
     runs-on: ubuntu-latest
@@ -30,15 +33,17 @@ jobs:
             FILES=$(git show --name-only --format='' HEAD)
           fi
 
+          echo "Changed files: $FILES"
+
           for F in $FILES; do
             [ -f "$F" ] || continue
             case "$F" in
-              repository.json)     cp "$F" "backups/repository/$TS.json" ;;
-              logs/dev-log.md)     cp "$F" "backups/dev-log/$TS.md" ;;
-              active/notes.md)     cp "$F" "backups/notes/$TS.md" ;;
+              repository.json)  cp "$F" "backups/repository/$TS.json" && echo "Backed up: $F" ;;
+              logs/dev-log.md)  cp "$F" "backups/dev-log/$TS.md"      && echo "Backed up: $F" ;;
+              active/notes.md)  cp "$F" "backups/notes/$TS.md"        && echo "Backed up: $F" ;;
               active/*)
                 N=$(echo "$F" | sed 's|active/||;s|/|-|g')
-                cp "$F" "backups/active/$TS-$N" ;;
+                cp "$F" "backups/active/$TS-$N" && echo "Backed up: $F" ;;
             esac
           done
 
@@ -47,27 +52,30 @@ jobs:
           for DIR in backups/repository backups/notes backups/dev-log backups/active; do
             [ -d "$DIR" ] || continue
             ls -t "$DIR" | grep -v '^\.' | tail -n +31 | while read F; do
-              rm "$DIR/$F" && echo "Pruned: $DIR/$F"
+              rm "$DIR/$F"
+              echo "Pruned: $DIR/$F"
             done
           done
 
       - name: Update manifest
-        run: |
-          python3 << 'PY'
-          import os, json
-          from datetime import datetime
-          m = {"generated": datetime.utcnow().isoformat()+"Z", "folders": {}}
-          for d in sorted(os.listdir("backups")):
-              p = os.path.join("backups", d)
-              if not os.path.isdir(p): continue
-              vs = sorted([f for f in os.listdir(p) if not f.startswith(".")], reverse=True)
-              m["folders"][d] = {"count": len(vs), "newest": vs[0] if vs else None, "versions": vs}
-          json.dump(m, open("backups/manifest.json","w"), indent=2)
-          PY
+        run: >-
+          python3 -c "
+          import os, json;
+          from datetime import datetime;
+          m={'generated':datetime.utcnow().isoformat()+'Z','folders':{}};
+          [m['folders'].update({d:{'count':len(vs:=sorted([f for f in os.listdir(p:=os.path.join('backups',d)) if not f.startswith('.')],reverse=True)),'newest':vs[0] if vs else None,'versions':vs}}) for d in sorted(os.listdir('backups')) if os.path.isdir(os.path.join('backups',d))];
+          open('backups/manifest.json','w').write(json.dumps(m,indent=2));
+          print('Manifest updated')
+          "
 
-      - name: Commit
+      - name: Commit and push
         run: |
           git config user.name "knox-backup[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add backups/
-          git diff --cached --quiet && echo "Nothing to commit" || git commit -m "knox: backup $(date -u '+%Y-%m-%d %H:%M') UTC" && git push
+          if git diff --cached --quiet; then
+            echo "No backup changes — nothing to commit."
+          else
+            git commit -m "knox: backup $(date -u '+%Y-%m-%d %H:%M') UTC"
+            git push
+          fi
