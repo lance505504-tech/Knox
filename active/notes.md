@@ -4,19 +4,21 @@
 -
 
 ## Decisions Made
-- knox-update.py is the standard Knox update method for Claude sessions
-- dev-log uses fetch-then-append -- safe across multiple simultaneous sessions
-- notes.md and session files are direct push -- last session wins
-- At session end Claude generates one knox-update.py with content baked in -- download, run, delete
-- ChatGPT sessions output file contents for manual GitHub copy-paste
-- CLAUDE_SESSION.md and CHATGPT_SESSION.md now contain full session protocol
+- Cape31 websites moving to Cloudflare Pages
+- cape31class.org to be transferred from 123-reg to Cloudflare Registrar
 
 ## Links
--
+- Cloudflare dashboard: dash.cloudflare.com
+- 123-reg: dcc.123-reg.co.uk
 
 ## To Do
 - [ ] Sign in to Knox and create Owner account
 - [ ] Invite team members
 - [ ] Create first Live project
 - [ ] Create first Development project
-- [ ] Broadoak team to review design paper and answer 57 questions
+- [ ] Call 123-reg for EPP transfer code
+- [ ] Transfer cape31class.org to Cloudflare Registrar
+- [ ] Set up Cloudflare Pages for all 12 Cape31 websites
+- [ ] Delete Skandi, D, FR from Azure (failed deployments)
+- [ ] Delete UK, US, Med, SA from Azure once Cloudflare Pages versions live
+- [ ] Confirm subdomains for 7 new regional sites
