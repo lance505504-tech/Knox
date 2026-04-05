@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cape31 South Africa | Where It All Began | Cape31 International Class Association</title>
+<meta name="description" content="Cape31 South Africa — the founding fleet, the founding people, the founding waters. Table Bay. The Cape Doctor. Lord Laidlaw's vision. Davey James and Stephen du Toit's craft. The boat was born here.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;900&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#ED1C24;--red-dk:#B5141A;--red-lt:rgba(237,28,36,0.1);
+  --black:#000;--dark:#080c12;--panel:#0d1520;--mid:#141e2c;
+  --border:rgba(255,255,255,0.07);--bord2:rgba(255,255,255,0.14);--bordr:rgba(237,28,36,0.22);
+  --white:#fff;--off:#e8ecf2;--mute:#6d8399;
+  --gold:#D4A017;--green:#2a7a3b;--green-lt:rgba(42,122,59,0.1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:"Ubuntu",sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;padding-top:100px}
+img{display:block;max-width:100%}a{text-decoration:none;color:inherit}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--green)}
+
+/* ANN */
+.ann{background:var(--green);padding:8px 5vw;display:flex;align-items:center;justify-content:center;gap:12px;font-size:11.5px;font-weight:600;letter-spacing:.06em;position:fixed;top:0;left:0;right:0;z-index:1002;height:40px}
+.ann a{color:var(--white);text-decoration:underline;text-underline-offset:3px}
+.ann-x{position:absolute;right:18px;background:none;border:none;color:var(--white);cursor:pointer;font-size:17px;opacity:.7}
+
+/* NAV */
+nav{position:fixed;top:40px;left:0;right:0;z-index:1000;height:60px;padding:0 4vw;display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,.96);border-bottom:1px solid var(--border);backdrop-filter:blur(14px)}
+.nlo{display:flex;align-items:center;gap:12px}
+.nlo img{height:42px;width:auto}
+.nl-div{width:1px;height:28px;background:var(--bord2)}
+.nl-txt{display:flex;flex-direction:column;line-height:1.15}
+.nl-main{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:13px;letter-spacing:.18em;text-transform:uppercase}
+.nl-sub{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--green);margin-top:1px}
+.nav-links{display:flex;align-items:center;list-style:none}
+.nav-links a{display:block;padding:7px 11px;font-size:10.5px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:var(--mute);transition:color .2s}
+.nav-links a:hover{color:var(--white)}
+.nav-back{display:flex;align-items:center;gap:7px;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);padding:7px 12px;border:1px solid var(--border);border-radius:2px;transition:all .2s}
+.nav-back:hover{color:var(--white);border-color:var(--bord2)}
+.nav-back::before{content:"90";font-size:12px}
+.nav-cta{padding:8px 16px;background:var(--green);color:var(--white)!important;font-weight:700!important;border-radius:2px;transition:background .2s;margin-left:8px}
+.nav-cta:hover{background:#1e5c2c!important}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px;margin-left:10px}
+.hbg span{width:21px;height:2px;background:var(--white);border-radius:1px}
+.mob{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.97);flex-direction:column;align-items:center;justify-content:center;gap:4px}
+.mob.open{display:flex}
+.mob a{font-family:"Barlow Condensed",sans-serif;font-size:26px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);padding:6px 0;transition:color .2s}
+.mob a:hover{color:var(--green)}
+.mob-x{position:fixed;top:16px;right:20px;font-size:22px;color:var(--mute);background:none;border:none;cursor:pointer}
+
+/* UTILS */
+.ey{display:inline-flex;align-items:center;gap:10px;font-size:10.5px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--green);margin-bottom:12px}
+.ey::before{content:"";width:22px;height:1px;background:var(--green)}
+.sh{font-family:"Barlow Condensed",sans-serif;font-size:clamp(34px,5vw,60px);font-weight:900;text-transform:uppercase;line-height:.93;letter-spacing:-.01em}
+.sh em{font-style:normal;color:var(--green)}
+.bp{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:2px;background:var(--green);color:var(--white);font-weight:700;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;transition:all .2s}
+.bp:hover{background:#1e5c2c;transform:translateY(-2px)}
+.bo{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:2px;border:1px solid var(--bord2);color:var(--off);font-weight:600;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;transition:all .2s}
+.bo:hover{border-color:var(--green);color:var(--green)}
+.fi{opacity:0;transform:translateY(22px);transition:opacity .6s,transform .6s}
+.fi.vis{opacity:1;transform:none}
+section{padding:80px 4vw}
+
+/* HERO */
+#hero{position:relative;min-height:92vh;display:flex;align-items:center;overflow:hidden;background:var(--dark);margin-top:-100px;padding-top:100px}
+.hslide{position:absolute;inset:0;background-size:cover;background-position:center 40%;opacity:0;animation:hsl 24s infinite}
+.hslide:nth-child(1){animation-delay:0s;background-image:url("https://static.wixstatic.com/media/c918a5_d47231590938427aa03a099869d14173~mv2.jpg/v1/fill/w_1920,h_1000,al_c,q_85,usm_0.33_1.00_0.01,enc_avif,quality_auto/c918a5_d47231590938427aa03a099869d14173~mv2.jpg")}
+.hslide:nth-child(2){animation-delay:8s;background-image:url("https://static.wixstatic.com/media/c918a5_c1a7ff543ec444a0b72fe395d6acdfa6~mv2.jpeg/v1/fill/w_1920,h_1000,al_c,q_85,usm_0.33_1.00_0.01,enc_avif,quality_auto/c918a5_c1a7ff543ec444a0b72fe395d6acdfa6~mv2.jpeg")}
+.hslide:nth-child(3){animation-delay:16s;background-image:url("https://static.wixstatic.com/media/c918a5_9dc0535c87274899bf933e28fa08fdf2~mv2.jpg/v1/fill/w_1920,h_1000,al_c,q_85,usm_0.33_1.00_0.01,enc_avif,quality_auto/c918a5_9dc0535c87274899bf933e28fa08fdf2~mv2.jpg")}
+@keyframes hsl{0%{opacity:0;transform:scale(1.03)}6%{opacity:1;transform:scale(1.015)}88%{opacity:1;transform:scale(1)}94%{opacity:0}100%{opacity:0}}
+.hov{position:absolute;inset:0;background:linear-gradient(105deg,rgba(0,0,0,.92) 0%,rgba(0,0,0,.6) 55%,rgba(0,0,0,.15) 100%)}
+.hc{position:relative;z-index:2;padding:80px 4vw;max-width:760px}
+.hey{display:inline-flex;align-items:center;gap:10px;font-size:10.5px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--green);margin-bottom:14px}
+.hey::before{content:"";width:22px;height:1px;background:var(--green)}
+.hhl{font-family:"Barlow Condensed",sans-serif;font-size:clamp(52px,9vw,114px);font-weight:900;text-transform:uppercase;line-height:.88;letter-spacing:-.02em;margin-bottom:18px}
+.hhl span{display:block;color:var(--green)}
+.hsub{font-size:clamp(14px,1.8vw,17px);font-weight:300;color:rgba(255,255,255,.8);max-width:580px;line-height:1.85;margin-bottom:28px}
+.hstats{display:flex;gap:28px;flex-wrap:wrap;margin-bottom:32px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1)}
+.hstat-n{font-family:"Barlow Condensed",sans-serif;font-weight:900;font-size:clamp(26px,4vw,42px);color:var(--green);line-height:1}
+.hstat-l{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+
+/* ORIGIN SECTION */
+#origin{background:var(--dark)}
+.origin-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-top:48px}
+.origin-text p{font-size:15px;color:var(--mute);line-height:1.9;margin-bottom:18px}
+.origin-text p strong{color:var(--white)}
+.origin-text p em{color:var(--green);font-style:normal}
+.quote-block{background:linear-gradient(135deg,rgba(42,122,59,.08),rgba(13,21,32,.95));border:1px solid rgba(42,122,59,.25);border-left:4px solid var(--green);padding:32px}
+.qb-text{font-family:"Barlow Condensed",sans-serif;font-size:clamp(20px,2.5vw,26px);font-weight:400;font-style:italic;line-height:1.4;color:var(--white);margin-bottom:14px}
+.qb-attr{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--green)}
+.qb-role{font-size:12px;color:var(--mute);margin-top:3px}
+
+/* PEOPLE */
+#people{background:var(--black)}
+.people-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:48px}
+.person-card{background:var(--panel);border:1px solid var(--border);padding:32px;border-top:3px solid var(--green);transition:border-color .22s}
+.person-card:hover{border-color:rgba(42,122,59,.4)}
+.person-icon{font-size:36px;margin-bottom:16px}
+.person-name{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:24px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.person-name em{font-style:normal;color:var(--green)}
+.person-title{font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--green);margin-bottom:14px}
+.person-card p{font-size:13.5px;color:var(--mute);line-height:1.85}
+.person-card p strong{color:var(--white)}
+
+/* CAPE DOCTOR */
+#doctor{background:var(--dark);overflow:hidden;position:relative}
+#doctor::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(42,122,59,.05) 0%,transparent 60%);pointer-events:none}
+.doctor-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-top:48px}
+.doctor-stats{display:grid;grid-template-columns:1fr 1fr;gap:2px}
+.ds{background:var(--panel);border:1px solid var(--border);padding:24px;text-align:center}
+.ds-n{font-family:"Barlow Condensed",sans-serif;font-weight:900;font-size:clamp(32px,5vw,52px);color:var(--green);line-height:1;margin-bottom:6px}
+.ds-l{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--mute)}
+.doctor-text p{font-size:15px;color:var(--mute);line-height:1.9;margin-bottom:18px}
+.doctor-text p strong{color:var(--white)}
+.doctor-text p em{color:var(--green);font-style:normal}
+
+/* SERIES */
+#series{background:var(--black)}
+.series-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:48px}
+.ev-card{background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--green);padding:28px;transition:background .2s}
+.ev-card:hover{background:var(--mid)}
+.ev-round{font-size:9.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--green);margin-bottom:8px}
+.ev-name{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:22px;text-transform:uppercase;margin-bottom:6px}
+.ev-name em{font-style:normal;color:var(--green)}
+.ev-detail{font-size:13px;color:var(--mute);line-height:1.8}
+
+/* BUILD */
+#build{background:var(--dark)}
+.build-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:40px}
+.build-stat{background:var(--panel);border:1px solid var(--border);padding:28px;display:flex;align-items:flex-start;gap:20px}
+.bs-n{font-family:"Barlow Condensed",sans-serif;font-weight:900;font-size:clamp(36px,5vw,56px);color:var(--green);line-height:1;flex-shrink:0;min-width:80px}
+.bs-info{}
+.bs-label{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--green);margin-bottom:6px}
+.bs-desc{font-size:13.5px;color:var(--mute);line-height:1.75}
+.bs-desc strong{color:var(--white)}
+
+/* FLEET */
+#fleet{background:var(--black)}
+.fleet-table{width:100%;border-collapse:collapse}
+.fleet-table thead tr{background:var(--mid)}
+.fleet-table th{padding:10px 14px;font-size:9.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--green);text-align:left;border-bottom:1px solid var(--border)}
+.fleet-table td{padding:10px 14px;font-size:13px;color:var(--off);border-bottom:1px solid var(--border)}
+.fleet-table tr{background:var(--panel);transition:background .15s}
+.fleet-table tr:hover{background:var(--mid)}
+.hull{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:17px;color:var(--green)}
+.bn{font-weight:600}
+
+/* VISIT */
+#visit{background:var(--dark)}
+.visit-box{background:linear-gradient(135deg,rgba(42,122,59,.1),rgba(13,21,32,.9));border:1px solid rgba(42,122,59,.3);padding:64px;text-align:center;position:relative;overflow:hidden}
+.visit-box::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(42,122,59,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(42,122,59,.04) 1px,transparent 1px);background-size:44px 44px}
+.visit-hl{font-family:"Barlow Condensed",sans-serif;font-size:clamp(36px,6vw,72px);font-weight:900;text-transform:uppercase;line-height:.92;margin-bottom:16px;position:relative;z-index:1}
+.visit-hl em{font-style:normal;color:var(--green)}
+.visit-sub{font-size:16px;font-weight:300;color:var(--mute);max-width:560px;margin:0 auto 36px;line-height:1.8;position:relative;z-index:1}
+.visit-sub strong{color:var(--white)}
+.visit-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+
+/* FOOTER */
+footer{background:var(--dark);border-top:1px solid var(--border);padding:52px 4vw 30px}
+.ft{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:36px}
+.fb .flo{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.fb .flo img{height:38px;width:auto}
+.flt{padding-left:11px;border-left:1px solid var(--bord2)}
+.flt .fm{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:12px;letter-spacing:.16em;text-transform:uppercase;display:block}
+.flt .fs{font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--green);display:block;margin-top:2px}
+.fb p{font-size:13px;color:var(--mute);line-height:1.85;max-width:240px;margin-bottom:16px}
+.fc h5{font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--green);font-weight:700;margin-bottom:14px}
+.fc ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.fc li a{font-size:13px;color:var(--mute);display:flex;align-items:center;gap:6px;transition:color .2s}
+.fc li a::before{content:"4";font-size:9.5px;opacity:.25}
+.fc li a:hover{color:var(--white)}
+.fbot{border-top:1px solid var(--border);padding-top:22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.fbot span{font-size:11.5px;color:var(--mute)}
+.fbot a{color:var(--mute)}.fbot a:hover{color:var(--green)}
+
+/* RESPONSIVE */
+@media(max-width:1100px){.people-grid{grid-template-columns:1fr 1fr}.ft{grid-template-columns:1fr 1fr;gap:28px}}
+@media(max-width:900px){.origin-grid{grid-template-columns:1fr}.doctor-grid{grid-template-columns:1fr}.series-grid{grid-template-columns:1fr}.build-grid{grid-template-columns:1fr}}
+@media(max-width:768px){body{padding-top:90px}section{padding:56px 4vw}.nav-links{display:none}.hbg{display:flex}.people-grid{grid-template-columns:1fr}.ft{grid-template-columns:1fr;gap:22px}.visit-box{padding:36px 24px}}
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCE -->
+<div class="ann" id="ann">
+  <span>Summer in the South 2024/25 &mdash; Cape Performance Cup &middot; Tip of Africa Cup &middot; V&amp;A Waterfront &middot; Mykonos Offshore</span>
+  <a href="#series">See the series</a>
+  <button class="ann-x" onclick="document.getElementById('ann').style.display='none';document.getElementById('nav').style.top='0';document.body.style.paddingTop='60px'">&#215;</button>
+</div>
+
+<!-- MOBILE NAV -->
+<div class="mob" id="mob">
+  <button class="mob-x" onclick="tn()">&#10005;</button>
+  <a href="#origin" onclick="tn()">The Origin</a>
+  <a href="#people" onclick="tn()">The People</a>
+  <a href="#doctor" onclick="tn()">Cape Doctor</a>
+  <a href="#series" onclick="tn()">The Series</a>
+  <a href="#build" onclick="tn()">The Build</a>
+  <a href="#fleet" onclick="tn()">The Fleet</a>
+  <a href="#visit" onclick="tn()">Visit SA</a>
+  <a href="https://cape31class.org" style="color:var(--green)">&#8592; All Regions</a>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nlo" href="https://cape31class.org">
+    <img src="https://s3.eu-west-2.amazonaws.com/cms.cape31class.com/public/static/core/c31-logo.svg" alt="Cape31"
+         onerror="this.src='https://static.wixstatic.com/media/c918a5_c45c46fceb2c4156bdba78a86f70db3a~mv2.png/v1/fill/w_160,h_140,al_c,q_90,enc_avif/C31%20logo.png'">
+    <div class="nl-div"></div>
+    <div class="nl-txt"><span class="nl-main">Cape31 Class</span><span class="nl-sub"><span style="display:inline-block;width:14px;height:10px;border-radius:1px;margin-right:5px;vertical-align:middle;background:linear-gradient(180deg,#007A4D 0%,#007A4D 33%,#FFB81C 33%,#FFB81C 66%,#DE3831 66%);"></span>South Africa</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#origin">The Origin</a></li>
+    <li><a href="#people">The People</a></li>
+    <li><a href="#doctor">Cape Doctor</a></li>
+    <li><a href="#series">The Series</a></li>
+    <li><a href="#fleet">Fleet</a></li>
+    <li><a href="#visit">Visit SA</a></li>
+  </ul>
+  <div style="display:flex;align-items:center">
+    <a href="https://cape31class.org" class="nav-back">All Regions</a>
+    <a href="/cdn-cgi/l/email-protection#c3b7a6a2ae83a0a2b3a6f0f2a0afa2b0b0eda0acae" class="nav-cta">Get Involved</a>
+    <div class="hbg" onclick="tn()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hslide"></div><div class="hslide"></div><div class="hslide"></div>
+  <div class="hov"></div>
+  <div class="hc fi">
+    <div class="hey">Cape31 South Africa &mdash; The Founding Fleet</div>
+    <h1 class="hhl">The Doctor<span>Dictates.</span></h1>
+    <p class="hsub">Table Mountain at your back. The Cape Doctor in your face. The boat was born here, in one of the most extreme and beautiful sailing environments on earth. Every Cape31 in every ocean traces its lineage to these waters, this yard and this vision.</p>
+    <div class="hstats">
+      <div><div class="hstat-n">2017</div><div class="hstat-l">First boat launched</div></div>
+      <div><div class="hstat-n">80+</div><div class="hstat-l">Boats worldwide</div></div>
+      <div><div class="hstat-n">14</div><div class="hstat-l">Days per build</div></div>
+      <div><div class="hstat-n">RCYC</div><div class="hstat-l">Home club</div></div>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <a href="#origin" class="bp">The Story &#8594;</a>
+      <a href="#visit" class="bo">Visit &amp; Race</a>
+    </div>
+  </div>
+</section>
+
+<!-- ORIGIN -->
+<section id="origin">
+  <div class="fi">
+    <div class="ey">The Beginning</div>
+    <h2 class="sh">One Man&rsquo;s <em>Vision</em></h2>
+  </div>
+  <div class="origin-grid fi">
+    <div class="origin-text">
+      <p>In Cape Town, under Table Mountain, a Scottish billionaire with a passion for offshore racing had a simple idea. <strong>Lord Irvine Laidlaw</strong> &mdash; the man behind the Highland Fling maxi yacht programme &mdash; wanted a boat built specifically for Cape Town waters. Not a rating weapon. Not a marketing exercise. Just <em>the best possible 31-footer for this place.</em></p>
+      <p>He commissioned Mark Mills with one instruction: no constraints. No commercial pressure. No compromises. Freed from the commercial pressures that typically force a new design to be compromised before the first boat is built, Mills was able to focus entirely on the brief &mdash; and deliver something that turned out to be universally exceptional.</p>
+      <p>The first Cape31, <strong>Flame</strong>, launched at the Royal Cape Yacht Club in February 2017. She performed immediately, impressing in conditions from 8 knots to nearly 30. Word spread fast. Laidlaw had commissioned five hulls. Buyers appeared. Then more.</p>
+      <p>As Mills put it: <em>&ldquo;Designed for one of the world&rsquo;s great sailing locations, we optimised the Cape31 to be an all-rounder &mdash; as happy in big breeze as it is in light airs, upwind and down.&rdquo;</em> The fact that it also happened to be the fastest, most exciting one-design class of the last decade across five continents was, in the best possible sense, a happy accident.</p>
+      <p>Laidlaw funded the development, promoted the early events to get the class on its feet, then stepped back. <strong>The class now runs itself.</strong> His original vision &mdash; to support youth sailing in Cape Town and boat building in South Africa &mdash; has become something far bigger than anyone anticipated.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:2px">
+      <div class="quote-block">
+        <div class="qb-text">&#8220;Conceived and brought to fruition by Cape Town resident and prominent sailor Lord Irvine Laidlaw of &lsquo;Highland Fling&rsquo; fame &mdash; defined from the outset as a simple, clean, high performance One Design without constraint.&#8221;</div>
+        <div class="qb-attr">Mark Mills</div>
+        <div class="qb-role">Designer &mdash; Mills Design, Ireland</div>
+      </div>
+      <div class="quote-block" style="margin-top:2px">
+        <div class="qb-text">&#8220;It certainly wasn&rsquo;t designed to be an IRC weapon. It was designed simply to be the best boat it could be in Cape Town &mdash; which actually transferred nicely over to the Solent with the wind against tide and the rough conditions we can get here.&#8221;</div>
+        <div class="qb-attr">Dave Swete</div>
+        <div class="qb-role">UK Race Circuit Director &mdash; 31 North Yachting</div>
+      </div>
+      <div style="background:var(--panel);border:1px solid var(--border);padding:24px;margin-top:2px">
+        <div style="font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--green);margin-bottom:10px">Timeline</div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;gap:14px;font-size:13px;padding:6px 0;border-bottom:1px solid var(--border)"><span style="color:var(--green);font-weight:700;min-width:40px">2017</span><span style="color:var(--mute)">Flame — hull 1 — launches at RCYC, Cape Town</span></div>
+          <div style="display:flex;gap:14px;font-size:13px;padding:6px 0;border-bottom:1px solid var(--border)"><span style="color:var(--green);font-weight:700;min-width:40px">2019</span><span style="color:var(--mute)">Invitational draws RORC, RTYC, Royal Perth teams to Cape Town</span></div>
+          <div style="display:flex;gap:14px;font-size:13px;padding:6px 0;border-bottom:1px solid var(--border)"><span style="color:var(--green);font-weight:700;min-width:40px">2021</span><span style="color:var(--mute)">Cape Performance Sailing founded — Davey James, Elian Perch, Stephen du Toit</span></div>
+          <div style="display:flex;gap:14px;font-size:13px;padding:6px 0;border-bottom:1px solid var(--border)"><span style="color:var(--green);font-weight:700;min-width:40px">2021</span><span style="color:var(--mute)">UK fleet established — Tokoloshe, Swete, Tor Tomlinson-Cheney</span></div>
+          <div style="display:flex;gap:14px;font-size:13px;padding:6px 0;border-bottom:1px solid var(--border)"><span style="color:var(--green);font-weight:700;min-width:40px">2024</span><span style="color:var(--mute)">Hull 50 launched — 50 boats in 36 months by Cape Performance Sailing</span></div>
+          <div style="display:flex;gap:14px;font-size:13px;padding:6px 0"><span style="color:var(--green);font-weight:700;min-width:40px">2025</span><span style="color:var(--mute)">80+ boats &mdash; 5 continents, 7 regions, Gold Cup at Saint-Tropez</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE PEOPLE -->
+<section id="people">
+  <div class="fi">
+    <div class="ey">The People Behind the Boat</div>
+    <h2 class="sh">Built by <em>People Who Sail</em></h2>
+    <p style="font-size:14px;color:var(--mute);max-width:640px;line-height:1.8;margin-top:14px">The Cape31 is not a corporate project. It was conceived by a sailor, designed by a sailor, built by sailors and raced by sailors. Every person in this story has skin in the game.</p>
+  </div>
+  <div class="people-grid fi">
+    <div class="person-card">
+      <div class="person-icon">&#127894;</div>
+      <div class="person-name">Lord Irvine <em>Laidlaw</em></div>
+      <div class="person-title">Founder &amp; Patron &mdash; Cape Town Resident</div>
+      <p>A Scottish peer and passionate offshore racer, Lord Laidlaw is best known internationally for his Highland Fling maxi programme &mdash; multiple Fastnet, Sydney-Hobart and offshore campaigns at the highest level. He lives in Cape Town and wanted a boat for these waters. <strong>He funded the design, commissioned the first five hulls, promoted the early events, then stepped back</strong> to let the class stand on its own. His original vision was to support youth sailing in Cape Town and boat building in South Africa. He succeeded beyond all expectation.</p>
+    </div>
+    <div class="person-card">
+      <div class="person-icon">&#9749;</div>
+      <div class="person-name">Davey <em>James</em></div>
+      <div class="person-title">Co-founder &amp; Managing Director &mdash; Cape Performance Sailing</div>
+      <p>A multiple Lipton Cup winning skipper and lifelong Cape Town sailor, Davey James heads Cape Performance Sailing &mdash; the company that builds every new Cape31. He handles marketing, sales, and the vision for where the class goes next. <strong>&ldquo;I would really like to crack the American market,&rdquo;</strong> he said in 2024. &ldquo;We have boats scattered in different areas of that country, but no fleets yet which would turn heads and get people excited.&rdquo; He co-founded Cape Performance Sailing with Elian Perch and Stephen du Toit in 2021 after the original builder stepped back.</p>
+    </div>
+    <div class="person-card">
+      <div class="person-icon">&#128296;</div>
+      <div class="person-name">Stephen <em>du Toit</em></div>
+      <div class="person-title">Master Boatbuilder &mdash; Cape Performance Sailing</div>
+      <p>With <strong>37 years of boatbuilding experience</strong>, Stephen du Toit has exacting standards on which he will not compromise. His build team of 30 people works from a dedicated facility in Capricorn Park near False Bay &mdash; a 500m&sup2; moulding facility plus 1,400m&sup2; of finishing space. <strong>A new Cape31 leaves the yard every 14 working days.</strong> All materials are sourced from South Africa&rsquo;s local marine industry &mdash; suppliers who have embraced the success of the project and worked closely with the team. 50 boats in 36 months. 80+ and counting.</p>
+    </div>
+    <div class="person-card">
+      <div class="person-icon">&#9997;</div>
+      <div class="person-name">Mark <em>Mills</em></div>
+      <div class="person-title">Designer &mdash; Mills Design, Ireland</div>
+      <p>One of the world&rsquo;s leading yacht designers, Mark Mills is the man behind the Cape31&rsquo;s hull. His portfolio includes Maxi 72 World Champion Alegre, the Cape26 and numerous grand prix offshore racing yachts. <strong>Freed from commercial compromise</strong>, he delivered an aggressively chined low-freeboard hull that maximises form stability in a breeze while minimising wetted surface when upright. The engineering came from Steve Koopman at composite specialists SDK. The deck is a clean ramp for easy operation. The rig is two-spreader carbon. Every choice was made for performance, not cost. The boat was designed to be the tightest fit in a 40ft high-cube container &mdash; so it could race anywhere in the world.</p>
+    </div>
+    <div class="person-card">
+      <div class="person-icon">&#127758;</div>
+      <div class="person-name">Elian <em>Perch</em></div>
+      <div class="person-title">Co-founder &mdash; Cape Performance Sailing</div>
+      <p>A Cape Town businessman and long-time investor in performance sailing, Elian Perch was a former board member and shareholder of Robertson &amp; Caine &mdash; the Cape Town company behind the world-renowned Leopard Catamaran. He brought the business structure and investment to Cape Performance Sailing alongside Davey James. <strong>His knowledge of high-volume performance boatbuilding</strong> &mdash; gleaned from years in the Leopard programme &mdash; helped shape the efficient production line that now turns out a Cape31 every fortnight.</p>
+    </div>
+    <div class="person-card">
+      <div class="person-icon">&#127945;</div>
+      <div class="person-name">Bjorn <em>Geiger</em></div>
+      <div class="person-title">Chairperson &mdash; SA Cape31 Class Association</div>
+      <p>An early adopter and passionate one-design racer, Bjorn Geiger has been central to the SA Cape31 fleet from near the beginning &mdash; hull 8, named MB, raced in the earliest invitational events and helped define what Cape Town one-design racing in this class would look like. As Chairperson of the SA Class Committee alongside Dave Hudson, he oversees the fleet that inspired a worldwide movement. The Royal Cape Yacht Club remains the spiritual home of the class.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CAPE DOCTOR -->
+<section id="doctor">
+  <div class="fi">
+    <div class="ey">The Testing Ground</div>
+    <h2 class="sh">The <em>Cape Doctor</em></h2>
+    <p style="font-size:14px;color:var(--mute);max-width:640px;line-height:1.8;margin-top:14px">The Cape Doctor is the local name for the fierce south-easterly wind that blows from False Bay and funnels through Table Mountain to sweep across Cape Town. It is one of the most consistent and extreme sailing environments in the world. The Cape31 was designed specifically for it.</p>
+  </div>
+  <div class="doctor-grid fi">
+    <div class="doctor-text">
+      <p>The South-Easter blows from late August through March. It accelerates through the funnel of the Table Mountain range and the Hottentots Holland mountains, arriving in Table Bay as a wall of wind that can stop you in your tracks on the street &mdash; and send a Cape31 screaming downwind at 25 knots.</p>
+      <p><em>Wind speeds of 30-70 km/h are typical.</em> <strong>Gusts exceeding 100 km/h have been recorded in Table Bay.</strong> The kite surfers of Blouberg call it the best and most consistent wind on earth. The Ocean Race fleet has left Cape Town into 30-knot conditions and 3-metre swells on their way to the Southern Ocean.</p>
+      <p>Designing the Cape31 for the Cape Doctor was the key to its global success. A boat built to thrive in these conditions &mdash; fast upwind in a chop, controllable downwind in 25 knots, stable and exciting in the short steep sea of Table Bay &mdash; turned out to handle beautifully everywhere else. The Solent in autumn. San Francisco Bay in September. The Bora in Bonifacio. Every extreme sailing venue in the world is a slightly gentler version of what Cape Town throws at you on a Tuesday afternoon in December.</p>
+      <p>That&rsquo;s the gift Lord Laidlaw gave the sailing world. He wanted the best boat for the hardest venue. He got one. And then it turned out the whole world wanted it too.</p>
+    </div>
+    <div>
+      <div class="doctor-stats">
+        <div class="ds">
+          <div class="ds-n">160</div>
+          <div class="ds-l">km/h gusts recorded<br>in Table Bay</div>
+        </div>
+        <div class="ds">
+          <div class="ds-n">30–70</div>
+          <div class="ds-l">km/h typical<br>Cape Doctor speeds</div>
+        </div>
+        <div class="ds">
+          <div class="ds-n">25+</div>
+          <div class="ds-l">knots downwind<br>boat speed</div>
+        </div>
+        <div class="ds">
+          <div class="ds-n">NOV</div>
+          <div class="ds-l">Peak Cape Doctor<br>month — race season</div>
+        </div>
+      </div>
+      <div style="margin-top:2px;background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--green);padding:22px">
+        <div style="font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--green);margin-bottom:8px">The Race Venues</div>
+        <p style="font-size:13px;color:var(--mute);line-height:1.8"><strong style="color:var(--white)">Table Bay</strong> &mdash; racing from the Royal Cape Yacht Club, with Table Mountain as the backdrop and Robben Island on the horizon. Short steep chop, unpredictable wind shadows from the mountain, and the full force of the Cape Doctor on any given race day.<br><br><strong style="color:var(--white)">V&amp;A Waterfront</strong> &mdash; racing in the shadow of Cape Town&rsquo;s iconic waterfront development, visible to thousands of spectators and with the harbour as a dramatic backdrop.<br><br><strong style="color:var(--white)">False Bay / Mykonos</strong> &mdash; the 65-mile downwind offshore race to Club Mykonos at Langebaan. Open ocean, full Cape Doctor, Cape31s at full stretch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERIES -->
+<section id="series">
+  <div class="fi">
+    <div class="ey">November &mdash; March</div>
+    <h2 class="sh">Summer in <em>the South</em></h2>
+    <p style="font-size:14px;color:var(--mute);max-width:640px;line-height:1.8;margin-top:14px">The Summer in the South series runs November to March &mdash; the Southern Hemisphere summer. Eight local boats and an open invitation to international teams to commission new boats in Cape Town before shipping north. Three teams took up the offer in 2023/24.</p>
+  </div>
+  <div class="series-grid fi">
+    <div class="ev-card">
+      <div class="ev-round">Round 1 &mdash; November/December</div>
+      <div class="ev-name">Cape <em>Performance Cup</em></div>
+      <p class="ev-detail">The opening event of the series, hosted by Cape Performance Sailing themselves &mdash; the people who build the boats hosting the first race of the season. Racing in Table Bay from the Royal Cape Yacht Club.</p>
+    </div>
+    <div class="ev-card">
+      <div class="ev-round">Round 2 &mdash; December</div>
+      <div class="ev-name">Tip of <em>Africa Cup</em></div>
+      <p class="ev-detail">Racing around the southernmost tip of Africa &mdash; one of the most dramatic sailing backdrops in the world. Where the Atlantic and Indian Oceans meet. Cape Point visible on the horizon. The Cape Doctor at its early-season best.</p>
+    </div>
+    <div class="ev-card">
+      <div class="ev-round">Round 3 &mdash; February</div>
+      <div class="ev-name">V&amp;A <em>Waterfront Event</em></div>
+      <p class="ev-detail">Racing against the iconic backdrop of the Victoria &amp; Alfred Waterfront. Thousands of spectators. Table Mountain in full view. The Cape31 fleet at its most visible &mdash; Cape Town&rsquo;s most spectacular sporting event.</p>
+    </div>
+    <div class="ev-card">
+      <div class="ev-round">Round 4 &mdash; February/March</div>
+      <div class="ev-name">Mykonos <em>Offshore</em></div>
+      <p class="ev-detail">The 65-mile downwind race &mdash; the Mykonos Offshore &mdash; to Club Mykonos at Langebaan. Open ocean, full Cape Doctor, Cape31s at maximum stretch. The definitive test of boat and crew. Followed by the Saturday Bay Race to close the season.</p>
+    </div>
+  </div>
+  <div class="fi" style="margin-top:2px;padding:22px;background:var(--panel);border:1px solid var(--border);border-left:4px solid var(--gold)">
+    <p style="font-size:14px;color:var(--off);line-height:1.8"><strong style="color:var(--white)">Commission your new boat in South Africa:</strong> Several international teams have taken delivery of new Cape31s in Cape Town and raced the Summer in the South series before shipping north for the European summer. You get your boat race-ready, learn it in ideal conditions, and arrive in the UK or Med already competitive. Contact <a href="/cdn-cgi/l/email-protection#a9dadeccddcce99a98c7c6dbddc1d0c8cac1ddc0c7ce87cac6c4" style="color:var(--green)">31 North</a> to discuss build slots and commissioning.</p>
+  </div>
+</section>
+
+<!-- THE BUILD -->
+<section id="build">
+  <div class="fi">
+    <div class="ey">Cape Performance Sailing</div>
+    <h2 class="sh">Built in <em>Cape Town</em></h2>
+    <p style="font-size:14px;color:var(--mute);max-width:640px;line-height:1.8;margin-top:14px">Every Cape31 in the world was built at Cape Performance Sailing&rsquo;s facility in Capricorn Park, near False Bay. No compromises, no shortcuts, and a new boat every 14 working days.</p>
+  </div>
+  <div class="build-grid fi">
+    <div class="build-stat">
+      <div class="bs-n">80+</div>
+      <div class="bs-info">
+        <div class="bs-label">Boats completed</div>
+        <div class="bs-desc">Every Cape31 racing in the world &mdash; from the Solent to San Francisco Bay, from the Med to Hong Kong &mdash; <strong>was built at this yard</strong> in Cape Town. 80 boats by January 2025, with the order book running well into the 80s and 90s.</div>
+      </div>
+    </div>
+    <div class="build-stat">
+      <div class="bs-n">14</div>
+      <div class="bs-info">
+        <div class="bs-label">Working days per boat</div>
+        <div class="bs-desc">Stephen du Toit&rsquo;s build team of 30 people delivers <strong>a new Cape31 every 14 working days</strong>. The first boat left the new Cape Performance Sailing factory in March 2021. By 2024 they had built their 50th hull &mdash; 50 boats in 36 months.</div>
+      </div>
+    </div>
+    <div class="build-stat">
+      <div class="bs-n">500</div>
+      <div class="bs-info">
+        <div class="bs-label">m&sup2; moulding facility</div>
+        <div class="bs-desc">The Capricorn Park facility has a dedicated <strong>500m&sup2; moulding facility</strong> plus 1,400m&sup2; of finishing space &mdash; with a new spray booth and efficient assembly line installed as the order book grew.</div>
+      </div>
+    </div>
+    <div class="build-stat">
+      <div class="bs-n">37</div>
+      <div class="bs-info">
+        <div class="bs-label">Years of experience &mdash; Stephen du Toit</div>
+        <div class="bs-desc"><strong>37 years of boatbuilding experience</strong> and exacting standards on which he will not compromise. All materials sourced from South Africa&rsquo;s local marine industry &mdash; suppliers who have embraced the Cape31&rsquo;s success and worked closely with the team.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLEET -->
+<section id="fleet">
+  <div class="fi" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-bottom:24px">
+    <div>
+      <div class="ey">SA Registered Boats</div>
+      <h2 class="sh">The SA <em>Fleet</em></h2>
+    </div>
+    <a href="https://cms.cape31class.com/core/boats" target="_blank" class="bo">Full Register in CMS &#8594;</a>
+  </div>
+  <p class="fi" style="font-size:14px;color:var(--mute);line-height:1.8;max-width:700px;margin-bottom:28px">Eight local boats racing regularly in Cape Town. The founding fleet &mdash; the boats that proved the concept, defined the class culture, and inspired everything that followed. Joined each season by visiting international teams.</p>
+  <div class="fi">
+    <table class="fleet-table">
+      <thead><tr><th>Hull</th><th>Boat Name</th><th>Owner</th><th>Club</th></tr></thead>
+      <tbody>
+        <tr><td class="hull">1</td><td class="bn">Flame &#127525;</td><td>Lord Irvine Laidlaw</td><td>RCYC</td></tr>
+        <tr><td class="hull">8</td><td class="bn">MB</td><td>Bjorn Geiger</td><td>RCYC</td></tr>
+        <tr><td class="hull">&mdash;</td><td class="bn">Nemesis</td><td>Philip Baum</td><td>RCYC</td></tr>
+        <tr><td class="hull">&mdash;</td><td class="bn">Vulcan</td><td style="color:var(--mute)">Blur Sailing Team</td><td>RCYC</td></tr>
+        <tr><td class="hull">&mdash;</td><td class="bn">Nitro</td><td style="color:var(--mute)">Local team</td><td>RCYC / GBYC</td></tr>
+        <tr><td class="hull">&mdash;</td><td class="bn">Local fleet</td><td style="color:var(--mute)">8 boats racing regularly</td><td>RCYC / GBYC</td></tr>
+        <tr><td class="hull">+</td><td class="bn" style="color:var(--green)">International teams welcome</td><td style="color:var(--mute)">Commission &amp; race Nov&ndash;Mar</td><td>RCYC</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section id="visit">
+  <div class="visit-box fi">
+    <h2 class="visit-hl">Come and<br><em>Race Here.</em></h2>
+    <p class="visit-sub">Cape Town is one of the great sailing cities of the world. Table Mountain. The V&amp;A Waterfront. The Cape Doctor. <strong>Commission your new Cape31 here, race the Summer in the South series, then ship it anywhere in the world for your home season.</strong> Or just come and sail as crew. Either way, you won&rsquo;t forget it.</p>
+    <div class="visit-btns">
+      <a href="/cdn-cgi/l/email-protection#8ffcf8eafbeacfbcbee1e0fdfbe7f6eeece7fbe6e1e8a1ece0e2" class="bp">New Boat Enquiry &mdash; 31 North</a>
+      <a href="/cdn-cgi/l/email-protection#0d79686c604d6e6c7d683e3c6e616c7e7e236e6260" class="bo">Contact the Class</a>
+      <a href="https://sa.cape31.com" target="_blank" class="bo">SA Class Website &#8594;</a>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:2px" class="fi">
+    <div style="background:var(--panel);border:1px solid var(--border);padding:28px">
+      <div style="font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--green);margin-bottom:12px">SA Class Committee</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--border)"><span style="color:var(--mute)">Chairperson</span><strong>Bjorn Geiger</strong></div>
+        <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0;border-bottom:1px solid var(--border)"><span style="color:var(--mute)">Committee Member</span><strong>Dave Hudson</strong></div>
+        <div style="display:flex;justify-content:space-between;font-size:13px;padding:6px 0"><span style="color:var(--mute)">Home Club</span><strong>Royal Cape Yacht Club</strong></div>
+      </div>
+    </div>
+    <div style="background:var(--panel);border:1px solid var(--border);padding:28px">
+      <div style="font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--green);margin-bottom:12px">Key Contacts</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div><div style="font-size:11px;color:var(--mute)">Class Association</div><a href="/cdn-cgi/l/email-protection#75011014183516140510464416191406065b161a18" style="color:var(--green);font-size:13px"><span class="__cf_email__" data-cfemail="d9adbcb8b499bab8a9bceae8bab5b8aaaaf7bab6b4">[email&#160;protected]</span></a></div>
+        <div><div style="font-size:11px;color:var(--mute)">New Boats &amp; Sales</div><a href="/cdn-cgi/l/email-protection#f98a8e9c8d9cb9cac897968b8d9180989a918d90979ed79a9694" style="color:var(--green);font-size:13px"><span class="__cf_email__" data-cfemail="b3c0c4d6c7d6f38082dddcc1c7dbcad2d0dbc7daddd49dd0dcde">[email&#160;protected]</span></a></div>
+        <div><div style="font-size:11px;color:var(--mute)">Cape Performance Sailing</div><a href="https://www.capeperformancesailing.com" target="_blank" style="color:var(--green);font-size:13px">capeperformancesailing.com</a></div>
+        <div><div style="font-size:11px;color:var(--mute)">Royal Cape Yacht Club</div><a href="https://rcyc.co.za" target="_blank" style="color:var(--green);font-size:13px">rcyc.co.za</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft">
+    <div class="fb">
+      <div class="flo">
+        <img src="https://s3.eu-west-2.amazonaws.com/cms.cape31class.com/public/static/core/c31-logo.svg" alt="Cape31"
+             onerror="this.src='https://static.wixstatic.com/media/c918a5_c45c46fceb2c4156bdba78a86f70db3a~mv2.png/v1/fill/w_160,h_140,al_c,q_90,enc_avif/C31%20logo.png'">
+        <div class="flt"><span class="fm">Cape31 South Africa</span><span class="fs">The Founding Fleet</span></div>
+      </div>
+      <p>Where it all began. Table Bay, the Cape Doctor, the Royal Cape Yacht Club, and the people who built something that went around the world.</p>
+    </div>
+    <div class="fc">
+      <h5>The Story</h5>
+      <ul>
+        <li><a href="#origin">The Origin</a></li>
+        <li><a href="#people">The People</a></li>
+        <li><a href="#doctor">Cape Doctor</a></li>
+        <li><a href="#series">Summer in the South</a></li>
+        <li><a href="#build">The Build</a></li>
+      </ul>
+    </div>
+    <div class="fc">
+      <h5>Racing</h5>
+      <ul>
+        <li><a href="https://sa.cape31.com/sa-notice-board/" target="_blank">SA Notice Board</a></li>
+        <li><a href="https://sa.cape31.com/sa-results/" target="_blank">Results</a></li>
+        <li><a href="https://sa.cape31.com/sa-calendar/" target="_blank">Calendar</a></li>
+        <li><a href="https://cms.cape31class.com" target="_blank">Class Management System</a></li>
+        <li><a href="https://rcyc.co.za" target="_blank">Royal Cape Yacht Club</a></li>
+      </ul>
+    </div>
+    <div class="fc">
+      <h5>Links</h5>
+      <ul>
+        <li><a href="https://cape31class.org">International Site</a></li>
+        <li><a href="https://cape31class.org/uk">UK Fleet</a></li>
+        <li><a href="https://cape31class.org/med">Med Circuit</a></li>
+        <li><a href="https://www.capeperformancesailing.com" target="_blank">Cape Performance Sailing</a></li>
+        <li><a href="http://www.31northyachting.com" target="_blank">31 North Yachting</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fbot">
+    <span>&#169; 2026 Cape31 International Class Association &middot; <a href="https://cape31class.org">cape31class.org</a></span>
+    <span>South Africa &
