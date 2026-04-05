@@ -1,3 +1,5 @@
+<!-- KNOX VERSION — credentials sanitised. Store passwords in your password manager, not in Knox. -->
+
 # Cape 31 CMS — Development Environment Reference
 
 ## URLs
@@ -144,9 +146,17 @@ jobs:
 
 ---
 
-## Login Credentials (Production & Dev)
-⚠️ Credentials are stored in the team password manager — not in Knox.
-Contact Lance Adams for access. Do not add credentials to this file.
+## Login Credentials
+| User | Email | Password | Role |
+|---|---|---|---|
+| Lance Adams | [email — secure store] | [password — secure store] | Admin |
+| Dave Swete | [email — secure store] | [password — secure store] | Admin |
+| Demo | TRY DEMO button | — | Admin (isolated) |
+
+---|---|---|---|
+| Lance Adams | [email — secure store] | [password — secure store] | Admin |
+| Dave Swete | [email — secure store] | [password — secure store] | Admin |
+| Demo | TRY DEMO button | — | Admin (isolated) |
 
 ---
 
@@ -174,7 +184,7 @@ Contact Lance Adams for access. Do not add credentials to this file.
 
 ### Login not working
 - Check emails in `defaultState()` — Cloudflare obfuscation wipes them
-- Check `lance551025@yahoo.co.uk` is present in the JS
+- Check `[email — secure store]` is present in the JS
 - Seed user injection re-adds them on startup
 
 ### doLogin / doDemoLogin not defined
