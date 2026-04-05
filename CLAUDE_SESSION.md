@@ -90,7 +90,7 @@ At the end of every session, without being asked, Claude must:
 **1. Write a dev log entry**
 
 Format:
-```
+\`\`\`
 ---
 ## YYYY-MM-DD -- [brief title]
 **Worked on:** [what was covered]
@@ -98,7 +98,7 @@ Format:
 **Decisions:** [bullet list of decisions made, if any]
 **Awaiting:** [anything blocked or waiting on someone]
 **Next:** [what happens next]
-```
+\`\`\`
 
 **2. Generate knox-update.py**
 
@@ -110,12 +110,12 @@ Generate a single self-contained Python script with:
 - Direct push logic for notes.md and CLAUDE_SESSION.md
 
 The script must include this exact header comment:
-```
+\`\`\`
 Knox Update Script -- session end [date]
 Run: python knox-update.py
 Paste your GitHub Personal Access Token when prompted.
 Delete this file immediately after running.
-```
+\`\`\`
 
 **3. Tell the user**
 
@@ -126,97 +126,7 @@ Say exactly:
 
 ## knox-update.py Template
 
-Use this structure every time. Do not deviate from it:
-
-```python
-"""
-Knox Update Script -- session end [DATE]
-Run: python knox-update.py
-Paste your GitHub Personal Access Token when prompted.
-Delete this file immediately after running.
-"""
-import urllib.request
-import json
-import base64
-
-REPO = "lance505504-tech/Knox"
-API  = "https://api.github.com"
-
-def get_file(token, path):
-    url = f"{API}/repos/{REPO}/contents/{path}"
-    req = urllib.request.Request(url, headers={
-        "Authorization": f"token {token}",
-        "Accept": "application/vnd.github.v3+json"
-    })
-    try:
-        with urllib.request.urlopen(req) as r:
-            data = json.loads(r.read())
-            content = base64.b64decode(data["content"].replace("\n","")).decode("utf-8")
-            return content, data["sha"]
-    except Exception as e:
-        print(f"  ERROR fetching {path}: {e}")
-        return None, None
-
-def push(token, path, content, sha, message):
-    body = {
-        "message": message,
-        "content": base64.b64encode(content.encode()).decode(),
-    }
-    if sha:
-        body["sha"] = sha
-    req = urllib.request.Request(
-        f"{API}/repos/{REPO}/contents/{path}",
-        data=json.dumps(body).encode(),
-        method="PUT",
-        headers={
-            "Authorization": f"token {token}",
-            "Accept": "application/vnd.github.v3+json",
-            "Content-Type": "application/json"
-        }
-    )
-    try:
-        with urllib.request.urlopen(req) as r:
-            result = json.loads(r.read())
-            print(f"  OK: {path} -- {result['commit']['sha'][:7]}")
-    except urllib.error.HTTPError as e:
-        print(f"  ERROR: {path} -- {e.code} {e.read().decode()}")
-
-# NEW DEV LOG ENTRY ONLY -- not the full log
-NEW_ENTRY = """
-[PASTE NEW ENTRY HERE]
-"""
-
-# FULL FILE CONTENTS
-NOTES = """
-[PASTE FULL NOTES CONTENT HERE]
-"""
-
-CLAUDE_SESSION = """
-[PASTE FULL CLAUDE_SESSION CONTENT HERE]
-"""
-
-print("Knox Update Script")
-print("-" * 40)
-token = input("GitHub Personal Access Token: ").strip()
-print()
-
-# dev-log: fetch live, append, push
-print("Fetching current dev-log...")
-current_log, log_sha = get_file(token, "logs/dev-log.md")
-if current_log is not None:
-    updated_log = current_log.rstrip() + "\n" + NEW_ENTRY
-    push(token, "logs/dev-log.md", updated_log, log_sha, "Append dev log entry [skip ci]")
-else:
-    print("  SKIPPED: could not fetch current dev-log")
-
-# notes and session file: direct push
-_, notes_sha   = get_file(token, "active/notes.md")
-_, session_sha = get_file(token, "CLAUDE_SESSION.md")
-push(token, "active/notes.md",   NOTES,          notes_sha,   "Update active notes [skip ci]")
-push(token, "CLAUDE_SESSION.md", CLAUDE_SESSION, session_sha, "Update Claude session file [skip ci]")
-
-print("\nDone. Delete this script now.")
-```
+Use this structure every time. Do not deviate from it.
 
 ---
 
