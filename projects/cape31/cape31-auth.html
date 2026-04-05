@@ -100,8 +100,8 @@ var USK         = 'cape31_users_v1';
 
 // -- Seed admins always available even before any app has run --
 var SEED_USERS = [
-  { id:'u0',  name:'Lance Adams', email:'[email — secure store]', pw:'[password — secure store]', role:'admin', boatId:'b49', approved:true },
-  { id:'u00', name:'Dave Swete',  email:'[email — secure store]',   pw:'[password — secure store]', role:'admin', boatId:null,  approved:true }
+  { id:'u0',  name:'Lance Adams', email:'lance551025@yahoo.co.uk', pw:'Office2026', role:'admin', boatId:'b49', approved:true },
+  { id:'u00', name:'Dave Swete',  email:'dave@swetesailing.com',   pw:'Office2026', role:'admin', boatId:null,  approved:true }
 ];
 
 function getAllUsers() {
@@ -216,7 +216,7 @@ function submitReg() {
         if (sr && sr.settings && sr.settings.excom) excom = sr.settings.excom;
       }
     }
-    var to   = excom.map(function(m){ return m.email; }).join(',') || '[excom-emails — secure store]';
+    var to   = excom.map(function(m){ return m.email; }).join(',') || 'lance551025@yahoo.co.uk,dave@swetesailing.com';
     var subj = encodeURIComponent('Cape 31 Class — Access request: ' + n);
     var body = encodeURIComponent('New access request:\n\nName: ' + n + '\nEmail: ' + e + '\nBoat: ' + (b||'Not specified') +
       '\n\nLog in to the class system and go to Settings → Owner accounts to approve.\n\n— Cape 31 Class System');
