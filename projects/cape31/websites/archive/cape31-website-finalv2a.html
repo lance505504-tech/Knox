@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cape31 International Class Association</title>
+<meta name="description" content="Cape31 International Class Association — fun, competitive and affordable one-design racing worldwide.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;900&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* ─ Cape31 brand palette ─────────────────────── */
+  --red:    #ED1C24;   /* Cape31 brand red — from official logo SVG  */
+  --red-dk: #B5141A;   /* darker red for hover states                */
+  --red-lt: rgba(237,28,36,0.12); /* red tint for backgrounds        */
+  /* ─ Backgrounds ─────────────────────────────── */
+  --black:  #000;
+  --dark:   #080c12;
+  --panel:  #0e1420;
+  --mid:    #141e2e;
+  /* ─ Borders ─────────────────────────────────── */
+  --border: rgba(255,255,255,0.07);
+  --bord2:  rgba(255,255,255,0.14);
+  --bord-r: rgba(237,28,36,0.22);
+  /* ─ Text ─────────────────────────────────────── */
+  --white:  #ffffff;
+  --off:    #e8ecf2;
+  --mute:   #7a8fa3;
+  /* ─ Accents ─────────────────────────────────── */
+  --gold:   #D4A017;   /* Gold Cup gold                              */
+  --teal:   #00b89c;   /* positive/growing status only               */
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Ubuntu',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden}
+::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--black)}::-webkit-scrollbar-thumb{background:var(--red)}
+img{display:block;max-width:100%}a{text-decoration:none;color:inherit}
+.ey{display:inline-flex;align-items:center;gap:10px;font-size:10.5px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--red);margin-bottom:13px}
+.ey::before{content:'';width:24px;height:1px;background:var(--red);flex-shrink:0}
+.sh{font-family:'Barlow Condensed',sans-serif;font-size:clamp(38px,5.5vw,68px);font-weight:900;text-transform:uppercase;line-height:.92;letter-spacing:-.01em}
+.sh em{font-style:normal;color:var(--red)}
+.bp{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border-radius:2px;background:var(--red);color:var(--white);font-weight:700;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;transition:background .2s,transform .2s;cursor:pointer;border:none}
+.bp:hover{background:var(--red);transform:translateY(-2px)}
+.bo{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:2px;border:1px solid var(--bord2);color:var(--off);font-weight:600;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;transition:all .2s;cursor:pointer}
+.bo:hover{border-color:var(--red);color:var(--red)}
+.fi{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
+.fi.vis{opacity:1;transform:none}
+/* ANNOUNCE */
+.ann{background:var(--red);padding:9px 5vw;display:flex;align-items:center;justify-content:center;gap:12px;font-size:11.5px;font-weight:600;letter-spacing:.06em;position:relative;z-index:1001}
+.ann a{color:var(--white);text-decoration:underline;text-underline-offset:3px}
+.ann-x{position:absolute;right:18px;background:none;border:none;color:var(--white);cursor:pointer;font-size:17px;opacity:.7;line-height:1}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:64px;padding:0 4vw;display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,.95);border-bottom:1px solid var(--border);backdrop-filter:blur(14px);transition:border-color .3s}
+nav.sc{border-bottom-color:rgba(237,28,36,.22)}
+.nlo{display:flex;align-items:center;gap:12px}
+.nlo img{height:42px;width:auto}
+.nl-div{width:1px;height:30px;background:var(--bord2)}
+.nl-txt{display:flex;flex-direction:column;line-height:1.15}
+.nl-txt .nm{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase}
+.nl-txt .ns{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-top:1px}
+ul.nv{display:flex;align-items:center;list-style:none}
+ul.nv a{display:block;padding:7px 10px;font-size:10.5px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:var(--mute);transition:color .2s}
+ul.nv a:hover{color:var(--white)}
+.hd{position:relative}
+.hd>a::after{content:' \u25be';font-size:8.5px}
+.hd:hover .dd{opacity:1;pointer-events:all;transform:translateY(0)}
+.dd{position:absolute;top:100%;left:0;min-width:205px;padding:6px 0;background:rgba(2,5,10,.98);border:1px solid var(--bord2);border-top:2px solid var(--red);opacity:0;pointer-events:none;transform:translateY(-8px);transition:all .18s}
+.dd a{padding:8px 16px;font-size:10.5px;display:flex;align-items:center;gap:9px;color:var(--mute);border-left:2px solid transparent}
+.dd a:hover{color:var(--white);border-left-color:var(--red);background:rgba(255,255,255,.025)}
+.nj{margin-left:10px;padding:8px 16px !important;background:var(--red);color:var(--white) !important;font-weight:700 !important;border-radius:2px;transition:background .2s !important}
+.nj:hover{background:var(--red) !important}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
+.hbg span{width:21px;height:2px;background:var(--white);border-radius:1px}
+/* MOB */
+.mob{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.97);flex-direction:column;align-items:center;justify-content:center;gap:3px;overflow-y:auto;padding:70px 0 40px}
+.mob.open{display:flex}
+.mob a{font-family:'Barlow Condensed',sans-serif;font-size:27px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);padding:6px 0;transition:color .2s}
+.mob a:hover{color:var(--red)}
+.mob-div{width:30px;height:1px;background:var(--bord2);margin:9px 0}
+.mob-lbl{font-size:9.5px;letter-spacing:.25em;color:var(--mute);text-transform:uppercase}
+.mob-x{position:fixed;top:16px;right:20px;font-size:22px;color:var(--mute);background:none;border:none;cursor:pointer}
+/* HERO */
+#hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+/* .hbg-img replaced by .hslideshow */
+.hov{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.52) 0%,rgba(0,0,0,.28) 38%,rgba(0,0,0,.7) 72%,rgba(0,0,0,.97) 100%)}
+.hc{position:relative;z-index:2;text-align:center;padding:110px 20px 190px;animation:hIn 1s cubic-bezier(.16,1,.3,1) both}
+@keyframes hIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+.hey{display:inline-flex;align-items:center;gap:13px;font-size:10.5px;font-weight:700;letter-spacing:.35em;text-transform:uppercase;color:var(--red);margin-bottom:22px}
+.hey::before,.hey::after{content:'';width:30px;height:1px;background:var(--red);opacity:.55}
+.hhl{font-family:'Barlow Condensed',sans-serif;font-size:clamp(68px,12.5vw,144px);font-weight:900;line-height:.88;text-transform:uppercase;letter-spacing:-.025em}
+.hhl .t1{display:block;color:var(--white)}
+.hhl .t2{display:block;color:var(--red)}
+.hsub{font-size:clamp(14.5px,1.9vw,18px);font-weight:300;color:rgba(255,255,255,.7);max-width:520px;margin:24px auto 42px;line-height:1.8}
+.hsub strong{color:var(--white);font-weight:600}
+.hctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.hstats{position:absolute;bottom:0;left:0;right:0;z-index:2;display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid rgba(255,255,255,.1);animation:hIn 1.2s .2s cubic-bezier(.16,1,.3,1) both}
+.hs{padding:20px 0;text-align:center;background:rgba(0,0,0,.72);backdrop-filter:blur(10px);border-right:1px solid var(--border)}
+.hs:last-child{border-right:none}
+.hsn{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(26px,4.5vw,42px);line-height:1;color:var(--red)}
+.hsl{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);margin-top:4px}
+/* TICKER */
+.tick{background:var(--red);padding:9px 0;overflow:hidden;white-space:nowrap}
+.ti{display:inline-flex;animation:tk 42s linear infinite}
+.ti:hover{animation-play-state:paused}
+.tit{display:inline-flex;align-items:center;gap:24px;padding:0 24px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--white)}
+.td{width:4px;height:4px;background:rgba(255,255,255,.45);border-radius:50%}
+@keyframes tk{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+section{padding:88px 4vw}
+/* NEWS */
+#news{background:var(--dark)}
+.ng{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:2px}
+.nc{background:var(--panel);border:1px solid var(--border);overflow:hidden;display:flex;flex-direction:column;transition:border-color .22s}
+.nc:hover{border-color:rgba(237,28,36,.32)}
+.ncf{grid-row:span 2}
+.ni{width:100%;aspect-ratio:16/9;object-fit:cover;background:var(--mid)}
+.ncf .ni{aspect-ratio:4/3}
+.nb{padding:24px 24px 20px;flex:1;display:flex;flex-direction:column}
+.nm2{display:flex;align-items:center;gap:9px;margin-bottom:8px}
+.nr{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:3px 7px;border:1px solid rgba(237,28,36,.28);color:var(--red);border-radius:1px}
+.nd{font-size:11px;color:var(--mute)}
+.nt{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;line-height:1.24;flex:1;margin-bottom:7px}
+.ncf .nt{font-size:24px}
+.nex{font-size:13px;color:var(--mute);line-height:1.7}
+.nl2{display:inline-flex;align-items:center;gap:5px;margin-top:14px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red)}
+.nl2 em{font-style:normal;display:inline-block;transition:transform .2s}
+.nc:hover .nl2 em{transform:translateX(4px)}
+/* REGIONS */
+#regions{background:var(--black)}
+.ri-intro{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-bottom:56px}
+.ri-intro p{font-size:14.5px;color:var(--mute);line-height:1.9}
+.rg{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;grid-auto-flow:dense}
+.rc{display:block;padding:34px 30px 28px;background:var(--panel);border:1px solid var(--border);position:relative;overflow:hidden;transition:border-color .22s,background .22s,transform .2s}.rc-usa{padding:40px 36px 32px;grid-column:span 2;min-height:200px;}
+.rc:hover{border-color:rgba(237,28,36,.28);background:var(--mid)}
+.rcc{position:absolute;right:16px;top:8px;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:64px;line-height:1;color:rgba(255,255,255,.025);user-select:none}
+.rfl{font-size:34px;margin-bottom:14px}
+.rn{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:23px;letter-spacing:.04em;text-transform:uppercase;margin-bottom:4px}
+.rv{font-size:13px;color:var(--mute);margin-bottom:12px}
+.rv strong{color:var(--red)}
+.rb2{display:inline-block;font-size:8.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:3px 8px;border-radius:1px;margin-bottom:14px}
+.ba{background:rgba(237,28,36,.07);color:var(--red);border:1px solid rgba(237,28,36,.2)}
+.bo2{background:rgba(224,152,32,.07);color:var(--gold);border:1px solid rgba(224,152,32,.2)}
+.bg3{background:rgba(255,255,255,.04);color:var(--mute);border:1px solid var(--bord2)}
+.rl{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--red)}
+.rl::after{content:' \u2192';transition:margin-left .2s}
+.rc:hover .rl::after{margin-left:4px}
+/* BOAT */
+#theboat{background:var(--dark)}
+.bg2{display:grid;grid-template-columns:1fr 1fr;gap:68px;align-items:start}
+.bimgs img{width:100%;border:1px solid var(--border);display:block}
+.bimgs img+img{margin-top:2px}
+.bdesc{font-size:14.5px;color:var(--mute);line-height:1.9;margin-bottom:32px;max-width:460px}
+.bsp{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:26px}
+.bs{padding:15px 17px;background:var(--panel);border:1px solid var(--border)}
+.bsv{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:23px;color:var(--red);line-height:1}
+.bsl{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);margin-top:3px}
+.bff{display:flex;flex-direction:column;gap:11px;margin-bottom:24px}
+.bf{display:flex;align-items:flex-start;gap:11px}
+.bfi{width:30px;height:30px;flex-shrink:0;background:rgba(237,28,36,.08);border:1px solid rgba(237,28,36,.2);display:flex;align-items:center;justify-content:center;font-size:13px;border-radius:2px}
+.bft h4{font-size:13.5px;font-weight:600;margin-bottom:2px}
+.bft p{font-size:12.5px;color:var(--mute);line-height:1.65}
+.rats{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:22px}
+.rat{display:flex;align-items:center;gap:9px;padding:9px 14px;background:var(--panel);border:1px solid var(--border);font-size:12.5px;color:var(--mute)}
+.rat .tag{font-size:8.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:3px 7px;background:rgba(237,28,36,.07);color:var(--red);border:1px solid rgba(237,28,36,.2);border-radius:1px}
+.rat strong{color:var(--white);font-size:14.5px}
+.bcts{display:flex;gap:9px;flex-wrap:wrap}
+/* FLEET */
+#fleet{background:var(--black)}
+.fleet-hero{position:relative;padding:64px 52px;text-align:center;background:var(--panel);border:1px solid var(--border);overflow:hidden;margin-bottom:2px}
+.fleet-hero::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(237,28,36,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(237,28,36,.04) 1px,transparent 1px);background-size:44px 44px}
+.fn{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(88px,16vw,180px);line-height:1;color:var(--red);position:relative;z-index:1;display:block;text-shadow:0 0 50px rgba(237,28,36,.12)}
+.fs2{font-size:clamp(15px,2.2vw,21px);font-weight:300;color:var(--mute);position:relative;z-index:1;margin-bottom:28px}
+.fs2 strong{color:var(--white);font-weight:600}
+.fbtns{display:flex;gap:11px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+.ftbl{width:100%;border-collapse:collapse;margin-top:2px}
+.ftbl thead tr{background:var(--mid)}
+.ftbl th{padding:11px 16px;font-size:9.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--red);text-align:left;border-bottom:1px solid var(--border)}
+.ftbl td{padding:10px 16px;font-size:13px;color:var(--off);border-bottom:1px solid var(--border)}
+.ftbl tr{background:var(--panel);transition:background .15s}
+.ftbl tr:hover{background:var(--mid)}
+.hn{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:17px;color:var(--red)}
+.sn{font-size:11px;color:var(--mute);font-weight:600;letter-spacing:.05em}
+.bn{font-weight:600}
+.fleet-more{text-align:center;padding:28px;background:var(--panel);border:1px solid var(--border);border-top:none}
+/* REGATTAS */
+#regattas{background:var(--dark)}
+.rl2{display:flex;flex-direction:column;gap:2px}
+.ri2{display:grid;grid-template-columns:90px 1fr auto;align-items:center;gap:26px;padding:18px 26px;background:var(--panel);border:1px solid var(--border);transition:border-color .2s,background .2s}
+.ri2:hover{border-color:rgba(237,28,36,.26);background:var(--mid)}
+.rd{text-align:center;border-right:1px solid var(--border);padding-right:26px}
+.rday{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:34px;line-height:1;color:var(--red)}
+.rmo{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);margin-top:2px}
+.rnm{font-size:16.5px;font-weight:600;margin-bottom:3px}
+.rloc{font-size:12.5px;color:var(--mute)}
+.rbg{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.rb3{font-size:8.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;padding:4px 8px;border-radius:1px}
+.ri3{background:rgba(237,28,36,.07);color:var(--red);border:1px solid rgba(237,28,36,.2)}
+.rn2{background:rgba(224,152,32,.07);color:var(--gold);border:1px solid rgba(224,152,32,.2)}
+.rr2{background:rgba(255,255,255,.04);color:var(--mute);border:1px solid var(--bord2)}
+.rgold{background:rgba(224,152,32,.14);color:var(--gold);border:1px solid rgba(224,152,32,.38)}
+.reg-ft{margin-top:32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.reg-ft p{font-size:13.5px;color:var(--mute)}
+.ldot{display:inline-flex;align-items:center;gap:8px;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--red)}
+.ldot::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--red);animation:lp 2s infinite}
+@keyframes lp{0%,100%{box-shadow:0 0 0 0 rgba(237,28,36,.5)}50%{box-shadow:0 0 0 5px rgba(237,28,36,0)}}
+/* VIDEO */
+#video{background:var(--black)}
+.vg{display:grid;grid-template-columns:2fr 1fr;gap:2px}
+.vc2{position:relative;overflow:hidden;border:1px solid var(--border);background:var(--panel);display:block;transition:border-color .22s}
+.vc2:hover{border-color:rgba(237,28,36,.28)}
+.vt{width:100%;aspect-ratio:16/9;background:var(--mid);display:flex;align-items:center;justify-content:center;font-size:52px;transition:transform .4s}
+.vc2:hover .vt{transform:scale(1.04)}
+.vov2{position:absolute;top:0;left:0;right:0;height:calc(100% - 58px);background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;transition:background .28s}
+.vc2:hover .vov2{background:rgba(0,0,0,.15)}
+.vpl{width:50px;height:50px;border-radius:50%;background:rgba(237,28,36,.9);display:flex;align-items:center;justify-content:center;font-size:17px;padding-left:3px;color:var(--white);transition:transform .3s,background .3s}
+.vc2:hover .vpl{transform:scale(1.12);background:var(--red)}
+.vi{padding:17px 21px}
+.vcat{font-size:9.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:4px}
+.vttl{font-size:15.5px;font-weight:600;line-height:1.3}
+.vcol{display:flex;flex-direction:column;gap:2px}
+.vcol .vt{font-size:36px}
+.vcol .vov2{height:calc(100% - 52px)}
+.vcol .vpl{width:42px;height:42px;font-size:14px}
+/* SOCIAL */
+#social{background:var(--dark)}
+.sch{display:flex;gap:9px;margin-bottom:40px;flex-wrap:wrap}
+.sc2{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border:1px solid var(--bord2);font-size:12.5px;font-weight:600;color:var(--mute);transition:all .2s;border-radius:1px}
+.sc2:hover{color:var(--white);border-color:var(--red);background:rgba(237,28,36,.04)}
+.sci{font-size:16px}
+.sff{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+.sp{aspect-ratio:1;overflow:hidden;position:relative;border:1px solid var(--border)}
+.sp img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.sp:hover img{transform:scale(1.06)}
+.spov{position:absolute;inset:0;background:rgba(0,0,0,.84);opacity:0;transition:opacity .28s;display:flex;flex-direction:column;justify-content:flex-end;padding:15px}
+.sp:hover .spov{opacity:1}
+.spt{font-size:11.5px;line-height:1.6;color:var(--white)}
+.spm{font-size:9.5px;color:var(--red);margin-top:6px;font-weight:600}
+/* PARTNERS */
+#partners{background:var(--black);border-top:1px solid var(--border);padding:56px 4vw}
+.prow{display:flex;align-items:center;justify-content:center;gap:2px;flex-wrap:wrap;margin-top:32px}
+.pt{padding:18px 28px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;min-width:120px;opacity:.32;filter:grayscale(100%);transition:opacity .22s,filter .22s,border-color .22s}
+.pt:hover{opacity:.82;filter:grayscale(0%);border-color:var(--bord2)}
+.pt img{height:36px;width:auto;object-fit:contain}
+.pt-wm{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);text-align:center;line-height:1.35}
+/* ADMIN */
+#admin{background:var(--dark);border-top:2px solid var(--red)}
+.ag{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;margin-top:48px}
+.ar{background:var(--panel);border:1px solid var(--border);padding:32px 28px}
+.ar-head{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.ar-icon{width:38px;height:38px;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.a1i{background:rgba(224,152,32,.12);border:1px solid rgba(224,152,32,.3)}
+.a2i{background:rgba(237,28,36,.1);border:1px solid rgba(237,28,36,.25)}
+.a3i{background:rgba(0,200,160,.1);border:1px solid rgba(0,200,160,.25)}
+.ar-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:.05em;text-transform:uppercase}
+.ar-sub{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--mute);margin-top:2px}
+.ar-perms{display:flex;flex-direction:column;gap:7px;margin-bottom:20px}
+.ar-perm{display:flex;align-items:flex-start;gap:9px;font-size:13px;color:var(--mute)}
+.a1c .ar-perm::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px;background:var(--gold)}
+.a2c .ar-perm::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px;background:var(--red)}
+.a3c .ar-perm::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px;background:var(--teal)}
+.ar-contact{font-size:12px;color:var(--mute);padding:10px 14px;background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:1px;line-height:1.7}
+.ar-contact a{color:var(--red)}
+.admin-note{margin-top:24px;padding:20px 24px;background:rgba(237,28,36,.06);border:1px solid rgba(237,28,36,.2);border-left:3px solid var(--red)}
+.admin-note p{font-size:13px;color:var(--mute);line-height:1.85}
+.admin-note a{color:var(--red)}
+.admin-note strong{color:var(--white)}
+/* FOOTER */
+footer{background:var(--dark);border-top:1px solid var(--border);padding:64px 4vw 34px}
+.ft2{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:44px;margin-bottom:48px}
+.fb .flo{display:flex;align-items:center;gap:11px;margin-bottom:16px}
+.fb .flo img{height:40px;width:auto}
+.flt2{padding-left:11px;border-left:1px solid var(--bord2)}
+.flt2 .fm2{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;display:block}
+.flt2 .fs3{font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);display:block;margin-top:2px}
+.fb p{font-size:13.5px;color:var(--mute);line-height:1.85;max-width:240px;margin-bottom:18px}
+.fsoc{display:flex;gap:8px}
+.fso{width:32px;height:32px;border:1px solid var(--border);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--mute);transition:all .2s}
+.fso:hover{border-color:var(--red);color:var(--white);background:rgba(237,28,36,.07)}
+.fc h5{font-size:9.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:14px}
+.fc ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.fc li a{font-size:13px;color:var(--mute);display:flex;align-items:center;gap:6px;transition:color .2s}
+.fc li a::before{content:'\2014';font-size:9.5px;opacity:.25}
+.fc li a:hover{color:var(--white)}
+.fbot2{border-top:1px solid var(--border);padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:11px}
+.fbot2 .fl{font-size:11.5px;color:var(--mute)}
+.fbot2 .fl a{color:var(--mute)}
+.fbot2 .fl a:hover{color:var(--red)}
+.fbot2 .fr{font-size:11.5px;color:var(--mute)}
+.fbot2 .fr a{color:var(--red)}
+/* RESPONSIVE */
+@media(max-width:1200px){.ng{grid-template-columns:1fr 1fr}.ncf{grid-column:span 2;grid-row:span 1}.ag{grid-template-columns:1fr 1fr}.ft2{grid-template-columns:1fr 1fr 1fr;gap:32px}}
+@media(max-width:1000px){.rg{grid-template-columns:repeat(2,1fr)}.ri-intro{grid-template-columns:1fr;gap:26px}.hstats{grid-template-columns:repeat(3,1fr)}.vg{grid-template-columns:1fr}}
+@media(max-width:860px){.bg2{grid-template-columns:1fr}.sff{grid-template-columns:repeat(2,1fr)}.ftbl .h860{display:none}}
+@media(max-width:768px){nav{height:58px}.nl-div,.nl-txt{display:none}ul.nv{display:none}.hbg{display:flex}section{padding:58px 4vw}.ng{grid-template-columns:1fr}.ncf{grid-column:span 1}.rg{grid-template-columns:1fr 1fr}.ri2{grid-template-columns:72px 1fr}.rbg{display:none}.ag{grid-template-columns:1fr}.ft2{grid-template-columns:1fr;gap:26px}.hc{padding:100px 18px 170px}.hstats{grid-template-columns:repeat(3,1fr)}.ftbl .h768{display:none}.prow{justify-content:flex-start}}
+@media(max-width:480px){.rg{grid-template-columns:1fr}}
+/* CMS MODULES */
+.cms-modules{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:2px}
+.cms-mod{display:block;padding:30px 26px;background:var(--panel);border:1px solid var(--border);transition:border-color .22s,background .22s}
+.cms-mod:hover{border-color:rgba(237,28,36,.3);background:var(--mid)}
+.cms-mod-icon{font-size:30px;margin-bottom:14px}
+.cms-mod h4{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:.05em;text-transform:uppercase;margin-bottom:8px}
+.cms-mod p{font-size:13px;color:var(--mute);line-height:1.7;flex:1}
+.cms-mod-link{margin-top:16px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red)}
+.cms-roles{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:2px}
+.cms-role{padding:20px 22px;background:var(--panel);border:1px solid var(--border)}
+.cr-badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:3px 9px;border-radius:1px;margin-bottom:10px}
+.cr-owner{background:rgba(237,28,36,.1);color:var(--red);border:1px solid rgba(237,28,36,.25)}
+.cr-excom{background:var(--red-lt);color:var(--red);border:1px solid var(--bord-r)}
+.cr-admin{background:rgba(224,152,32,.1);color:var(--gold);border:1px solid rgba(224,152,32,.25)}
+.cms-role p{font-size:13px;color:var(--mute);line-height:1.65}
+@media(max-width:1000px){.cms-modules{grid-template-columns:1fr 1fr}.cms-roles{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.cms-modules{grid-template-columns:1fr}.cms-roles{grid-template-columns:1fr 1fr}}
+
+/* ─── HERO CMS BAR ─────────────────────────────── */
+.hcms-bar{
+  position:absolute;bottom:90px;left:50%;transform:translateX(-50%);
+  z-index:3;width:min(900px,90vw);
+  animation:hIn 1.4s .4s cubic-bezier(.16,1,.3,1) both;
+}
+.hcms-bar a{
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;justify-content:center;
+  padding:14px 24px;
+  background:rgba(237,28,36,.08);
+  border:1px solid rgba(237,28,36,.35);
+  backdrop-filter:blur(12px);
+  transition:background .25s,border-color .25s;
+}
+.hcms-bar a:hover{background:rgba(237,28,36,.15);border-color:rgba(237,28,36,.6)}
+.hcms-icon{font-size:18px;flex-shrink:0}
+.hcms-label{
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;
+  font-size:15px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--white);flex-shrink:0;
+}
+.hcms-actions{display:flex;gap:8px;flex-wrap:wrap}
+.hcms-pill{
+  font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  padding:3px 9px;border-radius:1px;
+  background:rgba(237,28,36,.15);color:rgba(255,255,255,.7);
+  border:1px solid rgba(237,28,36,.3);
+}
+.hcms-cta{
+  font-size:11.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--red);margin-left:auto;flex-shrink:0;
+}
+/* Adjust stats bottom to make room for CMS bar */
+.hstats{bottom:0}
+@media(max-width:768px){
+  .hcms-bar{bottom:auto;position:relative;transform:none;left:auto;width:100%;margin-top:20px;order:3}
+  .hcms-label{font-size:13px}
+  .hcms-actions{display:none}
+}
+
+
+/* ─── HERO SLIDESHOW ──────────────────────────── */
+.hslideshow{
+  position:absolute;inset:0;overflow:hidden;
+}
+.hslide{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center 35%;
+  opacity:0;
+  animation:heroSlide 40s 0s infinite;
+}
+
+.hslide:nth-child(1){
+  background-image:url('https://static.wixstatic.com/media/ade705_3e8f9c9f3c2f4e9eb7d945c927ab4421~mv2.png/v1/fill/w_1920,h_1000,al_c,q_85,usm_0.33_1.00_0.01,enc_avif,quality_auto/ade705_3e8f9c9f3c2f4e9eb7d945c927ab4421~mv2.png');
+  animation:heroSlide 40s 0.0s infinite;
+}
+
+.hslide:nth-child(2){
+  background-image:url('https://static.wixstatic.com/media/c918a5_9dc0535c87274899bf933e28fa08fdf2~mv2.jpg/v1/fill/w_1920,h_1000,al_c,q_85,usm_0.33_1.00_0.01,enc_avif,quality_auto/c918a5_9dc0535c87274899bf933e28fa08fdf2~mv2.jpg');
+  animation:heroSlide 40s 5.0s infinite;
+}
+
+.hslide:nth-child(3){
+  background-image:url('https://static.wixstatic.com/media/c918a5_d47231590938427aa03a099869d14173~mv2.jpg/v1/fill/w_1920,h_1000,al_c,q_85,usm_0.33_1.00_0.01,enc_avif,quality_auto/c918a5_d47231590938427aa03a099869d14173~mv2.jpg');
+  animation:heroSlide 40s 10.0s infinite;
+}
+
+.hslide:nth-child(4){
+  background-image:url('https://static.wixstatic.com/media/c918a5_6ed1344e6ca14aebaef69e06c76ea88f~mv2.png/v1/fill/w_1920,h_1000,al_c,q_85,usm_0.33_1.00_0.01,enc_avif,quality_auto/c918a5_6ed1344e6ca14aebaef69e06c76ea88f~mv2.png');
+  animation:heroSlide 40s 15.0s infinite;
+}
+
+.hslide:nth-child(5){
+  background-image:url('https://static.wixstatic.com/media/c918a5_38eb6eb8f39342ff9fe94011fc4cb274~mv2.jpeg/v1/fill/w_1920,h_1000,al_c,q_85,usm_0.33_1.00_0.01,enc_avif,quality_auto/c918a5_38eb6eb8f39342ff9fe94011fc4cb274~mv2.jpeg');
+  animation:heroSlide 40s 20.0s infinite;
+}
+
+.hslide:nth-child(6){
+  background-image:url('https://static.wixstatic.com/media/c918a5_b90a528b7d2d4663bae4063e0675d49f~mv2.jpg/v1/fill/w_1920,h_1000,al_c,q_85,usm_0.33_1.00_0.01,enc_avif,quality_auto/c918a5_b90a528b7d2d4663bae4063e0675d49f~mv2.jpg');
+  animation:heroSlide 40s 25.0s infinite;
+}
+
+.hslide:nth-child(7){
+  background-image:url('https://static.wixstatic.com/media/c918a5_5745bec5a7824fc2b0a0e34cb6edc119~mv2.png/v1/fill/w_1920,h_1000,al_c,q_85,usm_0.33_1.00_0.01,enc_avif,quality_auto/c918a5_5745bec5a7824fc2b0a0e34cb6edc119~mv2.png');
+  animation:heroSlide 40s 30.0s infinite;
+}
+
+.hslide:nth-child(8){
+  background-image:url('https://static.wixstatic.com/media/c918a5_a334718eaac84328abfc1574415c48f5~mv2.jpeg/v1/fill/w_1920,h_1000,al_c,q_85,usm_0.33_1.00_0.01,enc_avif,quality_auto/c918a5_a334718eaac84328abfc1574415c48f5~mv2.jpeg');
+  animation:heroSlide 40s 35.0s infinite;
+}
+@keyframes heroSlide{
+  0%    {opacity:0;transform:scale(1.04)}
+  8%    {opacity:1;transform:scale(1.02)}
+  88%   {opacity:1;transform:scale(1)}
+  96%   {opacity:0;transform:scale(1)}
+  100%  {opacity:0;transform:scale(1.04)}
+}
+
+/* ─── HERO LOGO ───────────────────────────────── */
+.hero-logo-wrap{
+  margin-bottom:20px;
+}
+.hero-logo{
+  height:clamp(80px,12vw,140px);width:auto;
+  display:inline-block;
+  filter:brightness(0) invert(1);  /* white version of the logo */
+  drop-shadow:0 0 30px rgba(237,28,36,.4);
+  animation:hIn 1s cubic-bezier(.16,1,.3,1) both;
+}
+/* Show logo in brand red on lighter backgrounds — default is white for dark hero */
+/* Photo-caption label showing current photo region */
+.hero-photo-credit{
+  position:absolute;bottom:8px;right:16px;z-index:4;
+  font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.35);pointer-events:none;
+}
+
+/* ─── NAV LOGO ENHANCED ───────────────────────── */
+.nlo img{
+  height:48px;width:auto;
+  /* Show the logo in its brand red color */
+  filter:none;
+}
+/* On dark nav background, show white logo */
+.nlo img.logo-white{
+  filter:brightness(0) invert(1);
+}
+
+
+/* ─── USA REGION CARD ─────────────────────────────── */
+.rc-usa{
+  border-color:rgba(178,34,52,.35)!important;
+  min-height:220px;
+}
+.rc-usa:hover{
+  border-color:rgba(178,34,52,.7)!important;
+  background:rgba(178,34,52,.06)!important;
+}
+.usa-flag-bg{
+  position:absolute;
+  top:0;left:0;right:0;bottom:0;
+  opacity:0;
+  transition:opacity .5s;
+  background:
+    repeating-linear-gradient(
+      180deg,
+      #B22234 0px, #B22234 12px,
+      transparent 12px, transparent 24px
+    );
+  background-size:100% 168px;
+  border-radius:inherit;
+}
+.rc-usa:hover .usa-flag-bg{
+  opacity:.08;
+}
+/* Stars canton — top-left blue square */
+.usa-flag-bg::before{
+  content:'\2605 \2605 \2605\a\2605 \2605 \2605\a\2605 \2605 \2605';
+  position:absolute;
+  top:0;left:0;
+  width:40%;height:50%;
+  background:rgba(60,59,110,.55);
+  display:flex;align-items:center;justify-content:center;
+  font-size:9px;color:rgba(255,255,255,.7);
+  letter-spacing:3px;line-height:1.8;
+  white-space:pre;
+  padding:8px 6px;
+}
+/* Wave animation on hover */
+@keyframes usaPulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(178,34,52,0)}
+  50%{box-shadow:0 0 16px 2px rgba(178,34,52,.25)}
+}
+.rc-usa{animation:usaPulse 3s ease-in-out infinite}
+.rc-usa:hover{animation:flagWave 2s ease-in-out infinite}
+@keyframes flagWave{
+  0%,100%{transform:skewY(0deg) scaleX(1)}
+  25%{transform:skewY(.6deg) scaleX(1.01)}
+  75%{transform:skewY(-.4deg) scaleX(.99)}
+}
+.rc-usa:hover{
+  animation:flagWave 2s ease-in-out infinite;
+}
+
+</style>
+</head>
+<body>
+
+<div class="ann" id="ann">
+  <span>&#127942; Trinity Racing wins Trofeo Princesa Sof&#237;a 2026 &mdash;</span>
+  <a href="https://www.cape31class.com/post/trinity-racing-claims-cape-31-victory-at-trofeo-princesa-sofia" target="_blank">Read the race report</a>
+  <button class="ann-x" onclick="this.parentElement.style.display='none'">&#215;</button>
+</div>
+
+<div class="mob" id="mob">
+  <button class="mob-x" onclick="tn()">&#10005;</button>
+  <a href="#news" onclick="tn()">News</a>
+  <a href="#regions" onclick="tn()">Regions</a>
+  <a href="#theboat" onclick="tn()">The Boat</a>
+  <a href="#regattas" onclick="tn()">Regattas</a>
+  <a href="#fleet" onclick="tn()">Fleet</a>
+  <a href="#video" onclick="tn()">Videos</a>
+  <a href="#admin" onclick="tn()">Admin</a>
+  <div class="mob-div"></div>
+  <div class="mob-lbl">Regional Fleets</div>
+  <a href="https://www.cape31.uk" target="_blank">&#127468;&#127463; United Kingdom</a>
+  <a href="https://www.cape31class.com/eu" target="_blank">&#127466;&#127482; Europe / Med</a>
+  <a href="https://sa.cape31.com" target="_blank">&#127487;&#127462; South Africa</a>
+  <a href="https://cape31class.org/us" target="_blank">&#127482;&#127480; United States</a>
+  <a href="https://www.cape31class.com/hk" target="_blank">&#127469;&#127472; Hong Kong</a>
+  <a href="https://www.cape31.com.au" target="_blank">&#127462;&#127482; Australia</a>
+  <a href="https://www.cape31class.com/news/categories/ireland" target="_blank">&#127470;&#127466; Ireland</a>
+  <div class="mob-div"></div>
+  <a href="https://proud-pebble-0896e5503.2.azurestaticapps.net" style="color:var(--red)" target="_blank">Join the Class &#8594;</a>
+</div>
+
+<nav id="nav">
+  <a class="nlo" href="#">
+    <img src="https://s3.eu-west-2.amazonaws.com/cms.cape31class.com/public/static/core/c31-logo.svg" alt="Cape31 International Class Association" onerror="this.src='https://static.wixstatic.com/media/c918a5_c45c46fceb2c4156bdba78a86f70db3a~mv2.png/v1/fill/w_160,h_140,al_c,q_90,enc_avif,quality_auto/C31%20logo.png'">
+    <div class="nl-div"></div>
+    <div class="nl-txt">
+      <span class="nm">Cape31 Class</span>
+      <span class="ns">International Class Association</span>
+    </div>
+  </a>
+  <ul class="nv">
+    <li><a href="#news">News</a></li>
+    <li class="hd"><a href="#regions">Regions</a>
+      <div class="dd">
+        <a href="https://www.cape31.uk" target="_blank">&#127468;&#127463; United Kingdom</a>
+        <a href="https://www.cape31class.com/eu" target="_blank">&#127466;&#127482; Europe / Med</a>
+        <a href="https://sa.cape31.com" target="_blank">&#127487;&#127462; South Africa</a>
+        <a href="https://cape31class.org/us" target="_blank">&#127482;&#127480; United States</a>
+        <a href="https://www.cape31class.com/hk" target="_blank">&#127469;&#127472; Hong Kong</a>
+        <a href="https://www.cape31.com.au" target="_blank">&#127462;&#127482; Australia &amp; NZ</a>
+        <a href="https://www.cape31class.com/news/categories/ireland" target="_blank">&#127470;&#127466; Ireland</a>
+      </div>
+    </li>
+    <li><a href="#theboat">The Boat</a></li>
+    <li><a href="#regattas">Regattas</a></li>
+    <li class="hd"><a href="#fleet">Class</a>
+      <div class="dd">
+        <a href="https://proud-pebble-0896e5503.2.azurestaticapps.net/" target="_blank">Class Management System</a>
+        <a href="https://proud-pebble-0896e5503.2.azurestaticapps.net/racing/calendar" target="_blank">Race Calendar</a>
+        <a href="https://proud-pebble-0896e5503.2.azurestaticapps.net/core/boats" target="_blank">All Boats</a>
+        <a href="https://proud-pebble-0896e5503.2.azurestaticapps.net/measurement/" target="_blank">Measurement</a>
+        <a href="https://proud-pebble-0896e5503.2.azurestaticapps.net/core/index" target="_blank">Class Rules</a>
+        <a href="https://www.cape31class.com/class" target="_blank">Committees</a>
+      </div>
+    </li>
+    <li><a href="#video">Videos</a></li>
+    <li><a href="https://gallery.cape31class.com" target="_blank">Gallery</a></li>
+    <li><a href="#admin">Admin</a></li>
+    <li><a href="https://proud-pebble-0896e5503.2.azurestaticapps.net" target="_blank" class="nj">Join the Class</a></li>
+  </ul>
+  <div class="hbg" onclick="tn()"><span></span><span></span><span></span></div>
+</nav>
+
+<section id="hero">
+  <div class="hslideshow" aria-hidden="true">
+  <div class="hslide" style="background-image:url('https://static.wixstatic.com/media/ade705_3e8f9c9f3c2f4e9eb7d945c927ab4421~mv2.png/v1/fill/w_1920,h_1000,al_c,q_85,usm_0.33_1.00_0.01,enc_avif,quality_auto/ade705_3e8f9c9f3c2f4e9eb7d945c927ab4421~mv2.png')"></div>
+  <div class="hslide" style="background-image:url('https://static.wixstatic.com/media/c918a5_9dc0535c87274899bf933e28fa08fdf2~mv2.jpg/v1/fill/w_1920,h_1000,al_c,q_85,usm_0.33_1.00_0.01,enc_avif,quality_auto/c918a5_9dc0535c87274899bf933e28fa08fdf2~mv2.jpg')"></div>
+  <div class="hslide" style="background-image:url('https://static.wixstatic.com/media/c918a5_d47231590938427aa03a099869d14173~mv2.jpg/v1/fill/w_1920,h_1000,al_c,q_85,usm_0.33_1.00_0.01,enc_avif,quality_auto/c918a5_d47231590938427aa03a099869d14173~mv2.jpg')"></div>
+  <div class="hslide" style="background-image:url('https://static.wixstatic.com/media/c918a5_6ed1344e6ca14aebaef69e06c76ea88f~mv2.png/v1/fill/w_1920,h_1000,al_c,q_85,usm_0.33_1.00_0.01,enc_avif,quality_auto/c918a5_6ed1344e6ca14aebaef69e06c76ea88f~mv2.png')"></div>
+  <div class="hslide" style="background-image:url('https://static.wixstatic.com/media/c918a5_38eb6eb8f39342ff9fe94011fc4cb274~mv2.jpeg/v1/fill/w_1920,h_1000,al_c,q_85,usm_0.33_1.00_0.01,enc_avif,quality_auto/c918a5_38eb6eb8f39342ff9fe94011fc4cb274~mv2.jpeg')"></div>
+  <div class="hslide" style="background-image:url('https://static.wixstatic.com/media/c918a5_b90a528b7d2d4663bae4063e0675d49f~mv2.jpg/v1/fill/w_1920,h_1000,al_c,q_85,usm_0.33_1.00_0.01,enc_avif,quality_auto/c918a5_b90a528b7d2d4663bae4063e0675d49f~mv2.jpg')"></div>
+  <div class="hslide" style="background-image:url('https://static.wixstatic.com/media/c918a5_5745bec5a7824fc2b0a0e34cb6edc119~mv2.png/v1/fill/w_1920,h_1000,al_c,q_85,usm_0.33_1.00_0.01,enc_avif,quality_auto/c918a5_5745bec5a7824fc2b0a0e34cb6edc119~mv2.png')"></div>
+  <div class="hslide" style="background-image:url('https://static.wixstatic.com/media/c918a5_a334718eaac84328abfc1574415c48f5~mv2.jpeg/v1/fill/w_1920,h_1000,al_c,q_85,usm_0.33_1.00_0.01,enc_avif,quality_auto/c918a5_a334718eaac84328abfc1574415c48f5~mv2.jpeg')"></div>
+</div>
+  <div class="hov"></div>
+<div class="hero-photo-credit" id="photoCredit">Cape31 Class Photo Library</div>
+  <div class="hc">
+    <div class="hero-logo-wrap">
+      <img src="https://s3.eu-west-2.amazonaws.com/cms.cape31class.com/public/static/core/c31-logo.svg"
+           alt="Cape31" class="hero-logo"
+           onerror="this.src='https://static.wixstatic.com/media/c918a5_c45c46fceb2c4156bdba78a86f70db3a~mv2.png/v1/fill/w_320,h_280,al_c,q_90,enc_avif,quality_auto/C31%20logo.png'">
+    </div>
+    <div class="hey">Cape31 International Class Association</div>
+    <h1 class="hhl"><span class="t1">Race Pure.</span><span class="t2">Cape31.</span></h1>
+    <p class="hsub">The world's most exciting <strong>31-foot one-design</strong> keelboat &mdash; designed by Mark Mills, built in Cape Town, racing on six continents. Fun, competitive, affordable.</p>
+    <div class="hctas">
+      <a href="https://proud-pebble-0896e5503.2.azurestaticapps.net" target="_blank" class="bp">Join the Class</a>
+      <a href="https://proud-pebble-0896e5503.2.azurestaticapps.net" target="_blank" class="bo hcms">&#9881;&#65039; Class Management System</a>
+      <a href="#theboat" class="bo">Discover the C31</a>
+    </div>
+    <div class="hcms-bar">
+      <a href="https://proud-pebble-0896e5503.2.azurestaticapps.net" target="_blank">
+        <span class="hcms-icon">&#9881;&#65039;</span>
+        <span class="hcms-label">Cape31 Class Management System</span>
+        <span class="hcms-actions">
+          <span class="hcms-pill">Regattas</span>
+          <span class="hcms-pill">Fleet</span>
+          <span class="hcms-pill">Entries &amp; Crew</span>
+          <span class="hcms-pill">Results</span>
+          <span class="hcms-pill">Sail Buttons</span>
+        </span>
+        <span class="hcms-cta">Sign In &#8594;</span>
+      </a>
+    </div>
+  </div>
+  <div class="hstats">
+    <div class="hs"><div class="hsn">80+</div><div class="hsl">Hulls Built</div></div>
+    <div class="hs"><div class="hsn">39</div><div class="hsl">2024 Members</div></div>
+    <div class="hs"><div class="hsn">7</div><div class="hsl">Global Regions</div></div>
+    <div class="hs"><div class="hsn">13</div><div class="hsl">Nations Racing</div></div>
+    <div class="hs"><div class="hsn">2017</div><div class="hsl">Est. Cape Town</div></div>
+  </div>
+</section>
+
+<div class="tick" aria-hidden="true"><div class="ti">
+  <span class="tit">Trinity Racing wins Trofeo Princesa Sof&#237;a 2026<span class="td"></span></span>
+  <span class="tit">C31 Gold Cup 2026 &mdash; NEW International Event<span class="td"></span></span>
+  <span class="tit">Cape31 Med Circuit 2026 &mdash; 21 teams, 5 venues<span class="td"></span></span>
+  <span class="tit">STIG clinch C31 European Championship Palma 2025<span class="td"></span></span>
+  <span class="tit">Hull 80 delivered &mdash; January 2025<span class="td"></span></span>
+  <span class="tit">UK Nationals 2025 &mdash; Royal Yacht Squadron, Cowes<span class="td"></span></span>
+  <span class="tit">C31 wins class at Rolex Big Boat Series SF<span class="td"></span></span>
+  <span class="tit">Mateusz Kusznierewicz sails C31 &mdash; Aspire POL 17<span class="td"></span></span>
+  <span class="tit">Cape26 &mdash; smaller sister now in build at Cape Town<span class="td"></span></span>
+  <span class="tit">Trinity Racing wins Trofeo Princesa Sof&#237;a 2026<span class="td"></span></span>
+  <span class="tit">C31 Gold Cup 2026 &mdash; NEW International Event<span class="td"></span></span>
+  <span class="tit">Cape31 Med Circuit 2026 &mdash; 21 teams, 5 venues<span class="td"></span></span>
+  <span class="tit">STIG clinch C31 European Championship Palma 2025<span class="td"></span></span>
+  <span class="tit">Hull 80 delivered &mdash; January 2025<span class="td"></span></span>
+  <span class="tit">UK Nationals 2025 &mdash; Royal Yacht Squadron, Cowes<span class="td"></span></span>
+  <span class="tit">C31 wins class at Rolex Big Boat Series SF<span class="td"></span></span>
+  <span class="tit">Mateusz Kusznierewicz sails C31 &mdash; Aspire POL 17<span class="td"></span></span>
+  <span class="tit">Cape26 &mdash; smaller sister now in build at Cape Town<span class="td"></span></span>
+</div></div>
+
+<section id="news">
+  <div class="fi" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-bottom:44px">
+    <div><div class="ey">Latest Class News</div><h2 class="sh">C31 <em>News</em></h2></div>
+    <div style="display:flex;gap:9px;flex-wrap:wrap">
+      <a href="https://www.cape31class.com/news" target="_blank" class="bo">All News</a>
+      <a href="https://afloat.ie/sail/sailing-classes/cape-31" target="_blank" class="bo">afloat.ie</a>
+      <a href="https://www.livesaildie.com/tag/cape31/" target="_blank" class="bo">Live Sail Die</a>
+    </div>
+  </div>
+  <div class="ng">
+    <div class="nc ncf fi">
+      <img class="ni" src="https://static.wixstatic.com/media/c918a5_6ed1344e6ca14aebaef69e06c76ea88f~mv2.png/v1/fill/w_800,h_600,fp_0.50_0.50,q_90,enc_avif,quality_auto/c918a5_6ed1344e6ca14aebaef69e06c76ea88f~mv2.png" alt="Trinity Racing Trofeo Princesa Sofia" loading="lazy">
+      <div class="nb">
+        <div class="nm2"><span class="nr">Europe</span><span class="nd">30 Mar 2026</span></div>
+        <h3 class="nt">Trinity Racing Claims Cape31 Victory at Trofeo Princesa Sof&#237;a</h3>
+        <p class="nex">In a fiercely contested regatta off Palma de Mallorca, Trinity Racing demonstrated exceptional consistency across the race series to take honours at this prestigious Mediterranean event &mdash; a landmark result for the growing European C31 fleet.</p>
+        <a href="https://www.cape31class.com/post/trinity-racing-claims-cape-31-victory-at-trofeo-princesa-sofia" target="_blank" class="nl2">Read Report <em>&#8594;</em></a>
+      </div>
+    </div>
+    <div class="nc fi">
+      <img class="ni" src="https://static.wixstatic.com/media/c918a5_2f97b9bc62aa408b94f45b1ad3c2d65e~mv2.jpeg/v1/fill/w_500,h_280,fp_0.50_0.50,q_88,enc_avif,quality_auto/c918a5_2f97b9bc62aa408b94f45b1ad3c2d65e~mv2.jpeg" alt="Cape31 Med Circuit 2026" loading="lazy">
+      <div class="nb">
+        <div class="nm2"><span class="nr">International</span><span class="nd">18 Mar 2026</span></div>
+        <h3 class="nt">Cape31 Med Circuit 2026 Set for Biggest Season Yet &mdash; 21 Teams</h3>
+        <a href="https://www.cape31class.com/post/cape-31-mediterranean-circuit-2026-set-for-biggest-season-yet" target="_blank" class="nl2">Read More <em>&#8594;</em></a>
+      </div>
+    </div>
+    <div class="nc fi">
+      <img class="ni" src="https://static.wixstatic.com/media/c918a5_9ceaf38c79284fc1a034837004c09312~mv2.jpg/v1/fill/w_500,h_280,fp_0.50_0.50,q_88,enc_avif,quality_auto/c918a5_9ceaf38c79284fc1a034837004c09312~mv2.jpg" alt="STIG European Championship 2025" loading="lazy">
+      <div class="nb">
+        <div class="nm2"><span class="nr">Europe</span><span class="nd">20 Oct 2025</span></div>
+        <h3 class="nt">STIG Clinch Tight Cape31 European Championship on Countback &mdash; 25 Boats, 13 Nations</h3>
+        <a href="https://www.cape31class.com/post/stig-clinch-tight-cape-31-european-championship-in-palma-on-countback" target="_blank" class="nl2">Read More <em>&#8594;</em></a>
+      </div>
+    </div>
+    <div class="nc fi">
+      <img class="ni" src="https://static.wixstatic.com/media/c918a5_f1752aaf09984bbe85c7b678ec3bca31~mv2.jpg/v1/fill/w_500,h_280,fp_0.50_0.50,q_88,enc_avif,quality_auto/c918a5_f1752aaf09984bbe85c7b678ec3bca31~mv2.jpg" alt="C31 Europeans Day 1" loading="lazy">
+      <div class="nb">
+        <div class="nm2"><span class="nr">Europe</span><span class="nd">16 Oct 2025</span></div>
+        <h3 class="nt">Shotgunn Opens Strong at C31 Europeans &mdash; Light-Air Day One in Palma</h3>
+        <a href="https://www.cape31class.com/post/shotgunn-opens-strong-on-light-air-first-day-at-the-cape-31-europeans" target="_blank" class="nl2">Read More <em>&#8594;</em></a>
+      </div>
+    </div>
+    <div class="nc fi">
+      <img class="ni" src="https://static.wixstatic.com/media/c918a5_849a327fd8ae4b5f85379fefc15d68a2~mv2.jpg/v1/fill/w_500,h_280,fp_0.50_0.50,q_88,enc_avif,quality_auto/c918a5_849a327fd8ae4b5f85379fefc15d68a2~mv2.jpg" alt="Med Circuit Champions 2025" loading="lazy">
+      <div class="nb">
+        <div class="nm2"><span class="nr">EU/Med</span><span class="nd">7 Oct 2025</span></div>
+        <h3 class="nt">Stig &amp; Give Me Five Crowned 2025 Cape31 Med Circuit Champions</h3>
+        <a href="https://www.cape31class.com/post/stig-and-give-me-five-to-be-crowned-2025-cape-31-med-circuit-champions-after-nail-biting-finish" target="_blank" class="nl2">Read More <em>&#8594;</em></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="regions">
+  <div class="ri-intro fi">
+    <div><div class="ey">Global Fleets</div><h2 class="sh">Racing <em>Worldwide</em></h2></div>
+    <div>
+      <p>Cape31 has grown from its Cape Town origins into a truly global class with active fleets across seven regions. Each territory manages its own racing calendar, connected through the Cape31 International Class Association and the central Class Management System at proud-pebble-0896e5503.2.azurestaticapps.net. New fleets are welcome to contact the class to get started.</p>
+      <div style="margin-top:20px;display:flex;gap:9px;flex-wrap:wrap">
+        <a href="https://proud-pebble-0896e5503.2.azurestaticapps.net" target="_blank" class="bp" style="font-size:10.5px;padding:10px 20px">Register Your Boat</a>
+        <a href="https://proud-pebble-0896e5503.2.azurestaticapps.net/core/boats" target="_blank" class="bo" style="font-size:10.5px;padding:9px 18px">View All Boats &#8594;</a>
+      </div>
+    </div>
+  </div>
+  <div class="rg">
+    <a class="rc fi" href="https://www.cape31.uk" target="_blank">
+      <div class="rcc">UK</div><div class="rfl">&#127468;&#127463;</div>
+      <div class="rn">United Kingdom</div>
+      <div class="rv">The Solent &middot; Cowes &middot; RLYC &middot; RSYC &middot; <strong>20+ boats</strong></div>
+      <span class="rb2 ba">Most Active Fleet</span><br>
+      <div class="rl">Visit UK Fleet</div>
+    </a>
+    <a class="rc fi" href="https://www.cape31class.com/eu" target="_blank">
+      <div class="rcc">EU</div><div class="rfl">&#127466;&#127482;</div>
+      <div class="rn">Europe / Med</div>
+      <div class="rv">Palma &middot; St Tropez &middot; Imperia &middot; <strong>21 teams 2026</strong></div>
+      <span class="rb2 ba">Fastest Growing</span><br>
+      <div class="rl">Visit EU Fleet</div>
+    </a>
+    <a class="rc fi" href="https://sa.cape31.com" target="_blank">
+      <div class="rcc">ZA</div><div class="rfl">&#127487;&#127462;</div>
+      <div class="rn">South Africa</div>
+      <div class="rv">Cape Town &middot; V&amp;A Waterfront &middot; <strong>Origin Fleet</strong></div>
+      <span class="rb2 bo2">Founding Fleet</span><br>
+      <div class="rl">Visit SA Fleet</div>
+    </a>
+    <a class="rc fi" href="https://www.cape31class.com/hk" target="_blank">
+      <div class="rcc">HK</div><div class="rfl">&#127469;&#127472;</div>
+      <div class="rn">Hong Kong</div>
+      <div class="rv">Royal Hong Kong YC &middot; Asia Pacific</div>
+      <span class="rb2 ba">Active Fleet</span><br>
+      <div class="rl">Visit HK Fleet</div>
+    </a>
+    <a class="rc fi" href="https://www.cape31.com.au" target="_blank">
+      <div class="rcc">AU</div><div class="rfl">&#127462;&#127482;</div>
+      <div class="rn">Australia &amp; NZ</div>
+      <div class="rv">IRC Racing &middot; Fleet Forming 2025&ndash;26</div>
+      <span class="rb2 bg3">Forming Now</span><br>
+      <div class="rl">Visit AU Fleet</div>
+    </a>
+    <a class="rc fi" href="https://www.cape31class.com/news/categories/ireland" target="_blank">
+      <div class="rcc">IRL</div><div class="rfl">&#127470;&#127466;</div>
+      <div class="rn">Ireland</div>
+      <div class="rv">Royal Cork YC &middot; RCYC &middot; Growing fleet</div>
+      <span class="rb2 ba">Growing Fleet</span><br>
+      <div class="rl">Ireland News</div>
+    </a>
+    <a class="rc fi rc-usa" href="https://cape31class.org/us" target="_blank">
+      <div class="usa-flag-bg" aria-hidden="true"></div>
+      <div class="rcc" style="color:#B22234">US</div>
+      <div class="rfl">&#127482;&#127480;</div>
+      <div class="rn">United States</div>
+      <div class="rv">SF Bay &middot; Newport &middot; Key West &middot; <strong>ORC &amp; IRC Winners</strong></div>
+      <span class="rb2 ba" style="background:rgba(178,34,52,.12);color:#B22234;border-color:rgba(178,34,52,.3)">Fleet in Development</span><br>
+      <div class="rl">Join the US Fleet</div>
+    </a>
+    <a class="rc fi" href="/cdn-cgi/l/email-protection#314554505c71525041540200525d5042421f525e5c0e4244535b5452450c7f544611635456585e5f11745f4044584348" style="border-style:dashed;opacity:.65">
+      <div class="rfl">&#127757;</div>
+      <div class="rn">Your Region</div>
+      <div class="rv">New fleets welcome worldwide</div>
+      <span class="rb2 bg3">Get In Touch</span><br>
+      <div class="rl">Contact Class</div>
+    </a>
+  </div>
+</section>
+
+<section id="theboat">
+  <div class="bg2">
+    <div class="bimgs fi">
+      <img src="https://static.wixstatic.com/media/c918a5_d47231590938427aa03a099869d14173~mv2.jpg/v1/fill/w_980,h_653,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/c918a5_d47231590938427aa03a099869d14173~mv2.jpg" alt="C31 racing on the Solent" loading="lazy">
+      <img src="https://static.wixstatic.com/media/c918a5_80c0328876654224aa3cf005d81c6bbe~mv2.jpg/v1/fill/w_800,h_460,al_c,q_85,enc_avif,quality_auto/boat2.jpg" alt="C31 lines drawing" loading="lazy" style="background:#fff">
+    </div>
+    <div class="fi">
+      <div class="ey">Mark Mills Design &middot; Built Cape Town</div>
+      <h2 class="sh" style="margin-bottom:20px">The <em>C31</em></h2>
+      <p class="bdesc">A Grand Prix high-performance 31-foot race boat. Conceived by Lord Irvine Laidlaw, designed by Mark Mills and built by Cape Performance Sailing in Cape Town. Sails 7&ndash;8 up with an owner/amateur driver and mixed crew. Proven supreme one-design and handicap performer under IRC and ORC. Speeds in excess of 25 knots downwind.</p>
+      <div class="bsp">
+        <div class="bs"><div class="bsv">9.55m</div><div class="bsl">LOA</div></div>
+        <div class="bs"><div class="bsv">8.75m</div><div class="bsl">LWL</div></div>
+        <div class="bs"><div class="bsv">3.05m</div><div class="bsl">Beam</div></div>
+        <div class="bs"><div class="bsv">1800kg</div><div class="bsl">Displacement</div></div>
+        <div class="bs"><div class="bsv">2.45m</div><div class="bsl">Draft</div></div>
+        <div class="bs"><div class="bsv">7&ndash;8</div><div class="bsl">Crew</div></div>
+      </div>
+      <div class="bff">
+        <div class="bf"><div class="bfi">&#9889;</div><div class="bft"><h4>True One-Design</h4><p>All hulls, rigs and appendages unmodified. Racing decided by crew skill, not budget. Max 3 professionals per crew.</p></div></div>
+        <div class="bf"><div class="bfi">&#128230;</div><div class="bft"><h4>Container-Shippable</h4><p>C31 and 2-piece mast fit a standard 40ft container. International campaigns genuinely affordable. Tilt-trailer option available.</p></div></div>
+        <div class="bf"><div class="bfi">&#127942;</div><div class="bft"><h4>Proven Handicap Winner</h4><p>2&times; overall at Les Voiles de Saint-Tropez; 1-2-3 at UK IRC Nationals; Rolex Big Boat Series class winner (USA).</p></div></div>
+      </div>
+      <div class="rats">
+        <div class="rat"><span class="tag">IRC</span><strong>1.135</strong></div>
+        <div class="rat"><span class="tag">ORC APH</span><strong>493.3</strong></div>
+        <div class="rat"><span class="tag">Crew weight</span><strong>max 595kg</strong></div>
+      </div>
+      <div class="bcts">
+        <a href="https://www.youtube.com/watch?v=dDtuuFJ9aLY" target="_blank" class="bp">&#9654; Boat Tour</a>
+        <a href="https://www.cape31class.com/_files/ugd/ade705_af77e63ea23840a9aab72a961b79e042.pdf" target="_blank" class="bo">Owner's Manual</a>
+        <a href="http://www.31northyachting.com" target="_blank" class="bo">Buy a C31</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="fleet">
+  <div class="fi" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-bottom:44px">
+    <div><div class="ey">Cape31 Class Management System</div><h2 class="sh">The <em>Fleet</em></h2></div>
+    <span class="ldot">Live CMS Data</span>
+  </div>
+  <div class="fleet-hero fi">
+    <span class="fn">80+</span>
+    <p class="fs2"><strong>Cape31s built and racing worldwide.</strong> The new Cape31 Class Management System &mdash; built for the class, by the class.</p>
+    <div class="fbtns">
+      <a href="https://proud-pebble-0896e5503.2.azurestaticapps.net" target="_blank" class="bp">&#128274; Sign In to CMS</a>
+      <a href="https://proud-pebble-0896e5503.2.azurestaticapps.net" target="_blank" class="bo" style="border-color:var(--gold);color:var(--gold)">&#127942; Try the Demo</a>
+    </div>
+  </div>
+  <div class="cms-modules fi">
+    <a class="cms-mod" href="https://proud-pebble-0896e5503.2.azurestaticapps.net" target="_blank">
+      <div class="cms-mod-icon">&#127942;</div>
+      <h4>Regattas</h4>
+      <p>Calendar, notices, NORs and live results. Enter events and manage class-approved regatta schedules across all regions.</p>
+      <div class="cms-mod-link">Open in CMS &#8594;</div>
+    </a>
+    <a class="cms-mod" href="https://proud-pebble-0896e5503.2.azurestaticapps.net" target="_blank">
+      <div class="cms-mod-icon">&#9971;</div>
+      <h4>Boats &amp; Sail Buttons</h4>
+      <p>Full fleet register with IHC sail button certification, Atlas Vakaros integration, and owner details for all registered hulls.</p>
+      <div class="cms-mod-link">Open in CMS &#8594;</div>
+    </a>
+    <a class="cms-mod" href="https://proud-pebble-0896e5503.2.azurestaticapps.net" target="_blank">
+      <div class="cms-mod-icon">&#128101;</div>
+      <h4>Entries &amp; Crew</h4>
+      <p>Enter regattas, manage your crew roster with WS Sailor IDs, monitor crew weights and professional sailor limits, pay entry fees online.</p>
+      <div class="cms-mod-link">Open in CMS &#8594;</div>
+    </a>
+    <a class="cms-mod" href="https://proud-pebble-0896e5503.2.azurestaticapps.net" target="_blank">
+      <div class="cms-mod-icon">&#127937;</div>
+      <h4>Race Results</h4>
+      <p>Race results and standings by regatta. Sailwave CSV export for official scoring. Full season championship standings per series.</p>
+      <div class="cms-mod-link">Open in CMS &#8594;</div>
+    </a>
+    <a class="cms-mod" href="https://proud-pebble-0896e5503.2.azurestaticapps.net" target="_blank">
+      <div class="cms-mod-icon">&#128176;</div>
+      <h4>Class Fees &amp; Payments</h4>
+      <p>Class membership fees, regatta entry fees and ad-hoc payments via Stripe. Fee allocation and sticker number tracking for all boats.</p>
+      <div class="cms-mod-link">Open in CMS &#8594;</div>
+    </a>
+    <a class="cms-mod" href="https://proud-pebble-0896e5503.2.azurestaticapps.net" target="_blank">
+      <div class="cms-mod-icon">&#9881;&#65039;</div>
+      <h4>Class Office Admin</h4>
+      <p>ExCom and Admin access for fleet management, user accounts, class fee setting, Stripe configuration and full data export (JSON backup).</p>
+      <div class="cms-mod-link">Admin only &#8594;</div>
+    </a>
+  </div>
+  <div class="cms-roles fi">
+    <div class="cms-role">
+      <span class="cr-badge cr-owner">Owner</span>
+      <p>Enter regattas, manage crew, view your sail buttons and pay class fees</p>
+    </div>
+    <div class="cms-role">
+      <span class="cr-badge cr-excom">ExCom</span>
+      <p>Fleet management, results entry, fee tracking &mdash; no user admin</p>
+    </div>
+    <div class="cms-role">
+      <span class="cr-badge cr-admin">Admin</span>
+      <p>Full access including user accounts, Stripe config and system settings</p>
+    </div>
+    <div class="cms-role" style="border-color:rgba(224,152,32,.28);background:rgba(224,152,32,.05)">
+      <span class="cr-badge" style="background:rgba(224,152,32,.15);color:var(--gold);border-color:rgba(224,152,32,.4)">Demo</span>
+      <p>Try the system &mdash; demo mode active, no live data affected</p>
+    </div>
+  </div>
+  <div class="fi">
+    <table class="ftbl">
+      <thead><tr>
+        <th>Hull</th><th>Boat Name</th>
+        <th class="h768">Sail No.</th>
+        <th class="h860">Owner</th>
+        <th class="h768">&#127988;</th>
+      </tr></thead>
+      <tbody>
+        <tr><td class="hn">9</td><td class="bn">Jiraffe</td><td class="sn h768">GBR 315X</td><td class="h860">Simon Perry</td><td class="h768">&#127468;&#127463;</td></tr>
+        <tr><td class="hn">15</td><td class="bn">Squirt</td><td class="sn h768">GBR 311X</td><td class="h860">Giorgio Tortorolo</td><td class="h768">&#127468;&#127463;</td></tr>
+        <tr><td class="hn">19</td><td class="bn">Flying Jenny 19</td><td class="sn h768">USA 81567</td><td class="h860">Sandy Askew</td><td class="h768">&#127482;&#127480;</td></tr>
+        <tr><td class="hn">27</td><td class="bn">Black Star</td><td class="sn h768">SUI 27</td><td class="h860">Christian Zuerrer</td><td class="h768">&#127464;&#127469;</td></tr>
+        <tr><td class="hn">28</td><td class="bn">Antix</td><td class="sn h768">IRL 3128</td><td class="h860">Anthony O'Leary</td><td class="h768">&#127470;&#127466;</td></tr>
+        <tr><td class="hn">35</td><td class="bn">Shotgunn</td><td class="sn h768">IOM 31</td><td class="h860">Michael Wilson</td><td class="h768">&#127470;&#127474;</td></tr>
+        <tr><td class="hn">38</td><td class="bn">Motions</td><td class="sn h768">NED 3138</td><td class="h860">Lennard van Oeveren</td><td class="h768">&#127475;&#127473;</td></tr>
+        <tr><td class="hn">55</td><td class="bn">Aspire</td><td class="sn h768">POL 17</td><td class="h860">Kusznierewicz / Gacek</td><td class="h768">&#127477;&#127473;</td></tr>
+        <tr><td class="hn">57</td><td class="bn">Essentia</td><td class="sn h768">ROU 1001</td><td class="h860">Catalin Trandafir</td><td class="h768">&#127479;&#127476;</td></tr>
+        <tr><td class="hn">62</td><td class="bn">Pacific Yankee</td><td class="sn h768">USA 62</td><td class="h860">Drew Freides</td><td class="h768">&#127482;&#127480;</td></tr>
+        <tr><td class="hn">65</td><td class="bn">Stella Maris</td><td class="sn h768">AUT 3165</td><td class="h860">August Schram</td><td class="h768">&#127462;&#127481;</td></tr>
+        <tr><td class="hn">74</td><td class="bn">Warrior Won</td><td class="sn h768">USA 31074</td><td class="h860">Chris Sheehan</td><td class="h768">&#127482;&#127480;</td></tr>
+        <tr><td class="hn">76</td><td class="bn">Stig</td><td class="sn h768">ITA 3176</td><td class="h860">Alessandro Rombelli</td><td class="h768">&#127470;&#127481;</td></tr>
+      </tbody>
+    </table>
+    <div class="fleet-more">
+      <p style="font-size:13.5px;color:var(--mute);margin-bottom:16px">Showing 13 of 39 registered 2024 class members across 13 nations. Full register in the CMS.</p>
+      <a href="https://proud-pebble-0896e5503.2.azurestaticapps.net/class/boats" target="_blank" class="bp">View Full Fleet Register &#8594;</a>
+    </div>
+  </div>
+</section>
+
+<section id="regattas">
+  <div class="fi" style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-bottom:44px">
+    <div><div class="ey">Race Calendar</div><h2 class="sh">2026 <em>Regattas</em></h2></div>
+    <span class="ldot">Live via CMS</span>
+  </div>
+  <div class="rl2 fi">
+    <div class="ri2" style="border-left:3px solid var(--gold)">
+      <div class="rd"><div class="rday">&#11088;</div><div class="rmo">2026</div></div>
+      <div><div class="rnm">Cape31 Gold Cup 2026 &mdash; New International Event</div><div class="rloc">&#128205; Venue TBC &middot; <a href="https://proud-pebble-0896e5503.2.azurestaticapps.net/racing/regatta/cape-31-gold-cup-2026-2026" target="_blank" style="color:var(--red)">View on CMS</a></div></div>
+      <div class="rbg"><span class="rb3 rgold">Gold Cup</span><span class="rb3 ri3">International</span></div>
+    </div>
+    <div class="ri2"><div class="rd"><div class="rday">28</div><div class="rmo">Mar 2026</div></div><div><div class="rnm">Trofeo Princesa Sof&#237;a &mdash; C31 Class</div><div class="rloc">&#128205; Palma de Mallorca, Spain &middot; RCNP</div></div><div class="rbg"><span class="rb3 ri3">International</span><span class="rb3 rr2">EU Circuit</span></div></div>
+    <div class="ri2"><div class="rd"><div class="rday">14</div><div class="rmo">Jun 2026</div></div><div><div class="rnm">Cape31 UK National Championships</div><div class="rloc">&#128205; Cowes, Isle of Wight &middot; Royal Yacht Squadron</div></div><div class="rbg"><span class="rb3 rn2">UK Nationals</span></div></div>
+    <div class="ri2"><div class="rd"><div class="rday">28</div><div class="rmo">Jul 2026</div></div><div><div class="rnm">Cowes Week C31 Series</div><div class="rloc">&#128205; Cowes, Solent, UK</div></div><div class="rbg"><span class="rb3 rr2">UK Fleet</span></div></div>
+    <div class="ri2"><div class="rd"><div class="rday">25</div><div class="rmo">Sep 2026</div></div><div><div class="rnm">Les Voiles de Saint-Tropez</div><div class="rloc">&#128205; Saint-Tropez, France &middot; YCPR</div></div><div class="rbg"><span class="rb3 ri3">International</span><span class="rb3 rr2">EU Circuit</span></div></div>
+    <div class="ri2"><div class="rd"><div class="rday">12</div><div class="rmo">Oct 2026</div></div><div><div class="rnm">Cape31 European Championship</div><div class="rloc">&#128205; Palma de Mallorca, Spain</div></div><div class="rbg"><span class="rb3 ri3">Championship</span></div></div>
+    <div class="ri2"><div class="rd"><div class="rday">18</div><div class="rmo">Jan 2027</div></div><div><div class="rnm">Key West Race Week</div><div class="rloc">&#128205; Key West, Florida, USA</div></div><div class="rbg"><span class="rb3 rr2">US Fleet</span></div></div>
+  </div>
+  <div class="reg-ft">
+    <p>Full schedule, crew declarations and results via the Cape31 Class Management System.</p>
+    <div style="display:flex;gap:9px;flex-wrap:wrap">
+      <a href="https://proud-pebble-0896e5503.2.azurestaticapps.net/racing/calendar" target="_blank" class="bp">Full Calendar</a>
+      <a href="https://proud-pebble-0896e5503.2.azurestaticapps.net" target="_blank" class="bo">Enter a Regatta &#8594;</a>
+    </div>
+  </div>
+</section>
+
+<section id="video">
+  <div class="fi" style="margin-bottom:44px"><div class="ey">On the Water</div><h2 class="sh">Watch <em>C31 Racing</em></h2></div>
+  <div class="vg fi">
+    <a class="vc2" href="https://www.youtube.com/watch?v=dDtuuFJ9aLY" target="_blank">
+      <div class="vt">&#127916;</div>
+      <div class="vov2"><div class="vpl">&#9654;</div></div>
+      <div class="vi"><div class="vcat">Official Boat Tour</div><div class="vttl">Cape31 Official Boat Tour &mdash; Mark Mills Design Walkthrough</div></div>
+    </a>
+    <div class="vcol">
+      <a class="vc2" href="https://www.youtube.com/@cape31" target="_blank">
+        <div class="vt">&#9971;</div>
+        <div class="vov2"><div class="vpl">&#9654;</div></div>
+        <div class="vi"><div class="vcat">UK Racing</div><div class="vttl">C31 UK Nationals &mdash; Royal Yacht Squadron, Cowes</div></div>
+      </a>
+      <a class="vc2" href="https://www.youtube.com/@cape31" target="_blank">
+        <div class="vt">&#127942;</div>
+        <div class="vov2"><div class="vpl">&#9654;</div></div>
+        <div class="vi"><div class="vcat">Championship</div><div class="vttl">Les Voiles de Saint-Tropez &mdash; C31 Fleet Racing</div></div>
+      </a>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:32px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+    <a href="https://www.youtube.com/@cape31" target="_blank" class="bo">YouTube &mdash; @cape31</a>
+    <a href="https://gallery.cape31class.com" target="_blank" class="bo">Photo Gallery</a>
+    <a href="https://www.livesaildie.com/tag/cape31/" target="_blank" class="bo">Live Sail Die</a>
+  </div>
+</section>
+
+<section id="social">
+  <div class="fi" style="margin-bottom:36px"><div class="ey">C31 Community</div><h2 class="sh">Follow <em>Cape31</em></h2></div>
+  <div class="sch fi">
+    <a href="https://www.facebook.com/cape31class" target="_blank" class="sc2"><span class="sci">&#128152;</span> @cape31class &mdash; 5k</a>
+    <a href="https://www.facebook.com/cape31uk/" target="_blank" class="sc2"><span class="sci">&#128152;</span> @cape31uk &mdash; 4.5k</a>
+    <a href="https://www.facebook.com/cape31eu/" target="_blank" class="sc2"><span class="sci">&#128152;</span> @cape31eu</a>
+    <a href="https://www.instagram.com/cape31class/" target="_blank" class="sc2"><span class="sci">&#128247;</span> @cape31class &mdash; 4k</a>
+    <a href="https://www.instagram.com/cape31eu/" target="_blank" class="sc2"><span class="sci">&#128247;</span> @cape31eu &mdash; 3.4k</a>
+    <a href="https://www.youtube.com/@cape31" target="_blank" class="sc2"><span class="sci">&#9654;&#65039;</span> @cape31 YouTube</a>
+    <a href="https://www.tiktok.com/@cape31class" target="_blank" class="sc2"><span class="sci">&#127925;</span> @cape31class TikTok</a>
+  </div>
+  <div class="sff fi">
+    <div class="sp"><img src="https://static.wixstatic.com/media/c918a5_6ed1344e6ca14aebaef69e06c76ea88f~mv2.png/v1/fill/w_400,h_400,fp_0.50_0.50,q_85,enc_avif,quality_auto/c918a5_6ed1344e6ca14aebaef69e06c76ea88f~mv2.png" alt="" loading="lazy"><div class="spov"><div class="spt">Trinity Racing takes Princesa Sof&#237;a 2026 &#127942;</div><div class="spm">@cape31class &middot; 4 days ago</div></div></div>
+    <div class="sp"><img src="https://static.wixstatic.com/media/c918a5_2f97b9bc62aa408b94f45b1ad3c2d65e~mv2.jpeg/v1/fill/w_400,h_400,fp_0.50_0.50,q_85,enc_avif,quality_auto/c918a5_2f97b9bc62aa408b94f45b1ad3c2d65e~mv2.jpeg" alt="" loading="lazy"><div class="spov"><div class="spt">C31 Med Circuit 2026 loading &mdash; 21 teams committed!</div><div class="spm">@cape31class &middot; 2 weeks ago</div></div></div>
+    <div class="sp"><img src="https://static.wixstatic.com/media/c918a5_9ceaf38c79284fc1a034837004c09312~mv2.jpg/v1/fill/w_400,h_400,fp_0.50_0.50,q_85,enc_avif,quality_auto/c918a5_9ceaf38c79284fc1a034837004c09312~mv2.jpg" alt="" loading="lazy"><div class="spov"><div class="spt">STIG &mdash; 2025 Cape31 European Champions &#127945;</div><div class="spm">@cape31class &middot; Oct 2025</div></div></div>
+    <div class="sp"><img src="https://static.wixstatic.com/media/c918a5_849a327fd8ae4b5f85379fefc15d68a2~mv2.jpg/v1/fill/w_400,h_400,fp_0.50_0.50,q_85,enc_avif,quality_auto/c918a5_849a327fd8ae4b5f85379fefc15d68a2~mv2.jpg" alt="" loading="lazy"><div class="spov"><div class="spt">Stig &amp; Give Me Five &mdash; 2025 Med Circuit Champions &#127942;</div><div class="spm">@cape31class &middot; Oct 2025</div></div></div>
+  </div>
+</section>
+
+<section id="partners">
+  <div class="fi" style="text-align:center"><div class="ey" style="justify-content:center">Official Class Partners</div></div>
+  <div class="prow fi">
+    <a class="pt" href="https://mills-design.com" target="_blank"><img src="https://static.wixstatic.com/media/c918a5_d18af5ce5b634fdbba96952951f2703e~mv2.png/v1/fill/w_214,h_246,al_c,q_90,enc_avif,quality_auto/MillsDesLogo261_tif.png" alt="Mills Design"></a>
+    <a class="pt" href="https://www.capeperformancesailing.com" target="_blank"><div class="pt-wm">Cape Performance<br>Sailing</div></a>
+    <a class="pt" href="http://www.31northyachting.com" target="_blank"><img src="https://static.wixstatic.com/media/c918a5_97168f5648ed40299e695c53147dbbc7~mv2.png/v1/fill/w_246,h_246,al_c,q_90,enc_avif,quality_auto/c918a5_97168f5648ed40299e695c53147dbbc7~mv2.png" alt="31 North Yachting"></a>
+    <a class="pt" href="https://www.northsails.com" target="_blank"><img src="https://static.wixstatic.com/media/c918a5_c7cc928193b14a53bc2474e3c6cbf6a7~mv2.png/v1/fill/w_270,h_270,al_c,q_90,enc_avif,quality_auto/00_NS-BULLET_WM_ROYAL.png" alt="North Sails"></a>
+    <a class="pt" href="https://www.doylesails.com" target="_blank"><div class="pt-wm">Doyle Sails<br><span style="font-size:11px;letter-spacing:.05em;font-weight:400">Gold Partner</span></div></a>
+    <a class="pt" href="https://www.ttcmarine.com" target="_blank"><div class="pt-wm">TTC Marine<br><span style="font-size:11px;letter-spacing:.05em;font-weight:400">CMS Provider</span></div></a>
+  </div>
+  <div style="text-align:center;margin-top:32px"><a href="/cdn-cgi/l/email-protection#c5b1a0a4a885a6a4b5a0f6f4a6a9a4b6b6eba6aaa8fab6b0a7afa0a6b1f886a4b5a0f6f4e586a9a4b6b6e595a4b7b1aba0b7b6adacb5" class="bo">Become a Partner</a></div>
+</section>
+
+<section id="admin">
+  <div class="fi">
+    <div class="ey">Class Administration</div>
+    <h2 class="sh">Admin <em>Access</em></h2>
+    <p style="font-size:14px;color:var(--mute);margin-top:14px;max-width:700px;line-height:1.85">Access levels for the Cape31 International Class Association website. News updates, link changes, regatta entries and results are managed through <a href="https://proud-pebble-0896e5503.2.azurestaticapps.net" target="_blank" style="color:var(--red)">Cape31 Class Management System</a>. For structural website changes, contact the administrator. This site will migrate to <strong style="color:var(--white)">cape31class.org</strong> once approved by the Executive Committee.</p>
+  </div>
+  <div class="ag fi">
+    <div class="ar a1c">
+      <div class="ar-head"><div class="ar-icon a1i">&#128273;</div><div><div class="ar-title">Super Admin</div><div class="ar-sub">Cape31 International Class Association</div></div></div>
+      <div class="ar-perms">
+        <div class="ar-perm">Full website content management</div>
+        <div class="ar-perm">All regional sections &mdash; add, edit, delete</div>
+        <div class="ar-perm">Manage partner logos and sponsor links</div>
+        <div class="ar-perm">Create and close regattas in the CMS</div>
+        <div class="ar-perm">Add and verify boats in the registry</div>
+        <div class="ar-perm">Publish and manage class rules documents</div>
+        <div class="ar-perm">Full CMS admin across all series and regions</div>
+        <div class="ar-perm">Update social media links and accounts</div>
+        <div class="ar-perm">Domain, DNS and hosting management</div>
+        <div class="ar-perm">Grant / revoke admin access to other users</div>
+      </div>
+      <div class="ar-contact">General: <a href="/cdn-cgi/l/email-protection#55213034381536342530666436393426267b363a38"><span class="__cf_email__" data-cfemail="394d5c5854795a58495c0a085a55584a4a175a5654">[email&#160;protected]</span></a><br>CMS: <a href="https://proud-pebble-0896e5503.2.azurestaticapps.net" target="_blank">Cape31 CMS</a><br>CMS Technical: <a href="/cdn-cgi/l/email-protection#54203b39142020373935263d3a317a373b39"><span class="__cf_email__" data-cfemail="1e6a71735e6a6a7d737f6c77707b307d7173">[email&#160;protected]</span></a></div>
+    </div>
+    <div class="ar a2c">
+      <div class="ar-head"><div class="ar-icon a2i">&#128193;</div><div><div class="ar-title">Regional Admin</div><div class="ar-sub">Per region: UK &middot; EU/Med &middot; SA &middot; US &middot; HK &middot; AU &middot; IRL</div></div></div>
+      <div class="ar-perms">
+        <div class="ar-perm">Add and edit news for their region</div>
+        <div class="ar-perm">Manage regional events and Notice of Race</div>
+        <div class="ar-perm">Update regional fleet boat information</div>
+        <div class="ar-perm">Enter and manage regatta entries (CMS)</div>
+        <div class="ar-perm">Post race results for regional events</div>
+        <div class="ar-perm">Submit crew declarations</div>
+        <div class="ar-perm">Upload regional documents and NORs</div>
+        <div class="ar-perm">Update regional social media links</div>
+        <div class="ar-perm">View (read-only) all other regions</div>
+      </div>
+      <div class="ar-contact">UK &amp; international: <a href="/cdn-cgi/l/email-protection#e09485818da083819085d3d1838c819393ce838f8d"><span class="__cf_email__" data-cfemail="ec98898d81ac8f8d9c89dfdd8f808d9f9fc28f8381">[email&#160;protected]</span></a><br>EU/Med &amp; media: <a href="/cdn-cgi/l/email-protection#91e5fee3d1e5f9f8e3e5e8fefff4e3f0f2f4f2f8e3f2e4f8e5bff2fefc"><span class="__cf_email__" data-cfemail="3a4e55487a4e5253484e4355545f485b595f595348594f534e14595557">[email&#160;protected]</span></a><br>CMS support: <a href="/cdn-cgi/l/email-protection#9aeef5f7daeeeef9f7fbe8f3f4ffb4f9f5f7"><span class="__cf_email__" data-cfemail="a5d1cac8e5d1d1c6c8c4d7cccbc08bc6cac8">[email&#160;protected]</span></a></div>
+    </div>
+    <div class="ar a3c">
+      <div class="ar-head"><div class="ar-icon a3i">&#9999;&#65039;</div><div><div class="ar-title">Content Editor</div><div class="ar-sub">News &middot; Results &middot; Links &middot; Photos</div></div></div>
+      <div class="ar-perms">
+        <div class="ar-perm">Add news articles for assigned region</div>
+        <div class="ar-perm">Add and update external news links</div>
+        <div class="ar-perm">Update race results and standings</div>
+        <div class="ar-perm">Upload photos to the gallery</div>
+        <div class="ar-perm">Post updates to class social media</div>
+        <div class="ar-perm">Submit regatta entries on behalf of boats</div>
+        <div class="ar-perm">Update assigned boat profiles in CMS</div>
+        <div class="ar-perm">Cannot delete published content</div>
+        <div class="ar-perm">Cannot modify partner or class rule content</div>
+      </div>
+      <div class="ar-contact">Request access:<br><a href="/cdn-cgi/l/email-protection#80f4e5e1edc0e3e1f0e5b3b1e3ece1f3f3aee3efed"><span class="__cf_email__" data-cfemail="cebaabafa38eadafbeabfdffada2afbdbde0ada1a3">[email&#160;protected]</span></a><br>Subject: <em>Editor Access &mdash; [Your Region]</em></div>
+    </div>
+  </div>
+  <div class="admin-note fi">
+    <p><strong>How to add a news link or update content:</strong> Log in at <a href="https://proud-pebble-0896e5503.2.azurestaticapps.net" target="_blank">Cape31 Class Management System</a> with your credentials. News posts added through the CMS will feed to this site automatically. For website layout changes, new regional pages, or domain migration queries (to cape31class.org), email <a href="/cdn-cgi/l/email-protection#91e5f4f0fcd1f2f0e1f4a2a0f2fdf0e2e2bff2fefc"><span class="__cf_email__" data-cfemail="34405155597457554451070557585547471a575b59">[email&#160;protected]</span></a> with subject <em>"Website Update Request"</em>. The CMS is built and maintained by <a href="https://www.ttcmarine.com" target="_blank">TTC Marine Ltd</a> &mdash; direct technical queries to <a href="/cdn-cgi/l/email-protection#baced5d7faceced9d7dbc8d3d4df94d9d5d7"><span class="__cf_email__" data-cfemail="fc889391bc88889f919d8e959299d29f9391">[email&#160;protected]</span></a>. Race circuit news and media partnerships: <a href="/cdn-cgi/l/email-protection#e4908b96a4908c8d96909d8b8a8196858781878d9687918d90ca878b89"><span class="__cf_email__" data-cfemail="c8bca7ba88bca0a1babcb1a7a6adbaa9abadaba1baabbda1bce6aba7a5">[email&#160;protected]</span></a> &middot; <a href="https://www.thirtyoneracecircuit.com" target="_blank">thirtyoneracecircuit.com</a></p>
+  </div>
+</section>
+
+<footer>
+  <div class="ft2">
+    <div class="fb">
+      <div class="flo">
+        <img src="https://s3.eu-west-2.amazonaws.com/cms.cape31class.com/public/static/core/c31-logo.svg" alt="Cape31" onerror="this.src='https://static.wixstatic.com/media/c918a5_c45c46fceb2c4156bdba78a86f70db3a~mv2.png/v1/fill/w_160,h_140,al_c,q_90,enc_avif,quality_auto/C31%20logo.png'">
+        <div class="flt2"><span class="fm2">Cape31 International Class Association</span><span class="fs3">cape31class.org</span></div>
+      </div>
+      <p>Fun, competitive and affordable one-design racing with a friendly vibe on and off the water. C31 fleets racing worldwide since 2017.</p>
+      <div class="fsoc">
+        <a class="fso" href="https://www.facebook.com/cape31class" target="_blank">&#128152;</a>
+        <a class="fso" href="https://www.instagram.com/cape31class/" target="_blank">&#128247;</a>
+        <a class="fso" href="https://www.youtube.com/@cape31" target="_blank">&#9654;</a>
+        <a class="fso" href="https://www.tiktok.com/@cape31class" target="_blank">&#127925;</a>
+      </div>
+    </div>
+    <div class="fc">
+      <h5>The Class</h5>
+      <ul>
+        <li><a href="#theboat">The C31</a></li>
+        <li><a href="https://proud-pebble-0896e5503.2.azurestaticapps.net/core/index" target="_blank">Class Rules</a></li>
+        <li><a href="https://www.cape31class.com/class" target="_blank">Committees</a></li>
+        <li><a href="https://proud-pebble-0896e5503.2.azurestaticapps.net/measurement/" target="_blank">Measurement</a></li>
+        <li><a href="https://www.cape31class.com/contact" target="_blank">Contact</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#314554505c71525041540200525d5042421f525e5c0e4244535b5452450c62415e5f425e4342595841">Sponsorship</a></li>
+      </ul>
+    </div>
+    <div class="fc">
+      <h5>Regions</h5>
+      <ul>
+        <li><a href="https://www.cape31.uk" target="_blank">&#127468;&#127463; United Kingdom</a></li>
+        <li><a href="https://www.cape31class.com/eu" target="_blank">&#127466;&#127482; Europe / Med</a></li>
+        <li><a href="https://sa.cape31.com" target="_blank">&#127487;&#127462; South Africa</a></li>
+        <li><a href="https://cape31class.org/us" target="_blank">&#127482;&#127480; United States</a></li>
+        <li><a href="https://www.cape31class.com/hk" target="_blank">&#127469;&#127472; Hong Kong</a></li>
+        <li><a href="https://www.cape31.com.au" target="_blank">&#127462;&#127482; Australia &amp; NZ</a></li>
+        <li><a href="https://www.cape31class.com/news/categories/ireland" target="_blank">&#127470;&#127466; Ireland</a></li>
+      </ul>
+    </div>
+    <div class="fc">
+      <h5>Racing</h5>
+      <ul>
+        <li><a href="https://proud-pebble-0896e5503.2.azurestaticapps.net" target="_blank">Class Management System</a></li>
+        <li><a href="https://proud-pebble-0896e5503.2.azurestaticapps.net/racing/calendar" target="_blank">Race Calendar</a></li>
+        <li><a href="https://proud-pebble-0896e5503.2.azurestaticapps.net" target="_blank">Results &amp; Standings</a></li>
+        <li><a href="https://proud-pebble-0896e5503.2.azurestaticapps.net" target="_blank">Regatta Entry</a></li>
+        <li><a href="https://www.thirtyoneracecircuit.com" target="_blank">31 Race Circuit</a></li>
+        <li><a href="https://gallery.cape31class.com" target="_blank">Photo Gallery</a></li>
+      </ul>
+    </div>
+    <div class="fc">
+      <h5>Media &amp; Info</h5>
+      <ul>
+        <li><a href="https://www.cape31class.com/news" target="_blank">News Archive</a></li>
+        <li><a href="https://afloat.ie/sail/sailing-classes/cape-31" target="_blank">afloat.ie</a></li>
+        <li><a href="https://www.livesaildie.com/tag/cape31/" target="_blank">Live Sail Die</a></li>
+        <li><a href="https://www.youtube.com/@cape31" target="_blank">YouTube Channel</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#9aeef5e8daeef2f3e8eee3f5f4ffe8fbf9fff9f3e8f9eff3eeb4f9f5f7a5e9eff8f0fff9eea7d7fffef3fb">Media Enquiries</a></li>
+        <li><a href="#admin">Admin Access</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fbot2">
+    <div class="fl">&copy; 2026 Cape31 International Class Association &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a> &middot; <a href="https://proud-pebble-0896e5503.2.azurestaticapps.net/core/index" target="_blank">Class Rules</a> &middot; Migrating to <a href="https://cape31class.org" style="color:var(--red)">cape31class.org</a></div>
+    <div class="fr">Designed by <a href="https://mills-design.com" target="_blank">Mark Mills</a> &middot; Built in Cape Town &middot; CMS by <a href="https://www.ttcmarine.com" target="_blank">TTC Marine</a></div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const nav=document.getElementById('nav');
