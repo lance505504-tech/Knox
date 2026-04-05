@@ -182,3 +182,47 @@
 3. Verify live sites after push
 4. AUS site push still pending from previous session
 5. Consider adding official notices section to UK if #news not sufficient
+---
+## 2026-04-05 — Cape31 UK v2 + International v3 — FINAL BUILD
+
+**Both files complete and ready to upload to GitHub via web UI (no PAT needed for cape31one-sudo)**
+
+**UK v2 — Cape31-UK-v2.html**
+- Dave Swete: 5 name references, all below the fold
+- Removed from hero/nav: credential block, hero tag name, "Talk to Dave" nav renamed "Buy a C31"
+- Tor Tomlinson-Cheney removed from UK committee
+- Mobile CSS fixes applied
+- 16 Cloudflare email obfuscations decoded to plain mailto links
+- Cloudflare email decode script removed
+- 24 wixstatic.com image refs remain (public CDN — working on Azure, migrate to S3 next session if needed)
+- File size: 96,231 bytes
+
+**International v3 — Cape31-International-v3.html**
+- 4 new sections: Story, Series, Rules, Governance
+- Story: Cape Doctor, Lavranos spec table, 2016-2024 founding timeline
+- Series: Full circuit showcase — Med, UK, US, SA, AUS, HK with results and champions
+- Rules: Class Rules, Constitution, Measurement, Technical Decisions TD-001/002/003, IRC/ORC, NOR, Protest
+- Governance: ExCom structure, 6 circuits, committee cards, AGM/Measurement/New Fleet
+- 35 Cloudflare email obfuscations decoded to plain mailto links
+- Cloudflare email decode script removed
+- 33 wixstatic.com image refs remain
+- div balance: perfect. File size: 133,892 bytes
+
+**Upload instructions (HOW-TO-UPLOAD.txt delivered):**
+1. Go to github.com/cape31one-sudo/Cape31-UK-website
+2. Upload Cape31-UK-v2.html, rename to index.html, commit
+3. Go to github.com/cape31one-sudo/Cape31-International-website
+4. Upload Cape31-International-v3.html, rename to index.html, commit
+5. Verify at Azure staging URLs after ~60 seconds
+
+**Verify URLs:**
+- UK:   https://orange-stone-046c62f03.4.azurestaticapps.net
+- Intl: https://wonderful-beach-0c8107703.6.azurestaticapps.net
+
+**Next session tasks:**
+1. Confirm upload done and verify both live sites
+2. Migrate wixstatic.com images to Cape31 CMS S3 bucket if needed
+3. AUS site still pending push to Cape31-Aus-website repo
+4. Review International v3 on mobile
+5. Noticeboard decision — is current #news section sufficient or add official class notices section
+6. Knox PAT working: lance505504-tech account
