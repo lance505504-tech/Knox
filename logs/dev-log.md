@@ -43,3 +43,33 @@
 - ChatGPT sessions: file contents output as labelled blocks for manual GitHub commit
 - dev-log always appended, never replaced
 **Next:** Broadoak team to review design paper -> Phase 2 copywriting -> Phase 3 build
+
+---
+## 2026-04-05 -- Cape31 websites infrastructure planning
+**Worked on:** Azure Static Web Apps issues and migration planning to Cloudflare Pages
+**Completed:**
+- Investigated Azure portal branch dropdown bug when creating Static Web Apps
+- Troubleshot all standard fixes (revoke/reauthorize GitHub, browser cache, sign out)
+- Created Azure CLI script to deploy 7 regional Cape31 static web apps via Cloud Shell
+- Successfully deployed Skandi, D and FR before hitting Azure free tier limit (10 max per subscription)
+- Attempted second Azure subscription -- blocked, only one free account allowed per person
+- Decided to move all 12 Cape31 websites from Azure to Cloudflare Pages
+- Confirmed Cape31-class and Cape31-Dev stay on Azure (used for other services)
+- Investigated Cloudflare DNS issue -- nameserver mismatch between 123-reg (henry/ruth) and Cloudflare (johnathan/stevie)
+- Confirmed all 5 live sites working despite Cloudflare showing domain as pending
+- 123-reg unavailable (holiday) -- cannot update nameservers until they reopen
+- Knox session loaded and all work logged
+**Decisions:**
+- All Cape31 regional/country websites to move to Cloudflare Pages (no site limits, free, DNS already there)
+- Cape31-class and Cape31-Dev remain on Azure
+- Transfer cape31class.org from 123-reg to Cloudflare Registrar when 123-reg reopens (28 day window)
+- Cloudflare Pages setup to proceed after domain transfer completes
+**Awaiting:**
+- 123-reg to reopen to obtain EPP/Auth transfer code
+- Subdomains for the 7 new regional sites still to be confirmed by Lance
+**Next:**
+- Call 123-reg, get EPP code, initiate domain transfer to Cloudflare Registrar
+- Set up Cloudflare Pages for all 12 Cape31 websites
+- Delete 3 failed Azure deployments (Skandi, D, FR)
+- Delete 4 working Azure regional sites once Cloudflare Pages versions are live and tested
+- Confirm subdomain structure for all new regions
