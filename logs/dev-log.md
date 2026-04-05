@@ -147,3 +147,38 @@
 - Verify UK live site: https://orange-stone-046c62f03.4.azurestaticapps.net
 - Verify International live site: https://wonderful-beach-0c8107703.6.azurestaticapps.net
 - Delete HTML files and script from C:\ immediately after push
+---
+## 2026-04-05 — Cape31 UK v2 + International v3 full session
+
+**UK v2 — READY FOR UPLOAD (cape31one-sudo/Cape31-UK-website → index.html)**
+- Dave Swete reduced from 59 to 5 name references
+- Removed: ticker, hero tag, nav button (renamed "Buy a C31"), hero subtitle, origin blurb, credential block, quote block button, join section, footer blurb
+- Kept (5 refs all below fold): founding history, quote attribution, circuit section, committee card, footer link
+- Tor Tomlinson-Cheney removed from UK committee (International and Med role only)
+- Nav CTA renamed: "Buy a C31" — links to swete@31northyachting.com
+- Mobile CSS fixes: record rows, Cowes grids, quick links bar
+- Noticeboard confirmed present as #news with 4 race reports
+- File size: 97,357 bytes
+
+**International v3 — READY FOR UPLOAD (cape31one-sudo/Cape31-International-website → index.html)**
+- 4 new sections: Story, Series, Rules, Governance
+- Story: Cape Doctor, Lavranos spec table, 2016-2024 timeline
+- Series: Med (STIG, Europeans, Trinity Racing, Giraglia vs TP52), UK (Flying Jenny, Katabatic, Cowes quintuple), US (Pacific Yankee), SA/AUS/HK cards
+- Rules: Class Rules, Constitution, Measurement, Technical Decisions TD-001/002/003, IRC/ORC, NOR, Protest
+- Governance: ExCom structure, 6 circuits, committee cards, AGM/Measurement/New Fleet links
+- div balance: 607/607 perfect. File size: 136,298 bytes
+
+**Push status: PENDING — cape31one-sudo PAT needed**
+**Knox PAT (lance505504-tech): working as of 2026-04-05 — stored securely, do not log**
+
+**Session fixes:**
+- "Talk to Dave" nav → "Buy a C31"
+- Tor removed from UK committee
+- Edge duplicate download issue: delete old files before downloading fresh
+
+**Next session:**
+1. cape31one-sudo PAT to push both files
+2. Confirm repo names under cape31one-sudo for UK and International sites
+3. Verify live sites after push
+4. AUS site push still pending from previous session
+5. Consider adding official notices section to UK if #news not sufficient
