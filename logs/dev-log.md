@@ -73,3 +73,52 @@
 - Delete 3 failed Azure deployments (Skandi, D, FR)
 - Delete 4 working Azure regional sites once Cloudflare Pages versions are live and tested
 - Confirm subdomain structure for all new regions
+---
+## 2026-04-05 — Cape31 Website Build + Knox Protocol Overhaul
+
+**Worked on:** Full Cape31 website build session across six regional sites. Knox session protocol redesigned from script-based to direct GitHub API push.
+
+**Completed:**
+- UK site: Katabatic race record, Dave Swete credential block, Cowes 2025 quintuple, correct founding fleet history (Mike Bartholomew / Tokoloshe / sold to Russell Peters as Squirt / new Tokoloshe / Katabatic / Jiraffe / Gallivanter)
+- UK site: Tor Tomlinson-Cheney role corrected to International Class Secretary (non-voting). Dave Swete added as Circuit Director (non-voting ExCom)
+- International site: US vs AUS one-design challenge tracker with America's Cup 1983 narrative
+- SA site: Canadian flag emoji removed, correct SA flag CSS stripe added
+- Med + US sites: National flag CSS stripes added
+- HK site: Built from scratch — Where Dragons Race / 龍爭虎鬥, 888 cultural bar, fleet table, RHKYC venues, dragon culture section
+- All regional sites: All Regions button moved from bottom left to bottom right
+- All six sites pushed directly to GitHub via API (cape31one-sudo account) — all confirmed with commit SHAs
+- Knox CLAUDE_SESSION.md rewritten with robust PAT-in-session protocol
+- Knox user instruction manual written and pushed to docs/HOW-TO-USE-KNOX.md
+- Identified two GitHub accounts: lance505504-tech (Knox) and cape31one-sudo (Cape31 sites)
+
+**Decisions:**
+- Ireland and New Zealand sites on hold — fleets not currently active enough
+- HK hero confirmed: Where Dragons Race. / 龍爭虎鬥。
+- AUS hero confirmed: Dare to Win. The Whitsundays.
+- No names for TP52 owner in Cowes 2025 copy (Dave Swete advice)
+- Knox protocol: PAT pasted at session start, Claude pushes directly, no scripts
+- Knox PAT: lance505504-tech account. Cape31 PAT: cape31one-sudo account
+
+**Research confirmed:**
+- Katabatic: Queen's Cup 2024 (RSYC confirmed in writing), IRC Class 1 Overall 2024 Cowes
+- Cowes 2025 quintuple: Britannia Cup (Flying Jenny), NYYC Challenge Cup (Bullitt), Queen's Cup — all beating professional TP52
+- Giraglia 2025: Cape31s beat all TP52s in IRC1 inshore (Giornale della Vela)
+- Dave Swete: Fastnet 2021 overall winner on Sunrise (Tom Kneen) — only pro on board
+- Easter Challenge 2023: Corby 36 Oui — separate boat unrelated to Cape31 programme
+- Founding fleet order: Tokoloshe (Mike Bartholomew) → sold to Russell Peters as Squirt → new Tokoloshe ordered → Katabatic (Lance Adams) → Jiraffe (Simon Perry) → Gallivanter
+
+**Awaiting:**
+- AUS site: Push to Cape31-Aus-website (repo exists, file built)
+- SA domain validation still pending in Azure
+- Confirm second Cowes 2024 Katabatic trophy
+- Confirm HK floating dock detail with fleet
+- ExCom approval before public announcement
+- CMS integration with Tom at TTC Marine
+- Knox PAT renewal before expiry (check date)
+
+**Next:**
+- Push AUS site to Cape31-Aus-website
+- Set up aus.cape31class.org DNS CNAME in Cloudflare
+- Review international site on Android (reported rendering issues)
+- Expand Med site with European ORC/IRC market (French/German language elements)
+- Add offshore/IRC racing section to UK site (Malta, Middle Sea Race angle)
