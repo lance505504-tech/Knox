@@ -122,3 +122,28 @@
 - Review international site on Android (reported rendering issues)
 - Expand Med site with European ORC/IRC market (French/German language elements)
 - Add offshore/IRC racing section to UK site (Malta, Middle Sea Race angle)
+---
+## 2026-04-05 — Cape31 UK v2 + International v3 rebuilt and delivered
+**Worked on:** Two Cape31 site files rebuilt from live Azure staging URLs and dev-log context.
+
+**Completed:**
+- Cape31-UK-v2.html: Dave Swete prominence reduced from 58 to exactly 6 references
+  - Removed: ticker, hero subtitle, hero tag, origin blurb, dedicated credential block (CV table, Fastnet story, What he brings panel), Talk to Dave Swete CTA, join section sub, join button, join footer micro, footer blurb
+  - Kept: hero tag (Circuit Director title only), founding history mention, quote block attribution, circuit section single line, governance table entry, footer link to swetesailing.com
+- Cape31-International-v3.html: Two new sections added to existing live file
+  - Story section (id=story): Angelo Lavranos design origin, Cape Doctor context, 2016-2026 founding timeline (SA→UK→Med→US→AUS/HK→future), one-design purity/IRC/offshore panels
+  - Governance section (id=governance): ExCom structure, regional authority explanation, committee cards (Lance Adams Chair, Tor Tomlinson-Cheney Intl Secretary non-voting, Andy Wibroe Technical Officer non-voting, Dave Swete Circuit Director UK non-voting), Class Rules/Measurement/New Fleet document links
+  - Both sections linked in desktop and mobile nav
+- push-cape31-sites.ps1: one-click PowerShell script to push both files to cape31one-sudo repos
+- Files delivered for manual download — cape31one-sudo PAT not available this session
+
+**Decisions:**
+- Knox PAT (lance505504-tech) used for Knox only — cannot push to cape31one-sudo repos
+- User will download HTML files and run push-cape31-sites.ps1 with cape31one-sudo PAT
+- File naming: Cape31-UK-v2.html → index.html, Cape31-International-v3.html → index.html
+
+**Next:**
+- User to run push-cape31-sites.ps1 with cape31one-sudo PAT
+- Verify UK live site: https://orange-stone-046c62f03.4.azurestaticapps.net
+- Verify International live site: https://wonderful-beach-0c8107703.6.azurestaticapps.net
+- Delete HTML files and script from C:\ immediately after push
