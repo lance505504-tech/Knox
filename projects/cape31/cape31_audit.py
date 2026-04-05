@@ -130,7 +130,7 @@ acceptable = {'nav-av','nav-lbl','tab-admin','tab-sailbuttons','tab-payments',
               'sb-fleet','sb-register','sb-mine','sb-settings','fleet-grid',
               'q-fleet','f-yr','fleet-note','tab-mine','tab-settings',
               'rpw-val','rpw-err','rpw-for','boat-ov-title','fleet-body-sb',
-              'panel-sailbuttons','s-alloc','s-yr','sync-bar-inline','btn-race-mgmt','btn-add-regatta','reg-region','bm-contact-name','bm-address','bm-mobile','bm-phone','bm-emerg-name','bm-emerg-phone','bm-insurer','bm-policy','bm-ins-contact','bm-ins-phone','bm-ins-start','bm-ins-expiry','bm-ins-notes','bm-ins-status','bm-ins-status-row','um-boat','um-positions','um-boats','sp-stats','sponsors-grid','sp-panel-list','sp-panel-benefits','sp-panel-hospitality','sp-panel-manage','sp-benefits-content','sp-hosp-content','sp-manage-list','sp-tab-benefits','sp-tab-hosp','sp-tab-manage','sp-name','sp-type','sp-level','sp-website','sp-contact-name','sp-contact-email','sp-start','sp-end','sp-notes','sp-benefit-logo','sp-benefit-media','sp-benefit-reports','sp-benefit-hosp','sp-benefit-visits','sp-benefit-other','sp-media-url','sp-highlights-url','sp-logo-url','sp-photos-url','sp-media-notes','sp-err','sp-modal-title','sp-modal-details','sp-modal-benefits','sp-modal-media','enq-err','enq-msg','enq-type','enq-name','enq-email'}
+              'panel-sailbuttons','s-alloc','s-yr','sync-bar-inline'}
 real_missing = {e for e in (js_id_refs - html_ids - acceptable)
                 if not any(c in e for c in ['+','$','{'])}
 if real_missing:
@@ -149,7 +149,7 @@ required_els = [
     'fee-confirm-ov','fee-confirm-title','fee-confirm-year',
     'fee-confirm-boat','fee-confirm-amount','fee-confirm-method',
     'fee-confirm-ref','fee-confirm-notes','fee-confirm-btn-row',
-    'enquiry-ov','enq-name','enq-email','enq-type','enq-msg','enq-err','gate-config-body','region-gates-section','rm-messaging','rm-buttons-req','rm-handicap','rm-int-fee-req','meas-stats','meas-panel-rules','meas-rules-list','meas-panel-docs','meas-docs-list','meas-panel-qa','meas-qa-list','meas-panel-manage','meas-manage-list','meas-tab-manage','meas-qa-search','meas-qa-cat','meas-doc-ov','meas-doc-title','meas-doc-type','meas-doc-name','meas-doc-url','meas-doc-date','meas-doc-size','meas-doc-notes','meas-doc-err','meas-qa-ov','meas-qa-title','meas-qa-cat-sel','meas-qa-q','meas-qa-a','meas-qa-by','meas-qa-date','meas-qa-err','clubs-list','clubs-stats','clubs-admin-view','clubs-user-view','club-events-list','club-ov','club-ov-title','club-user-ov','club-user-ov-title','cl-name','cl-location','cl-contact','cl-region','cl-notes','cl-err','cu-name','cu-email','cu-pw','cu-club-id','cu-err','btn-add-club','rm-club','cpw-ov','cpw-for-label','cpw-uid','cpw-current-row','cpw-current','cpw-new2','cpw-conf2','cpw-err2','account-card','account-bio-status','btn-register-bio','btn-remove-bio','btn-biometric','forgot-pw-msg',
+    'enquiry-ov','enq-name','enq-email','enq-type','enq-msg','enq-err',
     'ov-regatta','rm-name','rm-start','rm-end','rm-venue','rm-year',
     'ov-user','um-role','toast-wrap',
     'fleet-body','fees-body','fees-summary','regatta-list',
@@ -165,7 +165,7 @@ else:
 
 # ── 6. SECTION SCREENS ────────────────────────────────────────────────────────
 print("\n═══ 6. SECTION SCREENS ══════════════════════════════════")
-screens = ['regattas','entries','results','fleet','fees','racing','admin','payments','sailbuttons','sponsors','certs']
+screens = ['regattas','entries','results','fleet','fees','racing','admin','payments','sailbuttons']
 missing_screens = []
 for s in screens:
     has = f'id="screen-{s}"' in raw or f'id="sect-{s}"' in raw
