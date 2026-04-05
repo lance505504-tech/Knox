@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cape 31 International Class Association</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#042C53;--blue:#185FA5;--blue-lt:#ddeaf8;
+  --g50:#F8F7F4;--g100:#EEECEA;--g200:#D3D1C7;--muted:#5F5E5A;
+  --text:#1A1A18;--surf:#fff;--red:#A32D2D;--red-lt:#FCEBEB;
+  --teal:#1D9E75;--amber:#BA7517;--amber-lt:#FAEEDA;
+  --bdr:rgba(0,0,0,.10);--bdr2:rgba(0,0,0,.18);
+  --r8:8px;--r12:12px;
+  --font:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;
+}
+body{font-family:var(--font);background:var(--navy);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
+.card{background:var(--surf);border-radius:var(--r12);padding:36px 32px;width:100%;max-width:400px;box-shadow:0 24px 64px rgba(0,0,0,.4)}
+.logo{display:flex;align-items:center;gap:14px;margin-bottom:26px}
+.logo img{height:48px;width:auto}
+.logo-fb{width:48px;height:48px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#fff;flex-shrink:0}
+.logo-text h1{font-size:20px;font-weight:700;color:var(--navy)}
+.logo-text p{font-size:12px;color:var(--muted)}
+h2{font-size:17px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.sub{font-size:13px;color:var(--muted);margin-bottom:22px;line-height:1.5}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
+.field input{width:100%;padding:9px 11px;border:1px solid var(--bdr2);border-radius:var(--r8);font-size:14px;background:var(--surf);color:var(--text);outline:none;transition:border-color .15s;font-family:var(--font)}
+.field input:focus{border-color:var(--blue)}
+.btn{display:block;width:100%;padding:11px;border-radius:var(--r8);border:none;font-size:14px;font-weight:600;cursor:pointer;transition:all .15s;text-align:center}
+.btn-primary{background:var(--blue);color:#fff}.btn-primary:hover{background:var(--navy)}
+.err{font-size:12px;color:var(--red);padding:8px 11px;background:var(--red-lt);border-radius:var(--r8);margin-bottom:12px;display:none}
+.err.show{display:block}
+.links{margin-top:14px;text-align:center;font-size:12px;color:var(--muted);line-height:1.8}
+.links a{color:var(--blue);cursor:pointer;text-decoration:underline}
+.apps{margin-top:24px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.app-btn{padding:8px 16px;border-radius:var(--r8);border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.1);color:#fff;font-size:13px;font-weight:600;text-decoration:none;transition:background .15s}
+.app-btn:hover{background:rgba(255,255,255,.2)}
+.reset{margin-top:16px;text-align:center;font-size:11px}
+.reset a{color:rgba(255,255,255,.5);cursor:pointer;text-decoration:underline}
+.reset a:hover{color:rgba(255,255,255,.8)}
+/* Request access modal */
+.overlay{display:none;position:fixed;inset:0;background:rgba(4,44,83,.55);z-index:99;align-items:center;justify-content:center;padding:20px}
+.overlay.open{display:flex}
+.modal{background:var(--surf);border-radius:var(--r12);padding:24px;width:100%;max-width:400px;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.modal h2{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.modal .sub{font-size:12px;color:var(--muted);margin-bottom:16px}
+.callout{padding:10px 13px;border-radius:var(--r8);font-size:12px;line-height:1.6;margin-bottom:14px;background:var(--blue-lt);border-left:3px solid var(--blue)}
+.mft{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}
+.btn-sm{padding:7px 14px;border-radius:var(--r8);border:none;font-size:13px;font-weight:600;cursor:pointer}
+.btn-ghost{background:var(--g100);color:var(--muted)}.btn-ghost:hover{background:var(--g200)}
+</style>
+</head>
+<body>
+
+<div class="card" style="text-align:center">
+  <div class="logo" style="justify-content:center;margin-bottom:30px">
+    <img src="https://s3.eu-west-2.amazonaws.com/cms.cape31class.com/public/static/core/c31-logo.svg" alt="Cape 31"
+         onerror="this.style.display='none'" style="height:60px;width:auto">
+  </div>
+  <h1 style="font-size:20px;font-weight:700;color:var(--navy);margin-bottom:6px">Cape 31 International Class Association</h1>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:30px">Select a system to continue</p>
+  <a href="cape31-sail-register.html" class="btn btn-primary" style="display:block;margin-bottom:12px;text-decoration:none;padding:12px">
+    ⛵ IHC Sail Button Register
+  </a>
+  <a href="cape31-class-management.html" class="btn btn-primary" style="display:block;text-decoration:none;padding:12px;background:var(--navy)">
+    📋 Class Management System
+  </a>
+</div>
+
+
+
+<div class="reset">
+  <a onclick="clearSession()">Having trouble? Click here to reset</a>
+</div>
+
+<!-- Request access modal -->
+<div class="overlay" id="reg-ov">
+  <div class="modal">
+    <h2>Request access</h2>
+    <p class="sub">Your request will be emailed to the Executive Committee for approval.</p>
+    <div class="callout" id="reg-excom">Loading contacts...</div>
+    <div class="field"><label>Full name</label><input id="rn" placeholder="Your full name"></div>
+    <div class="field"><label>Email</label><input type="email" id="re" placeholder="your@email.com"></div>
+    <div class="field"><label>Password you would like</label><input type="password" id="rp" placeholder="Min 6 characters"></div>
+    <div class="field"><label>Your boat</label><input id="rb" placeholder="Hull number, name or sail number"></div>
+    <div class="err" id="reg-err"></div>
+    <div class="mft">
+      <button class="btn-sm btn-ghost" onclick="document.getElementById('reg-ov').classList.remove('open')">Cancel</button>
+      <button class="btn-sm btn-primary" onclick="submitReg()" style="background:var(--blue);color:#fff">Send request</button>
+    </div>
+  </div>
+</div>
+
+<script>
+'use strict';
+var SESSION_KEY = 'cape31_session_v1';
+var USK         = 'cape31_users_v1';
+
+// -- Seed admins always available even before any app has run --
+var SEED_USERS = [
+  { id:'u0',  name:'Lance Adams', email:'[email — secure store]', pw:'[password — secure store]', role:'admin', boatId:'b49', approved:true },
+  { id:'u00', name:'Dave Swete',  email:'[email — secure store]',   pw:'[password — secure store]', role:'admin', boatId:null,  approved:true }
+];
+
+function getAllUsers() {
+  var users = SEED_USERS.slice();
+  try {
+    var raw = localStorage.getItem(USK);
+    if (raw) {
+      var parsed = JSON.parse(raw);
+      if (parsed && Array.isArray(parsed.users)) {
+        parsed.users.forEach(function(u) {
+          if (!users.find(function(x) { return x.id === u.id; })) {
+            users.push(u);
+          }
+        });
+        // Also get pending
+        if (Array.isArray(parsed.pending)) {
+          window._pending = parsed.pending;
+        }
+      }
+    }
+  } catch(e) {}
+  return users;
+}
+
+function getReturnUrl() {
+  // Check if we were redirected here from a specific app
+  var params = new URLSearchParams(window.location.search);
+  return params.get('from') || null;
+}
+
+function doLogin() {
+  var em  = document.getElementById('li-em').value.trim().toLowerCase();
+  var pw  = document.getElementById('li-pw').value;
+  var err = document.getElementById('li-err');
+  err.classList.remove('show');
+
+  var users = getAllUsers();
+  var u = users.find(function(u) {
+    return u.email.toLowerCase() === em && u.pw === pw && u.approved !== false;
+  });
+
+  if (!u) { err.classList.add('show'); return; }
+
+  // Write session
+  var session = {
+    userId:  u.id,
+    email:   u.email,
+    name:    u.name,
+    role:    u.role,
+    boatId:  u.boatId || null,
+    ts:      Date.now()
+  };
+  try { localStorage.setItem(SESSION_KEY, JSON.stringify(session)); } catch(e) {}
+
+  // Redirect back to originating app, or show app links
+  var returnUrl = getReturnUrl();
+  if (returnUrl) {
+    window.location.href = returnUrl;
+  } else {
+    document.querySelector('.card').style.display = 'none';
+    document.getElementById('app-links').style.display = 'flex';
+    document.querySelector('.reset').style.display = 'none';
+  }
+}
+
+function clearSession() {
+  if (!confirm('This clears your saved login and resets to default admin credentials.\n\nContinue?')) return;
+  try { localStorage.removeItem(SESSION_KEY); } catch(e) {}
+  document.getElementById('li-em').value = '';
+  document.getElementById('li-pw').value = '';
+  document.getElementById('li-err').classList.remove('show');
+  alert('Session cleared. You can now sign in fresh.');
+}
+
+// Request access
+function submitReg() {
+  var n   = document.getElementById('rn').value.trim();
+  var e   = document.getElementById('re').value.trim();
+  var p   = document.getElementById('rp').value;
+  var b   = document.getElementById('rb').value.trim();
+  var err = document.getElementById('reg-err');
+  err.classList.remove('show');
+  if (!n || !e || !p) { err.textContent = 'All fields are required.'; err.classList.add('show'); return; }
+  if (p.length < 6)   { err.textContent = 'Password must be 6+ characters.'; err.classList.add('show'); return; }
+
+  // Check not already registered
+  var users = getAllUsers();
+  if (users.find(function(u) { return u.email.toLowerCase() === e.toLowerCase(); })) {
+    err.textContent = 'That email is already registered.'; err.classList.add('show'); return;
+  }
+
+  // Save pending request to shared store
+  var req = { id: 'u' + Date.now().toString(36), name:n, email:e, pw:p, role:'owner', boatId:null, boatNote:b, approved:false };
+  try {
+    var raw = localStorage.getItem(USK);
+    var store = raw ? JSON.parse(raw) : { users:[], pending:[] };
+    if (!store.pending) store.pending = [];
+    store.pending.push(req);
+    localStorage.setItem(USK, JSON.stringify(store));
+  } catch(e2) {}
+
+  // Email ExCom
+  try {
+    var raw2 = localStorage.getItem(USK);
+    var excom = [];
+    if (raw2) {
+      var s2 = JSON.parse(raw2);
+      // Try to get excom from sail register state
+      var srRaw = localStorage.getItem('cape31_buttons_v3');
+      if (srRaw) {
+        var sr = JSON.parse(srRaw);
+        if (sr && sr.settings && sr.settings.excom) excom = sr.settings.excom;
+      }
+    }
+    var to   = excom.map(function(m){ return m.email; }).join(',') || '[excom-emails — secure store]';
+    var subj = encodeURIComponent('Cape 31 Class — Access request: ' + n);
+    var body = encodeURIComponent('New access request:\n\nName: ' + n + '\nEmail: ' + e + '\nBoat: ' + (b||'Not specified') +
+      '\n\nLog in to the class system and go to Settings → Owner accounts to approve.\n\n— Cape 31 Class System');
+    window.location.href = 'mailto:' + to + '?subject=' + subj + '&body=' + body;
+  } catch(e3) {}
+
+  document.getElementById('reg-ov').classList.remove('open');
+  alert('Request sent! The ExCom will review and approve your account. You will receive your login details directly.');
+}
+
+// Show ExCom contacts in request modal
+(function() {
+  try {
+    var srRaw = localStorage.getItem('cape31_buttons_v3');
+    if (srRaw) {
+      var sr = JSON.parse(srRaw);
+      if (sr && sr.settings && sr.settings.excom && sr.settings.excom.length) {
+        var el = document.getElementById('reg-excom');
+        el.innerHTML = '<strong>Executive Committee:</strong> ' +
+          sr.settings.excom.map(function(m) {
+            return m.name + ' (<a href="mailto:' + m.email + '" style="color:var(--blue)">' + m.email + '</a>)';
+          }).join(', ');
+      }
+    }
+  } catch(e) {}
+})();
+
+// If already logged in, skip straight to apps
+(function() {
+  try {
+    var raw = localStorage.getItem(SESSION_KEY);
+    if (raw) {
+      var session = JSON.parse(raw);
+      // Session valid for 30 days
+      if (session && session.ts && (Date.now() - session.ts) < 30 * 24 * 60 * 60 * 1000) {
+        var returnUrl = getReturnUrl();
+        if (returnUrl) {
+          window.location.href = returnUrl;
+        } else {
+          document.querySelector('.card').style.display = 'none';
+          document.getElementById('app-links').style.display = 'flex';
+          document.querySelector('.reset').style.display = 'none';
+          // Show welcome message
+          var welcome = document.createElement('div');
+          welcome.style.cssText = 'color:#fff;text-align:center;margin-bottom:14px;font-size:14px';
+          welcome.innerHTML = 'Signed in as <strong>' + session.name + '</strong> &nbsp; &middot; &nbsp; <a href="#" onclick="signOut()" style="color:rgba(255,255,255,.7)">Sign out</a>';
+          document.body.insertBefore(welcome, document.getElementById('app-links'));
+        }
+      }
+    }
+  } catch(e) {}
+})();
+
+function signOut() {
+  try { localStorage.removeItem(SESSION_KEY); } catch(e) {}
+  window.location.reload();
+}
+</script>
+</body>
+</html>
