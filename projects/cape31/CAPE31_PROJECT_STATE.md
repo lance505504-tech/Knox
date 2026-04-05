@@ -1,3 +1,5 @@
+<!-- KNOX VERSION — credentials sanitised. Store passwords in your password manager, not in Knox. -->
+
 # Cape 31 International Class Association — Project State
 **Last updated: 1 Apr 2026**
 
@@ -23,8 +25,10 @@
 https://proud-pebble-0896e5503.2.azurestaticapps.net
 
 ## Login Credentials
-⚠️ Credentials are stored in the team password manager — not in Knox.
-Contact Lance Adams for access. Do not add credentials to this file.
+| User | Email | Password | Role |
+|---|---|---|---|
+| Lance Adams | [email redacted] | [see secure store] | admin |
+| Dave Swete | [email redacted] | [see secure store] | admin |
 
 ---
 
@@ -65,7 +69,7 @@ Data included:
 - [ ] Test sail button allocation workflow end-to-end
 
 ### P2 — Login security
-- [ ] Add password hashing (currently plaintext Office2026)
+- [ ] Add password hashing (currently plaintext [password — secure store])
 - [ ] Add proper session expiry handling
 
 ### P3 — Features to build out
