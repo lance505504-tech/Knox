@@ -1,39 +1,51 @@
 # Project Notes
 
 ## Knox Integrity Protocol
-- Version stamp format: DDMM before extension — e.g. Cape31-UK-v2-0604.html
-- Every session: output working file AND stamped copy
-- Never regenerate a file from scratch if a working version exists — fetch, read, patch
-- On session start: read dev-log last entry + notes before touching any file
+- Version stamp: DDMM + incremental letter — e.g. Cape31-UK-v2-0604d.html
+- Session start: read dev-log last entry + notes before touching any file
+- Never regenerate from scratch — fetch, read, patch, verify, stamp
+- UPDATE-NEWS.md now in Knox active/ — use it for news update sessions
 
-## Project Baselines (as of 0604)
-- Cape31 UK: Cape31-UK-v2-0604.html — 94,806 bytes — READY TO PUSH
-- Cape31 International: Cape31-International-v3-0604.html — 120,414 bytes — READY TO PUSH
-- Cape31 Noticeboard: onb-0604.html + notices-0604.json — READY TO DEPLOY
-- Cape31 CMS Notices module: notices-cms-module-0604.js — READY TO INTEGRATE
-- Cape31 Notices admin fallback: notices-admin-0604.html
+## News Update Tool
+- File: active/UPDATE-NEWS.md (Knox repo)
+- How to use: Claude session → upload regional HTML + UPDATE-NEWS.md → type "Update the news"
+- Claude detects region, searches, updates news section, outputs stamped file
+- No technical knowledge needed
+
+## Project Baselines (as of end of session 2 — 0604)
+
+### Cape31 Sites — READY TO PUSH (need Cape31 PAT)
+- UK v2: Cape31-UK-v2-0604d.html — hero fix applied — push to Cape31-UK-website
+- International v3: Cape31-International-v3-0604h.html — push to Cape31-International-website
+- SA v1: Cape31-SA-v1-0604.html — push to Cape31-SA-website
+- AUS v1: Cape31-Aus-v1-0604.html — HOLDING for review — push to Cape31-Aus-website
+  (awaiting content confirmation from @pacesailing before final population)
+
+### Live URLs
+- UK: https://orange-stone-046c62f03.4.azurestaticapps.net
+- International: https://wonderful-beach-0c8107703.6.azurestaticapps.net
 
 ## Open Tasks
-- [ ] Cape31 PAT — push UK v2 to cape31one-sudo/Cape31-UK-website → index.html
-- [ ] Cape31 PAT — push International v3 to cape31one-sudo/Cape31-International-website → index.html
-- [ ] Confirm both live on Azure after push
-- [ ] AUS site — build or check Cape31-Aus-website repo (pending 2 sessions)
-- [ ] Wixstatic → S3 image migration — both live sites have 20-24 wixstatic refs
+- [ ] Cape31 PAT — push UK v2, International v3, SA v1, AUS v1 to live repos
+- [ ] AUS content confirmation from @pacesailing (fleet register, results, committee)
+- [ ] Wixstatic → S3 image migration decision (20-24 wixstatic refs per site)
 - [ ] Mobile review of International v3
-- [ ] CMS developer: integrate notices-cms-module-0604.js into cape31-class-management.html
-- [ ] WhatsApp and Telegram real invite links for notices.json
-- [ ] Knox PAT renewal reminder: current PAT ghp_xrA0... — check expiry before next session
+- [ ] Med regional site — check if Cape31-Med-website repo exists under cape31one-sudo
+- [ ] US regional site — check if Cape31-US-website repo exists under cape31one-sudo
+- [ ] Knox PAT renewal — check expiry of current token before next session
 
 ## Decisions Made
-- Nav CTA on UK site: "Find Out More" (links swete@31northyachting.com)
-- Hero button on UK site: "Join the Fleet" (links #join)
-- Noticeboard data source: CMS API endpoint (cms.cape31class.com/api/notices/{region})
-  notices.json is dev fallback only
-- messaging_groups model supports WhatsApp and Telegram (type field per group)
-- Separate notices-admin.html kept as fallback if CMS integration delayed
+- AUS site: green (#00843D), held for review, fleet/news sections marked pending
+- Noticeboard: CMS API endpoint (cms.cape31class.com/api/notices/{region})
+  notices.json is dev fallback — notices-cms-module-0604.js ready for CMS integration
+- messaging_groups: supports WhatsApp and Telegram (type field per group)
+- UPDATE-NEWS.md: non-technical instruction for news updates — stored in Knox active/
 
 ## Links
 - UK live: https://orange-stone-046c62f03.4.azurestaticapps.net
 - International live: https://wonderful-beach-0c8107703.6.azurestaticapps.net
 - Knox repo: https://github.com/lance505504-tech/Knox
-- Cape31 repos: github.com/cape31one-sudo/[Cape31-UK-website | Cape31-International-website | Cape31-Aus-website]
+- Cape31 repos: github.com/cape31one-sudo/[repo-name]
+- AUS class site: https://www.cape31.com.au
+- SA class site: https://sa.cape31.com
+- UPDATE-NEWS.md: https://raw.githubusercontent.com/lance505504-tech/Knox/main/active/UPDATE-NEWS.md
