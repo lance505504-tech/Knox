@@ -356,3 +356,104 @@ notices-admin.html (notices-admin-0604.html):
 Before changing any Cape31 site file: ask user to upload the 0604-stamped version
 or fetch it from the repo. Do not rebuild from memory. The 0604 files are the
 authoritative baseline for the next session.
+---
+## 2026-04-06 — Session 2: International v3 content build + SA/AUS regional sites + Knox tools
+
+### KNOX DATA INTEGRITY PROTOCOL (updated)
+- Version stamp format: DDMM before extension — Cape31-UK-v2-0604.html
+- Incremental stamps within session: 0604b, 0604c... 0604h
+- Every file produced: working name + stamped copy
+- Never regenerate from scratch — fetch, read, patch, verify
+- On session start: read dev-log + notes before touching any file
+- UPDATE-NEWS.md now in Knox active/ — fetch it for news update sessions
+
+---
+
+### Session work
+
+**International v3 — series of fixes (0604b through 0604h)**
+
+Content additions:
+- SA, AUS, HK, IRL series sections rebuilt as individual full-width rows matching
+  Med/UK/US format — no longer combined grid
+- SA: real Cape Doctor Editions 25/26 data — Nitro champion (Mike Hayton/Dave Rae,
+  9.0 nett), TNT 2nd, Vulcan 3rd, 8 boats, 8 events, Royal Cape YC + V&A Waterfront
+- AUS, HK, IRL: each a proper full-width showcase with three stat cards + paragraph
+- IRL: added for first time to series section
+- Boat section: performance/experience section added (upwind/downwind copy, four stat
+  panels: 25+ knots, 7 crew, 40ft container, 6 continents)
+- Join/Buy section added (two-col: Buy a C31 with 31 North + Cape Performance contacts;
+  Start a Fleet with ExCom contact and what class provides)
+- Regattas: expanded from 6 to 12 events including full Med circuit (Porto Cervo,
+  Scarlino, Bonifacio, Puntaldia, TBC Round 5); Princesa Sofia marked complete/green
+  with Trinity Racing result
+- Video section: 4 video cards (was 3), Hamilton Island and Med Circuit added
+- Series section: CTA bar added (Enter a Regatta, View All Boats, Photo Gallery)
+- Rules bottom panels: expanded from one-line summaries to full paragraphs
+- Governance bottom panels: AGM, Measurement, New Fleet all expanded with process detail
+- All CF emails decoded throughout file — 15 obfuscated addresses fixed
+- Mark Mills corrected throughout — Angelo Lavranos (wrong person) removed
+- IntersectionObserver added — was missing, causing all .fi elements to stay invisible
+- Hero bleed-through fixed: hov gradient fully opaque at bottom, solid black base,
+  hcms-bar raised 20px from hero bottom edge
+- Nav wrapping fixed: white-space:nowrap, font/spacing reduced
+- Footer truncation fixed twice — file was cutting short
+- Div balance: 761/761 final
+
+File baseline: Cape31-International-v3-0604h.html — 148,028 bytes
+
+**Cape31-SA-v1 update (Cape31-SA-v1-0604.html)**
+- Cape Doctor Editions 25/26 full results table added to series section:
+  Nitro champion 9.0 nett, TNT 22.0, Vulcan 23.0, Stella Maris 25.0, 008/Bjorn Geiger 30.0
+- Fleet table updated with real data: 9 boats with correct hull numbers (1,3,6,8,11,13,25,65,81)
+  and real owner names — no more placeholders
+- All CF emails decoded
+- Footer truncation fixed, IntersectionObserver added
+- File: 46,706 bytes — push to cape31one-sudo/Cape31-SA-website as index.html
+
+**Cape31-Aus-v1 build (Cape31-Aus-v1-0604.html)**
+- New file built for review — no confirmed fleet/results data yet
+- Sections: Hero, About, Racing, Fleet, News, Contact, Footer
+- Real data used throughout: @pacesailing t/a Cape31 Australia, info@cape31.com.au,
+  0431 222 121, Double Bay NSW, @cape31aus, Hamilton Island Race Week, NSW/QLD/SA/WA
+- Fleet and news sections clearly marked with gold review banners — not placeholder invented data
+- Australian green colour scheme (#00843D) to differentiate from other regions
+- Div balance: 137/137, CF clean, IntersectionObserver included
+- File: 36,113 bytes — push to cape31one-sudo/Cape31-Aus-website as index.html
+  for review pending agreement from @pacesailing on fleet register and content
+
+**UPDATE-NEWS.md — news update instruction set**
+- Non-technical instruction file pushed to Knox active/UPDATE-NEWS.md
+- How to use: start new Claude session, upload regional HTML + UPDATE-NEWS.md,
+  type "Update the news" — Claude detects region, searches sources, updates news section,
+  outputs date-stamped file ready to upload
+- Covers all regions with region-specific search sources
+- Push instructions included in plain English for non-technical users
+- Knox commit: a3a66e239d
+
+**UK v2 fixes (Cape31-UK-v2-0604d.html)**
+- IntersectionObserver added — hero text was invisible due to missing .vis trigger
+- Duplicate CF decode script removed
+- File: 95,026 bytes — confirmed working, hero visible
+
+**Files produced this session (stamped)**
+- Cape31-International-v3-0604b through 0604h (h is current)
+- Cape31-SA-v1-0604.html
+- Cape31-Aus-v1-0604.html
+- Cape31-UK-v2-0604d.html
+- UPDATE-NEWS.md (Knox active/)
+
+**Awaiting**
+- Cape31 PAT to push: UK v2 → Cape31-UK-website, International v3 → Cape31-International-website,
+  SA → Cape31-SA-website, AUS → Cape31-Aus-website
+- @pacesailing confirmation on AUS fleet register and content before populating AUS site
+- AUS site build agreement with more data
+- Wixstatic → S3 image migration decision
+- Mobile review of International v3
+
+**Next session**
+1. Cape31 PAT — push all four sites
+2. AUS content confirmation from @pacesailing
+3. Wixstatic → S3 decision
+4. Mobile review International v3
+5. Med and US regional sites (if files exist under cape31one-sudo)
