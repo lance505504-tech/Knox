@@ -172,3 +172,16 @@ Knox is Lances-Team's development workspace. It manages procedures, references, 
 Knox was set up on 2026-04-04. It is actively used across multiple simultaneous sessions. The fetch-then-append pattern for dev-log exists to prevent simultaneous sessions overwriting each other.
 
 Personal data is never stored in Knox — it goes in private repositories.
+## News Update Tool
+
+To update news on a Cape31 regional website, fetch this file from Knox at the start of a session:
+
+```
+https://raw.githubusercontent.com/lance505504-tech/Knox/main/active/UPDATE-NEWS.md
+```
+
+Then tell Claude: upload the regional HTML file alongside it and say "Update the news".
+Claude will detect the region, search for recent results, update the news section,
+and output a date-stamped file ready to upload to GitHub.
+
+No technical knowledge required. Works for: UK, International, SA, AUS, Med, US, HK, IRL.
