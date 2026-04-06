@@ -457,3 +457,43 @@ File baseline: Cape31-International-v3-0604h.html — 148,028 bytes
 3. Wixstatic → S3 decision
 4. Mobile review International v3
 5. Med and US regional sites (if files exist under cape31one-sudo)
+
+---
+## 2026-04-06 — Session 3: Cape31 Media Manager (CMM) built and configured
+
+**Worked on:** CMM system — full design, build and live configuration across all 8 regions.
+
+**Completed:**
+- CMM (cape31-media-manager.html): committee tool with 5 tabs — News, Video, Gallery, Approvals, Users
+- Community upload page (community-upload.html): Google sign-in, 2 slots per event, Cloudinary upload, copyright agreement, submission history, replace flow
+- content.json: regional content schema template
+- cape31-content-loader.js: drop-in script for regional index.html files — renders news, gallery (with lightbox), video
+- supabase-setup.sql: database schema run and confirmed working
+- All 10 config values collected and baked into both HTML files
+- CMM tested locally — login working, tabs loading
+
+**Services configured:**
+- Cloudinary: cloud=doi89o1gf, preset=cape31-media
+- Supabase: vlcnqmkrardcismsdnxh — tables community_users + pending_submissions created
+- Google OAuth: client ID created, UK + International + localhost origins added
+- EmailJS: service_0us6iod, template_5j6exlb, cape31one@gmail.com recipient
+- GitHub PAT: cape31one-sudo account, repo scope, 1 year
+
+**Decisions:**
+- CMM runs locally for now (GitHub Pages requires public repo which exposes credentials)
+- Community upload page to be added to each regional repo alongside content.json
+- content-loader.js replaces hardcoded news/gallery/video HTML in each index.html
+- Google OAuth origins: Med and SA/ZA URLs to be added once Azure URLs confirmed
+
+**Awaiting:**
+- content.json added to each regional repo
+- cape31-content-loader.js added to each regional index.html
+- Med and SA/ZA Azure URLs for Google OAuth origins
+- Aus, HK, IRL, US OAuth origins once those sites are live
+- Reset uploads_this_event in Supabase at start of each new event
+
+**Next:**
+- Add content.json + content-loader.js to UK and International repos
+- Test full flow: CMM adds news → content.json pushed → loader renders on live site
+- Add community-upload.html to regional repos
+- Test community upload → approval → gallery publish flow
