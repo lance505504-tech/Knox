@@ -226,3 +226,133 @@
 4. Review International v3 on mobile
 5. Noticeboard decision — is current #news section sufficient or add official class notices section
 6. Knox PAT working: lance505504-tech account
+---
+## 2026-04-06 — Cape31 sites recovery + Noticeboard module + Knox integrity protocol
+
+### KNOX DATA INTEGRITY PROTOCOL — READ FIRST
+Knox is the single source of truth for all project state across multiple simultaneous
+projects. The following rules apply to every project using Knox:
+
+**Version control**
+- Every file produced in a session is saved twice: working name AND date-stamped name
+- Date stamp format: DDMM appended before extension — e.g. Cape31-UK-v2-0604.html
+- Stamped files are never overwritten — they are the permanent record of that session
+- This prevents the failure mode where a rewrite corrupts the only copy of a file
+
+**Project titles**
+- Each project maintains a defined title used consistently across all files, logs and refs
+- Cape31 UK website: Cape31-UK-v{n} (current: v2)
+- Cape31 International website: Cape31-International-v{n} (current: v3)
+- Cape31 Noticeboard: onb + notices.json + notices-cms-module.js
+- Cape31 CMS: cape31-class-management (version tracked by dev log entry)
+- Nouvita: tracked in knox-nouvita repo
+- Broadoak Manor: tracked in knox-broadoak repo
+
+**Session start protocol**
+1. Fetch dev-log.md — read last entry to understand project state
+2. Fetch notes.md — read open tasks
+3. Before touching any file, confirm the current live version and its stamp
+4. Never rewrite a file without first confirming you have read the current version
+
+**Failed rewrite prevention**
+- If asked to update an existing file: fetch → read → patch → verify → output stamped copy
+- Never generate a file from scratch if a working version exists — always patch
+- If a file appears blank or truncated after editing: stop, revert to stamped backup, report
+
+---
+
+### Session: 2026-04-06
+
+**Worked on:**
+Cape31 UK v2 and International v3 recovery after corruption in previous session.
+Noticeboard system design and build. Knox integrity protocol established.
+
+**What went wrong last session**
+UK v2 and International v3 were corrupted during a tidy-up edit. The files lost hero
+content and key sections. Root cause: file was regenerated rather than patched, and no
+stamped backup existed to revert to. This session recovered both from uploaded working
+copies (Cape31-UK-v1_2.html and cape31-website-finalv2.html).
+
+**Completed this session**
+
+Cape31 UK v2 (Cape31-UK-v2-0604.html — 94,806 bytes):
+- Rebuilt from Cape31-UK-v1_2.html (working backup uploaded by user)
+- Dave Swete reduced to 4 name references — founding history, quote attribution,
+  katabatic section, committee card — all below fold, all factual
+- Removed: ticker name, hero subtitle name, hero tag name, story intro blurb,
+  swete-block credentials and buttons, Kneen/Fastnet credential block entirely,
+  join section personalisation, footer blurb name
+- Swete-block stripped to quote + attribution only
+- Nav CTA: "Find Out More" → swete@31northyachting.com
+- Hero button: "Join the Fleet" → #join
+- Tor Tomlinson-Cheney removed from UK committee (International/Med role only)
+- Mobile CSS: ri2 stacking, 600px breakpoint, Cowes grids collapse
+- File verified: all structural checks pass
+
+Cape31 International v3 (Cape31-International-v3-0604.html — 120,414 bytes):
+- Rebuilt from cape31-website-finalv2.html (working backup uploaded by user)
+- Footer truncation fixed — was cut short, missing closing JS and tags
+- 4 new sections: #story, #series, #rules, #governance
+- Story: Cape Doctor origin, Lavranos spec table, 2016-2024-Next founding timeline
+- Series: Med/UK/US/SA/AUS/HK circuit showcases with champions and results
+- Rules: Class Rules/Constitution/Measurement doc cards, TD-001/002/003 table
+- Governance: ExCom structure, MoU framework, 6 circuits, committee cards
+- Nav updated with new section anchors, CMS URLs → cms.cape31class.com
+- Div balance: 577/577. File verified: all structural checks pass
+
+Noticeboard system (onb-0604.html + notices-0604.json):
+- onb.html: CF email decode script removed, obfuscated email → plain mailto,
+  CMS URL → cms.cape31class.com
+- notices.json: 7 events (full 2026 UK calendar), 4-5 doc slots per event,
+  messaging group placeholders, 7 standing documents, 3 news items
+- Architecture decision: noticeboard pulls from CMS API endpoint — notices.json is dev fallback only
+
+CMS notices module (notices-cms-module-0604.js):
+- Self-contained integration patch for cape31-class-management.html
+- S.notices added to defaultState(): messaging_groups (WhatsApp + Telegram),
+  eventDocs keyed by regatta ID, standing docs, news, github config
+- 5-tab UI: Event Documents, Messaging, Standing Docs, News, Publish Settings
+- Event Documents reads S.regattas[] directly — no duplication of event data
+- Messaging: WhatsApp and Telegram groups, type toggle per card, colour-coded
+- Publish: assembles notices.json, pushes to GitHub via Contents API
+- GitHub PAT in localStorage(c31_notices_pat) — never in S, never in exports
+- 4 integration points labelled at bottom for CMS developer
+
+notices-admin.html (notices-admin-0604.html):
+- Standalone back office built as fallback if CMS integration delayed
+
+**Decisions made**
+- Version stamp protocol: DDMM appended to all session output files (0604 today)
+- Never regenerate a file from scratch if a working version exists — always patch
+- Noticeboard data source: CMS API (cms.cape31class.com/api/notices/{region})
+- messaging_groups replaces whatsapp_groups — supports both WhatsApp and Telegram
+- notices-admin.html kept as fallback; CMS module is primary approach
+
+**Awaiting**
+- Cape31 PAT: push UK v2 → cape31one-sudo/Cape31-UK-website → index.html
+- Cape31 PAT: push International v3 → cape31one-sudo/Cape31-International-website → index.html
+- WhatsApp and Telegram real invite links for notices.json
+- AUS site build and push — pending from two sessions ago
+- CMS developer to integrate notices-cms-module.js into cape31-class-management.html
+- Wixstatic → S3 image migration decision (both live sites have 20-24 wixstatic refs)
+- Mobile review of International v3
+
+**Files produced (stamped copies preserved at 0604)**
+- Cape31-UK-v2.html + Cape31-UK-v2-0604.html
+- Cape31-International-v3.html + Cape31-International-v3-0604.html
+- onb.html + onb-0604.html
+- notices.json + notices-0604.json
+- notices-cms-module.js + notices-cms-module-0604.js
+- notices-admin.html + notices-admin-0604.html
+
+**Next session must-do**
+1. Knox PAT + Cape31 PAT — push UK v2 and International v3 to live repos
+2. Confirm both live on Azure after push
+3. AUS site — build or confirm Cape31-Aus-website repo contents
+4. Wixstatic → S3 migration decision
+5. Mobile review International v3
+
+**Knox integrity note for next session**
+Before changing any Cape31 site file: ask user to upload the 0604-stamped version
+or fetch it from the repo. Do not rebuild from memory. The 0604 files are the
+authoritative baseline for the next session.
