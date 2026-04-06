@@ -1,39 +1,39 @@
 # Project Notes
 
-## Active Ideas
-- Expand Med site with European ORC/IRC market section (French/German language elements)
-- Add offshore/IRC racing section to UK site (Malta/Middle Sea Race, Breskens delivery story)
-- Consider Cape31 one-design challenge tracker on AUS and US regional sites
+## Knox Integrity Protocol
+- Version stamp format: DDMM before extension — e.g. Cape31-UK-v2-0604.html
+- Every session: output working file AND stamped copy
+- Never regenerate a file from scratch if a working version exists — fetch, read, patch
+- On session start: read dev-log last entry + notes before touching any file
+
+## Project Baselines (as of 0604)
+- Cape31 UK: Cape31-UK-v2-0604.html — 94,806 bytes — READY TO PUSH
+- Cape31 International: Cape31-International-v3-0604.html — 120,414 bytes — READY TO PUSH
+- Cape31 Noticeboard: onb-0604.html + notices-0604.json — READY TO DEPLOY
+- Cape31 CMS Notices module: notices-cms-module-0604.js — READY TO INTEGRATE
+- Cape31 Notices admin fallback: notices-admin-0604.html
+
+## Open Tasks
+- [ ] Cape31 PAT — push UK v2 to cape31one-sudo/Cape31-UK-website → index.html
+- [ ] Cape31 PAT — push International v3 to cape31one-sudo/Cape31-International-website → index.html
+- [ ] Confirm both live on Azure after push
+- [ ] AUS site — build or check Cape31-Aus-website repo (pending 2 sessions)
+- [ ] Wixstatic → S3 image migration — both live sites have 20-24 wixstatic refs
+- [ ] Mobile review of International v3
+- [ ] CMS developer: integrate notices-cms-module-0604.js into cape31-class-management.html
+- [ ] WhatsApp and Telegram real invite links for notices.json
+- [ ] Knox PAT renewal reminder: current PAT ghp_xrA0... — check expiry before next session
 
 ## Decisions Made
-- Ireland and New Zealand regional sites on hold
-- HK hero: Where Dragons Race. / 龍爭虎鬥。
-- AUS hero: Dare to Win. The Whitsundays.
-- Knox protocol: PAT-in-session direct push — no more knox-update.py scripts
-- Two GitHub accounts: lance505504-tech (Knox PAT) / cape31one-sudo (Cape31 PAT)
-- All Regions button: bottom right on all regional sites
-- No names for TP52 owner in Cowes 2025 copy
+- Nav CTA on UK site: "Find Out More" (links swete@31northyachting.com)
+- Hero button on UK site: "Join the Fleet" (links #join)
+- Noticeboard data source: CMS API endpoint (cms.cape31class.com/api/notices/{region})
+  notices.json is dev fallback only
+- messaging_groups model supports WhatsApp and Telegram (type field per group)
+- Separate notices-admin.html kept as fallback if CMS integration delayed
 
 ## Links
+- UK live: https://orange-stone-046c62f03.4.azurestaticapps.net
+- International live: https://wonderful-beach-0c8107703.6.azurestaticapps.net
 - Knox repo: https://github.com/lance505504-tech/Knox
-- Cape31 repos: https://github.com/cape31one-sudo
-- Sign-in: https://lance-knox.netlify.app
-- International site staging: https://wonderful-beach-0c8107703.6.azurestaticapps.net
-- UK staging: https://orange-stone-046c62f03.4.azurestaticapps.net
-- US staging: https://ambitious-cliff-034848303.2.azurestaticapps.net
-- Med staging: https://ashy-bay-004cb4c03.2.azurestaticapps.net
-- SA staging: https://thankful-flower-0bf3a5703.4.azurestaticapps.net
-
-## To Do
-- [ ] Push AUS site to Cape31-Aus-website repo
-- [ ] Add aus.cape31class.org CNAME in Cloudflare → AUS Azure URL
-- [ ] Create Azure Static Web App for AUS site
-- [ ] Confirm SA domain validation complete in Azure
-- [ ] Confirm second Katabatic Cowes 2024 trophy with Lance
-- [ ] Confirm HK floating dock story with fleet contact
-- [ ] ExCom approval before public announcement of cape31class.org
-- [ ] CMS integration with Tom at TTC Marine (CORS + API endpoints)
-- [ ] Video rights confirmation with Tor Tomlinson-Cheney
-- [ ] Review main site on Android — reported rendering/image issues
-- [ ] Expand Med site: European ORC/IRC market (French/German elements)
-- [ ] UK site: Add offshore/IRC racing section
+- Cape31 repos: github.com/cape31one-sudo/[Cape31-UK-website | Cape31-International-website | Cape31-Aus-website]
