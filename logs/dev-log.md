@@ -497,3 +497,43 @@ File baseline: Cape31-International-v3-0604h.html — 148,028 bytes
 - Test full flow: CMM adds news → content.json pushed → loader renders on live site
 - Add community-upload.html to regional repos
 - Test community upload → approval → gallery publish flow
+
+---
+## 2026-05-02 — Knox v4 design session: MCP architecture confirmed, Increment 1 spec written
+
+**Worked on:** Knox v4 architecture — from problem statement through to first build spec.
+
+**Completed:**
+- Read and reviewed all existing Knox repos: lance505504-tech/Knox (operational) and lanceadams/library/knox (design brief + prior versions)
+- Confirmed the 19-section v4 design brief exists at lanceadams/library/knox/knox-v4-design-brief.md
+- Identified that the brief's critical open question (Q3 — MCP as integration layer) needed answering first
+- Researched MCP protocol status as of May 2026 — confirmed mature, cloud-native, OAuth 2.1, Streamable HTTP
+- Answered brief Q2 and Q3: MCP confirmed as the Knox v4 integration layer; Claude calls Knox tools natively mid-session via MCP protocol
+- Defined Knox v4 Increment 1 scope: two tools only — knox_push_output and knox_close_session
+- Resolved infrastructure decisions: Supabase meltlfmxsjfnizsxgavw.supabase.co (existing Knox project), Render (account exists), lance505504-tech/knox-mcp as new repo
+- Defined audit_log table schema including workstream field
+- Wrote complete self-contained build spec: docs/knox-v4-increment-1-build-spec.md
+- Read and incorporated updated Session Rules v1.2 (through Rule 53, established 020526)
+- Pushed build spec, updated dev-log, notes, and session rules to Knox repo
+
+**Decisions:**
+- Knox v4 = MCP server. The plug is the key — Claude calls Knox tools natively, no PAT pasting
+- Increment 1 solves one problem only: outputs not making it back to the repo
+- knox_push_output scope: lance505504-tech account only for increment 1; multi-account in increment 2
+- Supabase: use existing Knox project meltlfmxsjfnizsxgavw.supabase.co (verify empty at build session start)
+- Render: account exists, previously connected to Knox repo but nothing deployed — redirect to knox-mcp at build session start
+- Repo: lance505504-tech/knox-mcp (to be created at build session start)
+- Session rules v1.2 (Rules 1-53) adopted as Knox v4 session protocol
+
+**Awaiting:**
+- Render to be redirected to lance505504-tech/knox-mcp at build session start
+- Supabase meltlfmxsjfnizsxgavw.supabase.co to be verified empty and audit_log table created
+- GITHUB_PAT_LANCE to be generated with contents:write scope on Knox repo before build session
+
+**Next:**
+1. Open build session with docs/knox-v4-increment-1-build-spec.md as the briefing document
+2. Create lance505504-tech/knox-mcp repo
+3. Verify Supabase project and create audit_log table
+4. Build and deploy knox_push_output and knox_close_session to Render
+5. Connect Claude Desktop/Code to Knox MCP endpoint
+6. Dogfood: close that build session using knox_close_session

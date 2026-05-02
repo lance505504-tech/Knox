@@ -676,3 +676,21 @@ When something useful emerges during a session — a better approach, a correcti
 For ephemeral insights that emerge during a session, default to capture rather than confirmation. Post findings automatically to Knox and GitHub Discussions. The cost of losing a good idea is higher than the cost of a deletable post. Flag what was posted but do not block on permission.
 
 *Both rules established 240427. The finding rule makes insight capture an AI responsibility. The capture rule makes the default action capture rather than confirmation — reversing the usual bias toward caution for this specific case.*
+
+### Rule 50. Line-count gate
+
+If a planned change will produce more than 50 net lines of diff, the build must be broken into stages. Each stage is shown to the owner before the next stage begins. No stage is committed until the owner has seen and approved it. A single declaration does not authorise an unlimited number of lines.
+
+### Rule 51. Show-before-push is mandatory, not optional
+
+Rule 41 says show before pushing. This rule makes it unambiguous: for any change over 10 lines, paste the actual changed sections in the conversation before running git add. The owner must acknowledge before the commit happens. "Confirm and I'll go" is not a blank cheque for unlimited lines of implementation.
+
+### Rule 52. Declaration scope is a ceiling, not a floor
+
+What is declared in the pre-build declaration is the maximum scope of the build. If during implementation something additional seems useful or necessary, stop — return to the owner, describe the addition, get explicit approval, then continue. Never expand scope silently during implementation. The owner cannot review what they were not told was being added.
+
+### Rule 53. One logical change per commit
+
+Each commit should do one thing. DOM, JS, CSS, and routing changes for a single feature are separate steps, each shown and approved before the next begins — not combined into one monolithic commit. A commit message that requires "and" to describe what changed probably contains too much.
+
+*Rules 50-53 established 020526 following a scope creep incident in which 622 lines were committed across three commits without staged review. The revert cost more time than the original build. These rules exist because "confirm and I'll go" was treated as permission for unlimited implementation rather than permission for what was declared.*
